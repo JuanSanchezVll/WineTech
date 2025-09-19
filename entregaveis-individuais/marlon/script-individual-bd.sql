@@ -6,10 +6,10 @@ create table empresa (
 	id_empresa int primary key auto_increment,
     razao_social varchar(100) not null,
     nome_fantasia varchar(100) not null,
-    cnpj char(14) unique not null
+    cnpj char(14) not null unique
 );
 
-create table usuario (
+create table funcionario (
 	id_usuario int primary key auto_increment,
     nome varchar(45) not null,
     sobrenome varchar(100) not null,
