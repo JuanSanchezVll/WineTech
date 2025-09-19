@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Simulador de Lucro</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Simulador Financeiro</h2>
+        <p><i>Com o nosso sistema, você transforma um problema em lucro.</i></p>
+
+        <p>Insira a quantidade de barris na sua adega: <input type="text" id="input_qtd_barris"></p>
+        <p>Insira o valor médio de cada barril (Ex: 20000): <input type="text" id="input_valor_barril"></p>
+        <p>Insira a temperatura média da adega (em °C): <input type="text" id="input_temperatura"></p>
+        <p>Insira a umidade média da adega (em %): <input type="text" id="input_umidade"></p>
+        
+        <button onclick="simular()">Simular Prejuízo</button>
+        
+        <div id="relatorio"></div>
+    </div>
+</body>
+
+<script>
+    function simular() {
+        // Obtenção dos valores do usuário
+        var qtdBarris = Number(input_qtd_barris.value);
+        var valorBarril = Number(input_valor_barril.value);
+        var temperatura = Number(input_temperatura.value);
+        var umidade = Number(input_umidade.value);
+        
+        // Cálculo do valor total do estoque
+        var gastoTotal = qtdBarris * valorBarril;
+        
+        var porcentagemPerda = 0;
+        var economia = 0;
+        var mensagemCenario = '';
+
+        // Lógica para determinar o cenário e as perdas com base na temperatura e umidade
+        // Cenário Crítico: Perda total
+        if (temperatura > 22 || temperatura < 14) {
+            porcentagemPerda = 1.00; // 100% de perda
+            economia = gastoTotal;
+            mensagemCenario = `
+                <span class="no-project">Condição Crítica:</span> Temperatura fora do limite ideal.<br>
+                Risco de perder <span class="no-project">todo o seu estoque</span>.
+            `;
+        }
+        // Cenário de Alerta: Perda parcial
+        else if (temperatura >= 16 || umidade > 70 || umidade < 70) {
+            porcentagemPerda = 0.30; // 30% de perda
+            economia = gastoTotal * 0.90; // Economia de 90% da perda
+            mensagemCenario = `
+                <span class="no-project">Estado de Alerta:</span> O envelhecimento pode ser acelerado ou a evaporação aumentada.<br>
+                Risco de perder até <span class="no-project">30% do seu investimento</span>.
+            `;
+        }
+        // Cenário Ideal
+        else {
+            porcentagemPerda = 0.03; // 3% de perda por evaporação natural
+            economia = (gastoTotal * 0.03) * 0.99; // Economia de 99% da perda
+            mensagemCenario = `
+                <span class="with-project">Condição Ideal:</span> Condições de temperatura e umidade favoráveis.<br>
+                Ainda há uma perda de até <span class="no-project">3% do seu estoque</span> sem monitoramento preciso.
+            `;
+        }
+        
+        // Cálculo do prejuízo sem o projeto e a economia anual com o projeto
+        var prejuizoTotal = gastoTotal * porcentagemPerda;
+        var economiaAnual = economia;
+
+        // Montagem e exibição do relatório de resultados
+        relatorio.innerHTML = `
+            <hr>
+            <h3>Resultados da Simulação:</h3>
+            <p>Seu cenário atual: ${mensagemCenario}</p>
+            <p>Valor total do seu estoque: <b>R$ </b></p>
+            <p>Prejuízo potencial sem a Red Shot: <b class="no-project">R$ </b></p>
+            <p>Com a nossa solução, você garante a qualidade da sua safra e tem uma <b class="with-project">economia anual de até R$ ${economiaAnual.toFixed(2)}</b></p>
+        `;
+    }
+</script>
+</html>
