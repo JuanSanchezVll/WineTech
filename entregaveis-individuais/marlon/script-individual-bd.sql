@@ -13,21 +13,40 @@ create table usuario (
 	id_usuario int primary key auto_increment,
     nome varchar(45) not null,
     sobrenome varchar(100) not null,
-    email varchar(100) not null,
+    email varchar(100) not null unique,
     senha varchar(255) not null,
-    nivel_acesso tinyint,
+    nivel_acesso tinyint not null default 3,
     fk_empresa int not null,
     
-    constraint chkNivel check (nivel_acesso >= 1 and nivel_acesso <= 5),
+    constraint chkNivel check (nivel_acesso >= 1 and nivel_acesso <= 3),
+    constraint foreign key (fk_empresa) references empresa (id_empresa)
+);
+
+create table endereco (
+	id_endereco int primary key auto_increment,
+    cep char(8) not null,
+    logradouro varchar(150) not null,
+    numero varchar(12),
+    cidade varchar(150) not null,
+    uf char(2) not null
+);
+
+create table filial (
+	id_filial int primary key auto_increment,
+    nome varchar(100) not null,
+    fk_endereco int not null,
+    fk_empresa int not null,
+    
+    constraint foreign key (fk_endereco) references endereco (id_endereco),
     constraint foreign key (fk_empresa) references empresa (id_empresa)
 );
 
 create table setor (
 	id_setor int primary key auto_increment,
     nome varchar(45) not null,
-    fk_empresa int not null,
+    fk_filial int not null,
     
-    constraint foreign key (fk_empresa) references empresa (id_empresa)
+    constraint foreign key (fk_filial) references filial (id_filial)
 );
 
 create table sensor (
@@ -40,10 +59,12 @@ create table sensor (
 
 create table captura (
 	id_captura int primary key auto_increment,
-    valor decimal(5, 2),
+    valor decimal(5, 2) not null,
     data_registro datetime default current_timestamp,
+    tipo varchar(10) not null,
     fk_sensor int not null,
     
+    constraint chkTipo check (tipo in ('temperatura', 'umidade')),
     constraint foreign key (fk_sensor) references sensor (id_sensor)
 );
 
