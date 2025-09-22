@@ -62,12 +62,6 @@ git commit -m "nome_da_alteração"
 
 # 5. Envie suas alterações
 git push
-   
-   ---
-
-Quer que eu já acrescente nesse README também a parte de **Funcionalidades da Solução** (Dashboard, Alertas, Relatórios, etc.) do documento, pra deixar mais completo e “vendedor”, ou prefere manter só essa estrutura mais resumida?
-   
-   
 
    
 
