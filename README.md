@@ -47,25 +47,21 @@ O setor vitivinícola brasileiro movimentou **R$ 3,8 bilhões em 2022** e contin
 
 Para contribuir com este projeto:  
 
-1. Clone o repositório:  
-   ```bash
-   git clone https://github.com/usuario/RedShot.git
+```bash
+# 1. Clone o repositório
+git clone https://github.com/usuario/RedShot.git
 
-2.Atualize o repositorio diariamente:   
- ```bash
-   git pull
-   
-3.Faça as alterações necessárias e empacote com:
- ```bash
-   git add .
-   
-4.Escreva uma mensagem de commit:
- ```bash
-   git commit -m "nome_da_alteração"
-   
-5.Envie suas alterações:
- ```bash
-   git push
+# 2. Atualize o repositório diariamente
+git pull
+
+# 3. Faça as alterações necessárias e empacote
+git add .
+
+# 4. Escreva uma mensagem de commit
+git commit -m "nome_da_alteração"
+
+# 5. Envie suas alterações
+git push
    
    ---
 
