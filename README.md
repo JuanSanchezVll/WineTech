@@ -1,6 +1,7 @@
 # WineTech 
 
-<img src="https://cdn.pixabay.com/photo/2017/09/28/18/20/barrel-2796988_1280.jpg">  
+<img width="500" height="500" alt="logov2" src="https://github.com/user-attachments/assets/321af82a-d609-437b-b74d-200559e76613" />
+
 
 ## 📖 Descrição do Projeto  
 
