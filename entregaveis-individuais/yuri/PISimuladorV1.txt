@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro - Adega Inteligente</title>
+</head>
+<body style="background:linear-gradient(120deg, #4a0e1a, #231921); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #eddddd; text-align: center; padding: 20px;">
+    
+    <h2 style="background-color: #b21138; padding: 15px; border-radius: 50px; box-shadow: 0 8px 25px #111;">
+        Simule a proteção da sua safra com a <b style="color: #f8b43f;">ADEGA INTELIGENTE</b>!
+    </h2>   
+    
+    <p style="font-size: 1.1em;">Preencha os campos e veja como nosso sistema protege seu investimento.</p>
+    
+    Quantidade de barris que sua vinícola possui:
+    <br>
+    <input id="ipt_barris" type="number" style="width: 80%; max-width: 400px; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 50px; border: 2px solid #f8b43f; background-color: #333; color: #eddddd; text-align: center; font-size: 1em;">
+    <br>
+
+    Valor médio de cada barril (em R$):
+    <br>
+    <input id="ipt_valor" type="number" style="width: 80%; max-width: 400px; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 50px; border: 2px solid #f8b43f; background-color: #333; color: #eddddd; text-align: center; font-size: 1em;">
+    <br>
+
+    Seu percentual de perda anual estimada (%):
+    <br>
+    <input id="ipt_perda" type="number" style="width: 80%; max-width: 400px; padding: 10px; margin-top: 5px; margin-bottom: 20px; border-radius: 50px; border: 2px solid #f8b43f; background-color: #333; color: #eddddd; text-align: center; font-size: 1em;">
+    <br><br>
+
+    <button onclick="calcular()" style="background-color: #b21138; color: #eddddd; border-radius: 50px; box-shadow: 0 8px 25px #111; border: none; padding: 15px 30px; font-size: 1.1em; cursor: pointer;">
+        Simular Economia
+    </button>
+    
+    <div id="div_msg" style="margin: 30px auto; padding: 20px; border-radius: 15px; line-height: 1.8; font-size: 1.1em; max-width: 500px;"></div>
+
+</body>
+<script>
+    function calcular(){
+        var qtdBarris = Number(ipt_barris.value);
+        var valorBarril = Number(ipt_valor.value);
+        var perdaPercentual = Number(ipt_perda.value);
+
+        if (qtdBarris <= 0 || valorBarril <= 0 || perdaPercentual <= 0) {
+            div_msg.innerHTML = "<b style='color:#ffc107;'>⚠️ Por favor, preencha todos os campos com valores válidos!</b>";
+
+        } else {
+            
+            var valorTotalAtivos = qtdBarris * valorBarril;
+            var prejuizoAtual = valorTotalAtivos * (perdaPercentual / 100);
+            
+            div_msg.innerHTML = 
+                `O valor total dos seus barris em envelhecimento é de <b>R$ ${valorTotalAtivos.toFixed(2)}</b>.` +
+                `<br><br>` +
+                `❌ Sem nosso sistema, uma perda de <b>${perdaPercentual}%</b> representa um prejuízo de <b style='color:#d9534f;'>R$ ${prejuizoAtual.toFixed(2)}</b> ao ano.` +
+                `<br><br>` +
+                `✅ Com a <b>ADEGA INTELIGENTE</b>, você protege 100% desse valor, transformando o prejuízo em <b>lucro garantido</b>.` +
+                `<br><br>` +
+                `🚀 Garanta a qualidade máxima e aumente seu lucro em até <b>40%</b>!`;
+        }
+    }
+</script>
+</html>

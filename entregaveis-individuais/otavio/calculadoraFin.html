@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    insira a quantidade de barris
+    <input type="text" id="barris"> <br>
+    Insira valor medio de cada barril (Media R$20.000,00)
+    <input type="text" id="valorBarril"><br>
+    Selecione qual o cenario que sera testado:
+    <Select id="cenario">
+        <option value="1">Mais que 22C</option>
+        <option value="2">Entre 16C e 22C</option>
+        <option value="3">Entre 14C e 16C</option>
+        <option value="4">Menos que 14C</option>
+
+    </Select>
+    
+    <button onclick="analisar()">Analisar perda por temperatura</button>
+
+    <div id="resultado">
+
+        <b></b>
+        
+    </div>
+
+</body>
+
+    <script>
+        function analisar() {
+
+            barrisF = Number(barris.value)
+            valorBarrilF = Number(valorBarril.value)
+            porcentPerda = 0
+
+            if (cenario.value == 1) 
+            {
+                porcentPerda = 1
+
+                resultado.innerHTML = `<p>Como cada barril te rende ${valorBarrilF} no cenario selecionado voce estaria tendo uma perda de ${porcentPerda * 100} % que equivale a um total de ${valorBarrilF - (valorBarrilF * (1 - porcentPerda))}, <b style="color: firebrick;">infelizmente a o barril todo é perdido!</b></p>`
+
+            }else if (cenario.value == 2)
+            {
+                porcentPerda = 0
+                calcF = valorBarrilF - valorBarrilF * (1 - porcentPerda)
+
+                resultado.innerHTML = `<p>Como cada barril te rende ${valorBarrilF} no cenario selecionado voce estaria tendo uma perda de ${porcentPerda * 100} % que equivale a um total de ${calcF}, <b style="color: green;">Em um Cenario ideal não ocorreria perda nenhuma!</b></p>`
+                
+            }else if (cenario.value == 3)
+            {
+                porcentPerda = 0.22
+                calcF = valorBarrilF - valorBarrilF * (1 - porcentPerda)
+
+                resultado.innerHTML = `<p>Como cada barril te rende ${valorBarrilF} no cenario selecionado voce estaria tendo uma perda de ${porcentPerda * 100} % que equivale a um total de ${calcF}, <b style="color: orange;">A perda em um cenario como esse pode ser de até 30% aqui estamos usando uma media um pouco mais otimista de 25%</b></p>`
+
+            }else if (cenario.value == 4)
+            {
+                porcentPerda = 0.18
+                calcF = valorBarrilF - valorBarrilF * (1 - porcentPerda)
+
+                resultado.innerHTML = `<p>Como cada barril te rende ${valorBarrilF} no cenario selecionado voce estaria tendo uma perda de ${porcentPerda * 100} % que equivale a um total de ${calcF}, <b style="color: yellow;">A perda em um cenario como esse pode ser de até 25% aqui estamos usando uma media um pouco mais otimista de 18%</b></p>`
+            }
+
+
+
+
+
+            
+        }
+    </script>
+
+
+</html>

@@ -1,7 +1,6 @@
 # WineTech 
 
-<img width="500" height="500" alt="logov2" src="https://github.com/user-attachments/assets/321af82a-d609-437b-b74d-200559e76613" />
-
+<img width="336" height="306" alt="logov2 0" src="https://github.com/user-attachments/assets/870c95fb-56c1-4c6b-a868-a6e1383d8aa1" />
 
 ## 📖 Descrição do Projeto  
 

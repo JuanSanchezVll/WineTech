@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINETECH - SIMULADOR FINANCEIRO</title>
+</head>
+<body>
+    <img src="" alt="logo winetech">
+    <h1><i>Transforme dados em decisões!</i></h1>
+    <h2>Simule já e projete seus resultados com segurança!</h2>
+       
+    <p>
+        O <b>Simulador Financeiro  Winetch</b> foi desenvolvido para mostrar, de forma clara e prática, o impacto das perdas financeiras que sua empresa pode estar sofrendo e como nossa solução pode transformar essas perdas em ganhos reais.<br>
+        Nosso objetivo é fornecer uma visão precisa e confiável para apoiar sua tomada de decisão.
+    </p>
+------------------------------------------------------------------------------------------------------------------------ <br>
+    IDENTIFIQUE O NOME DE SUA EMPRESA: <input id="iptNomeEmpresa"> <br><br>
+
+    INSIRA O VALOR DO SEU FATURAMENTO ANUAL (R$): <input id="iptValorFaturamento"> <br><br>
+    
+    <button onclick="calcular()">SIMULE AGORA</button> <br><br><br>
+------------------------------------------------------------------------------------------------------------------------ <br>
+    <div id="div_simulacao"></div>
+
+</body>
+<script>
+    function calcular(){
+
+        var faturamento = Number(iptValorFaturamento.value);
+        var empresa = iptNomeEmpresa.value || 'Sua empresa';
+
+        if ( faturamento <= 0) {
+            div_simulacao.innerHTML = 'Por favor informe um faturamento anual válido (somente números).';
+            return;
+        }
+
+        
+        // 30% do faturamento pesquisa.
+        var perda_percentual_total = 0.30; 
+        var perda_total = faturamento * perda_percentual_total;
+
+        // angel's share 3% ao ano 
+        var evaporacao_percentual = 0.03; 
+        var perda_evaporacao = faturamento * evaporacao_percentual;
+
+        // angel share
+        var evaporacao_pior_percentual = 0.05;
+        var perda_evaporacao_pior = faturamento * evaporacao_pior_percentual;
+
+        // 40% pesquisa
+        var recuperacao_frac = 0.40; // 40%
+        var recuperacao_monetaria = perda_total * recuperacao_frac;
+
+        // 5% para 3%
+        var recuperacao_evaporacao = perda_evaporacao_pior - perda_evaporacao; // diferença pior e conservador
+
+        // Limpa inputs (igual ao comportamento original)
+        iptNomeEmpresa.value = '';
+        iptValorFaturamento.value = '';
+
+        div_simulacao.innerHTML = '<b>Olá ' + empresa + '!</b><br><br>' +
+        'Com base no seu faturamento anual informado de <b>R$ ' + faturamento.toFixed(2) + '</b>, aqui está uma projeção realista das perdas e do potencial de recuperação com monitoramento automatizado:<br><br>' +
+
+        '<b>1) Perda anual estimada por falhas de monitoramento (visão consolidada):</b><br>' +
+        'Estimamos que até <b>' + (perda_percentual_total*100).toFixed(0) + '%</b> do faturamento pode ser afetado por problemas de controle, manejo e monitoramento (estoque, qualidade, evaporação, oxidação e contaminação). Isso significa uma perda aproximada de <b style="color:red;">R$ ' + perda_total.toFixed(2) + '</b> por ano.<br><br>' +
+
+        '<b>Resumo prático:</b><br>' +
+        '- Faturamento anual: <b>R$ ' + faturamento.toFixed(2) + '</b><br>' +
+        '- Perda anual estimada (30%): <b style="color:red;">R$ ' + perda_total.toFixed(2) + '</b><br>' +
+        '- Evaporação típica (~3%): <b style="color:red;">R$ ' + perda_evaporacao.toFixed(2) + '</b><br>' +
+        '- Potencial de recuperação com nosso serviço (~40% da perda): <b style="color:green;">R$ ' + recuperacao_monetaria.toFixed(2) + '</b><br><br>';
+
+
+    }
+</script>
+</html>

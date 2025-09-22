@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <h1> Calculadora - Variação de Temperatura</h1>
+    
+    Número de barris: <input id="ipt_barris"><br>
+    Temperatura da adega (°C): <input id="ipt_temp"><br>
+    Valor médio de um barril (R$): <input id="ipt_valor"><br>
+    
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="divmsg"></div>
+
+    <script>
+        function calcular() {
+            var barris = Number(ipt_barris.value);
+            var temp = Number(ipt_temp.value);
+            var valorBarril = Number(ipt_valor.value);
+
+            if (valorBarril == 0) {
+                valorBarril = 20000; // valor padrão
+            }
+
+            var perdaPorBarril = 0;
+            var descricao = "";
+
+            if (temp > 22) {
+                perdaPorBarril = valorBarril; // perda total
+                descricao = "Temperatura muito alta (>22°C). O vinho pode virar vinagre.";
+            } else if (temp >= 16 && temp <= 22) {
+                perdaPorBarril = valorBarril * 0.3; // perda de até 30%
+                descricao = "Temperatura moderadamente alta (16°C a 22°C). O vinho pode ser 'cozido'.";
+            } else if (temp < 14) {
+                perdaPorBarril = valorBarril * 0.1; // perda de 10% a 25% (pegando o mínimo como base)
+                descricao = "Temperatura muito baixa (<14°C). O vinho perde qualidade de evolução.";
+            } else {
+                perdaPorBarril = 0;
+                descricao = "Temperatura ideal (14°C a 16°C). Sem perdas significativas.";
+            }
+
+            var perdaTotal = perdaPorBarril * barris;
+
+            divmsg.innerHTML =
+                "Número de barris: " + barris + "<br>" +
+                "Temperatura da adega: " + temp + "°C<br>" +
+                "Valor médio por barril: R$ " + valorBarril + "<br>" +
+                "Perda estimada por barril: R$ " + perdaPorBarril + "<br>" +
+                "Perda total estimada: R$ " + perdaTotal + "<br>" +
+                "Cenário: " + descricao + "<br>" +
+                "Sua solução de monitoramento evita esse risco com alertas em tempo real.";
+        }
+    </script>
+</body>
+
+</html>

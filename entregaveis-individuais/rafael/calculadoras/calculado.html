@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <h1>Calculadora - Cota dos Anjos</h1>
+    Número de barris: <input id="ipt_barris"><br>
+    Valor médio de um barril (R$): <input id="ipt_valor"><br>
+    Umidade atual (%): <input id="ipt_umidade"><br>
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="divmsg"></div>
+
+    <script>
+        function calcular() {
+            var barris = Number(ipt_barris.value);
+            var valorBarril = Number(ipt_valor.value);
+            var umidade = Number(ipt_umidade.value);
+
+            if (valorBarril == 0) {
+                valorBarril = 20000; // valor padrão se não digitar nada
+            }
+
+            var perdaIdeal = valorBarril * 0.02; // 2% perda ao ano (umidade ideal 70%)
+            var perdaAlta = valorBarril * 0.05; // 5% perda ao ano (umidade baixa)
+
+            var perdaPorBarril = 0;
+
+            if (umidade < 70) {
+                perdaPorBarril = perdaAlta;
+            } else {
+                perdaPorBarril = perdaIdeal;
+            }
+
+            var perdaTotal = perdaPorBarril * barris;
+            var economia = (perdaAlta - perdaIdeal) * barris;
+
+            divmsg.innerHTML =
+                "Número de barris: " + barris + "<br>" +
+                "Valor médio por barril: R$ " + valorBarril + "<br>" +
+                "Umidade atual: " + umidade + "%<br>" +
+                "Perda anual estimada por barril: R$ " + perdaPorBarril + "<br>" +
+                "Perda anual total: R$ " + perdaTotal + "<br>" +
+                "Economia potencial mantendo 70% de umidade: R$ " + economia;
+        }
+    </script>
+</body>
+
+</html>
