@@ -50,3 +50,30 @@ Para contribuir com este projeto:
 1. Clone o repositório:  
    ```bash
    git clone https://github.com/usuario/RedShot.git
+
+2.Atualize o repositorio diariamente:   
+ ```bash
+   git pull
+   
+3.Faça as alterações necessárias e empacote com:
+ ```bash
+   git add .
+   
+4.Escreva uma mensagem de commit:
+ ```bash
+   git commit -m "nome_da_alteração"
+   
+5.Envie suas alterações:
+ ```bash
+   git push
+   
+   ---
+
+Quer que eu já acrescente nesse README também a parte de **Funcionalidades da Solução** (Dashboard, Alertas, Relatórios, etc.) do documento, pra deixar mais completo e “vendedor”, ou prefere manter só essa estrutura mais resumida?
+   
+   
+
+   
+
+   
+   
