@@ -10,7 +10,10 @@ create table empresa (
     emailContato varchar(100),
     telefoneContato varchar(100),
     codigoSeguranca varchar(255) not null unique,
-	dataRegistro datetime default current_timestamp
+    situacaoContrato tinyint not null default 0,
+	dataRegistro datetime default current_timestamp,
+    
+    constraint chkSituacaoContrato check (situacaoContrato in (0, 1))
 );
 
 create table funcionario (
