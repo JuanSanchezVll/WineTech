@@ -7,7 +7,8 @@ create table empresa (
     cnpj char(14) not null unique,
     razaoSocial varchar(200) not null,
     nomeFantasia varchar(100),
-    contato varchar(100),
+    emailContato varchar(100),
+    telefoneContato varchar(100),
 	dataRegistro datetime default current_timestamp
 );
 
@@ -15,7 +16,7 @@ create table funcionario (
 	idFuncionario int primary key auto_increment,
     nome varchar(45) not null,
     sobrenome varchar(100) not null,
-    email varchar(100) not null,
+    email varchar(100) not null unique,
     senha varchar(255) not null,
     nivelAcesso tinyint not null,
     dataRegistro datetime default current_timestamp,
