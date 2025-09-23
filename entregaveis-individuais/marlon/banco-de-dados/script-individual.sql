@@ -42,14 +42,6 @@ create table tipoVinho (
     umidadeMaxima decimal(5, 2) not null
 );
 
-create table cave (
-	idCave int primary key auto_increment,
-    identificacao varchar(45) not null,
-    idEmpresa int not null,
-    
-    constraint foreign key (idEmpresa) references empresa (idEmpresa)
-);
-
 create table barril (
 	idBarril int primary key auto_increment,
     identificacao varchar(45) not null,
