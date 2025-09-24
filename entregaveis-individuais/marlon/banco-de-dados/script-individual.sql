@@ -6,14 +6,11 @@ create table empresa (
 	idEmpresa int primary key auto_increment,
     cnpj char(14) not null unique,
     razaoSocial varchar(200) not null,
-    nomeFantasia varchar(100),
-    emailContato varchar(100),
-    telefoneContato varchar(100),
+    nomeFantasia varchar(100) not null,
+    emailContato varchar(100) not null,
     codigoSeguranca varchar(255) not null unique,
-    situacaoContrato tinyint not null default 0,
-	dataRegistro datetime default current_timestamp,
-    
-    constraint chkSituacaoContrato check (situacaoContrato in (0, 1))
+    situacaoContrato boolean not null default false,
+	dataRegistro datetime default current_timestamp
 );
 
 create table funcionario (
@@ -22,12 +19,14 @@ create table funcionario (
     sobrenome varchar(100) not null,
     email varchar(100) not null unique,
     senha varchar(255) not null,
-    nivelAcesso tinyint not null,
+    nivelAcesso tinyint not null default 3,
     dataRegistro datetime default current_timestamp,
-    idEmpresa int not null,
+    ativo boolean default true,
+    idEmpresa int,
     
-    constraint chkNivelAcesso check (nivelAcesso in (1, 2, 3)),
-    constraint foreign key (idEmpresa) references empresa (idEmpresa)
+    constraint chkNivelAcesso check (nivelAcesso in (0, 1, 2, 3)),
+    constraint foreign key (idEmpresa) references empresa (idEmpresa),
+    constraint chkEmpresaUsuario check ((nivelAcesso = 0 and idEmpresa is null) or (nivelAcesso >= 1 and idEmpresa is not null))
 );
 
 create table cave (
@@ -60,6 +59,7 @@ create table barril (
 create table sensor (
 	idSensor int primary key auto_increment,
     identificacao varchar(45) not null,
+    intervaloMaximoSemLeitura int not null,
     idBarril int not null,
     
     constraint foreign key (idBarril) references barril (idBarril)
