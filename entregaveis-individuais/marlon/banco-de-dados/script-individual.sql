@@ -31,7 +31,7 @@ create table funcionario (
 
 create table cave (
 	idCave int primary key auto_increment,
-    identificacao varchar(45) not null,
+    identificacao varchar(45) not null unique,
     idEmpresa int not null,
     
     constraint foreign key (idEmpresa) references empresa (idEmpresa)
@@ -39,7 +39,7 @@ create table cave (
 
 create table tipoVinho (
 	idTipoVinho int primary key auto_increment,
-    nome varchar(45) not null,
+    nome varchar(45) not null unique,
     temperaturaMinima decimal(5, 2) not null,
     temperaturaMaxima decimal(5, 2) not null,
     umidadeMinima decimal(5, 2) not null,
@@ -48,7 +48,7 @@ create table tipoVinho (
 
 create table barril (
 	idBarril int primary key auto_increment,
-    identificacao varchar(45) not null,
+    identificacao varchar(45) not null unique,
     idCave int not null,
     idTipoVinho int not null,
     
@@ -58,7 +58,7 @@ create table barril (
 
 create table sensor (
 	idSensor int primary key auto_increment,
-    identificacao varchar(45) not null,
+    identificacao varchar(45) not null unique,
     intervaloMaximoSemLeitura int not null,
     idBarril int not null,
     
