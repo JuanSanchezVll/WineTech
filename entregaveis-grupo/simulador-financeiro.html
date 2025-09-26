@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         .conteudo {
             display: flex;
             flex-direction: column;
@@ -48,6 +49,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="conteudo">
         <div class="header">
@@ -81,24 +83,17 @@
             <button onclick="simular()">Simular</button>
         </div>
 
-        <div id="economia">
-            
-        </div>
-
-        <div id="relatorio">
-
-        </div>
+        <div id="economia"></div>
+        <div id="relatorio"></div>
 
         <div id="semWinetech">
-
-           <h1>Porcentagem de perda estimada</h1><br>
+            <h1>Porcentagem de perda estimada</h1><br>
             <div id="barrisPerdidos"></div><br>
-            <div id="prejuizoAnual"></div>
-
         </div>
 
         <div id="comWinetech">
-
+            <h1>Porcentagem de perda estimada</h1><br>
+            <div id="barrisPreservados"></div><br>
         </div>
     </div>
 </body>
@@ -108,7 +103,7 @@
         var quantidadeBarris = Number(inputQuantidadeBarris.value);
         var precoBarril = Number(inputPrecoBarril.value);
         var temperatura = Number(inputTemperaturaMedia.value);
-        var umidade = Number(inputUmidadeMedia.value);
+        var umidade = Number(inputUmidadeMedia.value); // CORRIGIDO .value
         var cenario = "";
         var perda = 0;
 
@@ -127,7 +122,7 @@
 
         } else if (inputPrecoBarril.value == '') {
             alert("O campo 'Preço barril'" + msg_erro_vazio);
-            
+
         } else if (Number(inputPrecoBarril.value) <= 0) {
             alert("O campo 'Preço barril'" + msg_erro_entrada_nula);
 
@@ -140,35 +135,45 @@
         } else if (inputUmidadeMedia.value == '') {
             alert("O campo 'Umidade média'" + msg_erro_vazio);
 
-        } else if (Number(inputUmidadeMedia.value) <= 0 || Number(inputUmidadeMedia) >= 100) {
+        } else if (Number(inputUmidadeMedia.value) <= 0 || Number(inputUmidadeMedia.value) >= 100) {
             alert("O campo 'Umidade média' deve estar entre 0 e 100. Insira um valor válido");
-            
-        // 1° PARTE
 
         } else {
             if (temperatura < 10 || temperatura > 20 || umidade < 50 || umidade > 85) {
                 perda = 1;
                 cenario = "Alerta máximo: Perda total";
-                barrisPerdidos.innerHTML = `<b>Quantidade de barris perdido:</b> ${quantidadeBarris} barris perdidos<br>
-                                            <b>Prejuízo anual estimado:</b> ${(precoBarril * quantidadeBarris) * 12} R$`;
-                                            
+                barrisPerdidos.innerHTML = `<b>Cenário:</b> ${cenario}<br>
+                    <b>Quantidade de barris perdido:</b> <span style="color: red;">${quantidadeBarris}</span> barris perdidos<br>
+                    <b>Prejuízo anual estimado:</b> <span style="color: red;">${(precoBarril * quantidadeBarris) * 12}</span> R$`;
+                barrisPreservados.innerHTML = `<b>Redução de prejuízo anual estimado:</b> X R$<br>
+                    <b>Barris preservados:</b> X barris preservados<br>
+                    <b>Redução da perda:</b> A redução da perda estimada é de X%<br><br>
+                    <b>Seu cave está protegido e o valor do vinho é preservado com a wineTech!</b>`;
 
             } else if (((temperatura >= 10) && (temperatura < 14)) || ((umidade > 75) && (umidade <= 85))) {
                 perda = 0.3;
                 cenario = "Alerta moderado: Perda moderada";
-                barrisPerdidos.innerHTML = `<h2>Quantidade de barris perdido</h2>: ${quantidadeBarris * 0.3} barris perdidos<br>
-                                            <h2>Prejuízo anual estimado: ${((precoBarril * quantidadeBarris) - ((precoBarril * quantidadeBarris) * 0.3)) * 12} R$`
+                barrisPerdidos.innerHTML = `<b>Cenário:</b> ${cenario}<br>
+                    <h2>Quantidade de barris perdido:</h2> <span style="color: red;">${quantidadeBarris * 0.3}</span> barris perdidos<br>
+                    <h2>Prejuízo anual estimado:</h2> <span style="color: red;">${((precoBarril * quantidadeBarris) - ((precoBarril * quantidadeBarris) * 0.3)) * 12}</span> R$`;
+                barrisPreservados.innerHTML = `<b>Redução de prejuízo anual estimado:</b> X R$<br>
+                    <b>Barris preservados:</b> X barris preservados<br>
+                    <b>Redução da perda:</b> A redução da perda estimada é de X%<br><br>
+                    <b>Seu cave está protegido e o valor do vinho é preservado com a wineTech!</b>`;
 
-            }  else if (((temperatura >= 14) && (temperatura <= 16)) && ((umidade >= 50) && (umidade < 60))) {
-                cenario = "Cenário ideal: Perda de mínima";
-                barrisPerdidos.innerHTML = `<h2>Quantidade de barris perdido</h2>: Nenhum barril perdido!<br>
-                                            <h2>Prejuízo anual estimado: Nenhum prejuizo anual! `
-
-            } 
+            } else if (((temperatura >= 14) && (temperatura <= 16)) && ((umidade >= 50) && (umidade < 60))) {
+                cenario = "Cenário ideal: Perda mínima";
+                barrisPerdidos.innerHTML = `<b>Cenário:</b> ${cenario}<br>
+                    <h2>Quantidade de barris perdido:</h2> Nenhum barril perdido!<br>
+                    <h2>Prejuízo anual estimado:</h2> Nenhum prejuízo anual!`;
+                barrisPreservados.innerHTML = `<b>Redução de prejuízo anual estimado:</b> X R$<br>
+                    <b>Barris preservados:</b> X barris preservados<br>
+                    <b>Redução da perda:</b> A redução da perda estimada é de X%<br><br>
+                    <b>Seu cave está protegido e o valor do vinho é preservado com a wineTech!</b>`;
+            }
         }
-
-
     }
 </script>
 
 </html>
+
