@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="conteudo">
+        <div class="input-group">
+            <div class="input-box">
+                <label for="inputQuantidadeBarris">Informe a quantidade de barris no estoque:</label>
+                <input type="text" name="inputQuantidadeBarris" id="inputQuantidadeBarris">
+            </div>
+
+            <div class="input-box">
+                <label for="inputPrecoBarril">Informe o preço do barril:</label>
+                <input type="text" name="inputPrecoBarril" id="inputPrecoBarril">
+            </div>
+
+            <div>
+                <label for="inputTemperaturaMedia">Informe a temperatura média do cave</label>
+                <input type="text" name="inputTemperaturaMedia" id="inputTemperaturaMedia">
+            </div>
+
+            <div>
+                <label for="inputUmidadeMedia">Informe a umidade média do cave</label>
+                <input type="text" name="inputUmidadeMedia" id="inputUmidadeMedia">
+            </div>
+        </div>
+
+        <div class="button">
+            <button onclick="simular()">Simular</button>
+        </div>
+
+        <div id="economia">
+            
+        </div>
+
+        <div id="relatorio">
+
+        </div>
+
+        <div id="semWinetech">
+
+        </div>
+
+        <div id="comWinetech">
+
+        </div>
+    </div>
+</body>
+
+<script>
+    function simular() {
+        var quantidadeBarris = Number(inputQuantidadeBarris.value);
+        var temperatura = Number(inputTemperaturaMedia.value);
+        var umidade = Number(inputUmidadeMedia.value);
+        var cenario = "";
+        var perda = 0;
+
+        // validações
+        var msg_erro_vazio = " é obrigatório. Insira um valor válido";
+        var msg_erro_entrada_nula = " não pode ser menor ou igual a zero. Insira um valor válido";
+
+        if (inputQuantidadeBarris.value == '') {
+            alert("O campo 'Quantidade barris'" + msg_erro_vazio);
+        } else if (Number(inputQuantidadeBarris.value) <= 0) {
+            alert("O campo 'Quantidade barris'" + msg_erro_entrada_nula);
+        } else if (Number(inputQuantidadeBarris.value) % 1 != 0) {
+            alert("O campo 'Quantidade barris' não pode ser um número decimal. Insira um número inteiro");
+        } else if (inputPrecoBarril.value == '') {
+            alert("O campo 'Preço barril'" + msg_erro_vazio);
+        } else if (Number(inputPrecoBarril.value) <= 0) {
+            alert("O campo 'Preço barril'" + msg_erro_entrada_nula);
+        } else if (inputTemperaturaMedia.value == '') {
+            alert("O campo 'Temperatura média'" + msg_erro_vazio);
+        } else if (Number(inputTemperaturaMedia.value) <= 0) {
+            alert("O campo 'Temperatura média'" + msg_erro_entrada_nula);
+        } else if (inputUmidadeMedia.value == '') {
+            alert("O campo 'Umidade média'" + msg_erro_vazio);
+        } else if (Number(inputUmidadeMedia.value) <= 0 || Number(inputUmidadeMedia) >= 100) {
+            alert("O campo 'Umidade média' deve estar entre 0 e 100. Insira um valor válido");
+        } else {
+            if (temperatura < 10 || temperatura > 20 || umidade < 50 || umidade > 85) {
+                perda = 1;
+                cenario = "Alerta máximo: Perda total";
+            } else if (((temperatura >= 10) && (temperatura < 14)) || ((umidade > 75) && (umidade <= 85))) {
+                perda = 0.3;
+                cenario = "Alerta moderado: Perda moderada";
+            }  else if (((temperatura >= 14) && (temperatura <= 16)) && ((umidade >= 50) && (umidade < 60))) {
+                cenario = "Cenário ideal: Perda de mínima";
+            }
+        }
+    }
+</script>
+
+</html>
