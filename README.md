@@ -1,6 +1,6 @@
 # WineTech 
 
-<img width="336" height="306" alt="logov2 0" src="/entregaveis-grupo/logos/logo.png">
+<img src="/entregaveis-grupo/logos/logo.png">
 
 ## 📖 Descrição do Projeto  
 
