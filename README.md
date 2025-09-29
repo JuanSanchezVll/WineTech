@@ -1,6 +1,6 @@
 # WineTech 
 
-<img width="336" height="306" alt="logov2 0" src="https://github.com/user-attachments/assets/870c95fb-56c1-4c6b-a868-a6e1383d8aa1" />
+<img width="336" height="306" alt="logov2 0" src="/entregaveis-grupo/logos/logo.png">
 
 ## 📖 Descrição do Projeto  
 
