@@ -156,3 +156,6 @@ FROM leituraSensor ls
 JOIN sensor s ON ls.idSensor = s.idSensor
 JOIN barril b ON s.idBarril = b.idBarril
 JOIN tipoUva t ON b.idTipoUva = t.idTipoUva;
+
+-- CRIAR USUÁRIO
+create user 'inserter'@'localhost' identified by 'senha123';
