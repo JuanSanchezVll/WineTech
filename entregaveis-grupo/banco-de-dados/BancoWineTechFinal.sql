@@ -161,13 +161,15 @@ JOIN tipoUva t ON b.idTipoUva = t.idTipoUva;
 
 
 -- CRIAR USUÁRIO E DAR AS PERMISSÕES
--- create user 'winetech-sensor'@'localhost' identified by 'w@n@t@c@';
+CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
--- grant insert on winetech.leituraSensor to 'winetech-sensor'@'localhost';
+GRANT INSERT on winetech.leituraSensor to 'winetech-sensor'@'%';
 
--- flush privileges;
+CREATE USER 'winetech'@'%' IDENTIFIED BY 'Winetech.2026';
 
--- drop user 'inserter'@'localhost';
+GRANT ALL PRIVILEGES ON winetech.* TO'winetech'@'%';
 
--- SELECT user, host FROM mysql.user;
+flush privileges;
+
+SELECT user, host FROM mysql.user;
 
