@@ -23,7 +23,7 @@ CREATE TABLE empresa (
   situacaoContrato BOOLEAN DEFAULT FALSE,
   dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
   idEndereco INT,
-  CONSTRAINT fkEndereco FOREIGN KEY (idEndereco) REFERENCES endereco(idEndereco)
+  CONSTRAINT fkEmpresaEndereco FOREIGN KEY (idEndereco) REFERENCES endereco(idEndereco)
 );
 
 CREATE TABLE funcionario (
@@ -32,27 +32,29 @@ CREATE TABLE funcionario (
   sobrenome VARCHAR(100) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL,
   senha VARCHAR(255) NOT NULL,
-  nivelAcesso TINYINT NOT NULL,
+  nivelAcesso TINYINT NOT NULL DEFAULT 3,
   ativo BOOLEAN DEFAULT TRUE,
   dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  idEmpresa INT NOT NULL,
-  CONSTRAINT fkEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
+  idEmpresa INT,
+  CONSTRAINT fFuncionariokEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
+  CONSTRAINT chkNivelAcesso CHECK (nivelAcesso in (0, 1, 2, 3)),
+  CONSTRAINT chkEmpresaUsuario CHECK ((nivelAcesso = 0 and idEmpresa is null) or (nivelAcesso >= 1 and idEmpresa is not null))
 );
 
 CREATE TABLE cave (
   idCave INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) UNIQUE NOT NULL,
   idEmpresa INT,
-  CONSTRAINT fkEmpresaCave FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
+  CONSTRAINT fkCaveEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE tipoUva (
   idTipoUva INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
-  temperaturaMaxima DECIMAL(5,2),
-  temperaturaMinima DECIMAL(5,2),
-  umidadeMaxima DECIMAL(5,2),
-  umidadeMinima DECIMAL(5,2)
+  temperaturaMinima DECIMAL(5,2) NOT NULL,
+  temperaturaMaxima DECIMAL(5,2) NOT NULL,
+  umidadeMinima DECIMAL(5,2) NOT NULL,
+  umidadeMaxima DECIMAL(5,2) NOT NULL
 );
 
 CREATE TABLE barril (
@@ -83,7 +85,7 @@ CREATE TABLE leituraSensor (
 CREATE TABLE alerta (
   idAlerta INT PRIMARY KEY AUTO_INCREMENT,
   gravidadeAlerta VARCHAR(30) NOT NULL,
-  dataHoraAlerta DATETIME NOT NULL,
+  dataRegistro DATETIME NOT NULL,
   statusManutencao VARCHAR(45),
   idLeituraSensor INT NOT NULL,
  CONSTRAINT fkAlertaLeituraSensor FOREIGN KEY (idLeituraSensor) REFERENCES leituraSensor(idLeituraSensor)
@@ -94,10 +96,10 @@ INSERT INTO endereco (logradouro, numero, complemento, bairro, cidade, estado, c
 ('Avenida do Sol', '1200', 'Escritório', 'Laranjeiras', 'Caxias do Sul', 'RS', '95000002'),
 ('Travessa da Lua', '22', 'Fundos', 'Centro Velho', 'Bento Gonçalves', 'RS', '95700003');
 
-INSERT INTO tipoUva (nome, temperaturaMaxima, temperaturaMinima, umidadeMaxima, umidadeMinima) VALUES
-('Tannat', 17.00, 13.00, 75.00, 60.00),
-('Merlot', 16.50, 12.00, 80.00, 65.00),
-('Sauvignon Blanc', 12.00, 8.00, 78.00, 68.00);
+INSERT INTO tipoUva (nome, temperaturaMinima, temperaturaMaxima, umidadeMinima, umidadeMaxima) VALUES
+('Merlot', 14.00, 16.00, 60.00, 75.00),
+('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00),
+('Malbec', 14.00, 16.00, 60.00, 75.00);
 
 INSERT INTO empresa (cnpj, razaoSocial, nomeFantasia, emailContato, codigoSeguranca, situacaoContrato, dataRegistro, idEndereco) VALUES
 ('00000000000001', 'Vinícola Nova Era S.A.', 'Nova Era Vinhos', 'contato@novaera.com', 'SEGRT54321', 1, '2024-01-01 10:00:00', 1),
@@ -129,10 +131,10 @@ INSERT INTO leituraSensor (temperatura, umidade, dataRegistro, idSensor) VALUES
 (18.20, 81.00, '2024-09-25 16:05:00', 2),
 (10.00, 72.00, '2024-09-25 16:10:00', 3);
 
-INSERT INTO alerta (gravidadeAlerta, dataHoraAlerta, statusManutencao, idLeituraSensor) VALUES
+INSERT INTO alerta (gravidadeAlerta, dataRegistro, statusManutencao, idLeituraSensor) VALUES
 ('URGENTE', '2024-09-25 16:00:01', 'CORRIGIDO', 1),
 ('CRÍTICA', '2024-09-25 16:05:01', 'PENDENTE', 2),
-('MODERADA', '2024-09-25 16:10:01', 'AGENDADO', 3);
+('MODERADA', '2024-09-25 16:10:01', 'AGENDADO', 3); 
 
 SELECT
     b.identificacao AS Barril,
@@ -157,5 +159,15 @@ JOIN sensor s ON ls.idSensor = s.idSensor
 JOIN barril b ON s.idBarril = b.idBarril
 JOIN tipoUva t ON b.idTipoUva = t.idTipoUva;
 
--- CRIAR USUÁRIO
-create user 'inserter'@'localhost' identified by 'senha123';
+
+-- CRIAR USUÁRIO E DAR AS PERMISSÕES
+-- create user 'winetech-sensor'@'localhost' identified by 'w@n@t@c@';
+
+-- grant insert on winetech.leituraSensor to 'winetech-sensor'@'localhost';
+
+-- flush privileges;
+
+-- drop user 'inserter'@'localhost';
+
+-- SELECT user, host FROM mysql.user;
+
