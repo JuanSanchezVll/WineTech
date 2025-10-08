@@ -259,8 +259,7 @@
             var valorCave = quantidadeBarris * precoBarril; 
 
             // Variáveis para a 3° SAIDA: Sem Winetech
-            var barrisPerdidos = quantidadeBarris * perda;
-            barrisPerdidos = barrisPerdidos.ath.round(barrisPerdidos);
+            var barrisPerdidos = Math.round(quantidadeBarris * perda);
             var totalMensal = (precoBarril * quantidadeBarris) * 6;
             var prejuizo = (precoBarril * barrisPerdidos) * 6;
             var porcentagemPrejuizo = (prejuizo / totalMensal) * 100;
