@@ -1,0 +1,150 @@
+* 
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+p 
+{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 0.5rem;
+    margin-bottom: 10px;
+}
+
+header 
+{
+
+    height: 250px;
+
+}
+
+header img {
+    height: 200px;
+}
+
+#container 
+{
+    margin-left: 150px;
+    margin-right: 20px;
+    display: flex;
+    height: 650px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.esquerda
+{   
+    display: flex;
+    padding-right: 20px;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    margin-left: 30px;
+}
+
+.esquerda img
+{
+    width: 100%;
+}
+
+.direita
+{   
+    display: flex;
+    height: 95%;
+    width: 50%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.direita div 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 70%;
+}
+
+.direita input 
+{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-width: 1px;
+    filter: drop-shadow(5px 10px 4px rgba(0, 0, 0, 0.219));
+    border-color: rgba(0, 0, 0, 0.219);
+    border-radius: 5px;
+    width: 90%;
+    height: 40px;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 0.5rem;
+}
+
+
+    input[type="text"]:focus {
+        outline-color: #a53b32;
+        outline-offset: 2px;
+}
+
+.cadastro 
+{
+
+    width: 92%;
+    border-radius: 5px;
+    background-color: #70160E;
+    color: white;
+    border-color: rgba(0, 0, 0, 0.219);
+    filter: drop-shadow(5px 10px 4px rgba(0, 0, 0, 0.219));
+    font-size: 20px;
+    margin-top: 10px;
+    height: 50px;
+    cursor: pointer;
+
+}
+
+.cadastro:hover
+{
+
+    width: 92%;
+    border-radius: 5px;
+    background-color: #a53b32;
+    color: white;
+    border-color: rgba(0, 0, 0, 0.219);
+    filter: drop-shadow(5px 10px 4px rgba(0, 0, 0, 0.219));
+    font-size: 20px;
+    margin-top: 10px;
+    height: 50px;
+    cursor: pointer;
+
+}
+
+.entrar 
+{
+    margin-left: 62px;
+    display: flex;
+    margin-top: 20px;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+}
+
+.entrar a
+{
+    
+    text-decoration: none;
+    color: #70160E;
+    font-size: 14px;
+}
