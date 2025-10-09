@@ -43,7 +43,7 @@ CREATE TABLE funcionario (
 
 CREATE TABLE cave (
   idCave INT PRIMARY KEY AUTO_INCREMENT,
-  identificacao VARCHAR(45) UNIQUE NOT NULL,
+  identificacao VARCHAR(45) NOT NULL,
   idEmpresa INT,
   CONSTRAINT fkCaveEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
 );
@@ -59,7 +59,7 @@ CREATE TABLE tipoUva (
 
 CREATE TABLE barril (
   idBarril INT PRIMARY KEY AUTO_INCREMENT,
-  identificacao VARCHAR(45) UNIQUE NOT NULL,
+  identificacao VARCHAR(45) NOT NULL,
   idCave INT NOT NULL,
   idTipoUva INT NOT NULL,
  CONSTRAINT fkBarrilCave  FOREIGN KEY (idCave) REFERENCES cave(idCave),
@@ -68,7 +68,7 @@ CREATE TABLE barril (
 
 CREATE TABLE sensor (
   idSensor INT PRIMARY KEY AUTO_INCREMENT,
-  identificacao VARCHAR(45) UNIQUE NOT NULL,
+  identificacao VARCHAR(45) NOT NULL,
   idBarril INT NOT NULL,
  CONSTRAINT fkSensorBarril FOREIGN KEY (idBarril) REFERENCES barril(idBarril)
 );
