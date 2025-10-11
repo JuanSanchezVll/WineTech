@@ -173,3 +173,5 @@ flush privileges;
 
 SELECT user, host FROM mysql.user;
 
+SELECT @@PORT, @@VERSION, @@hostname;
+
