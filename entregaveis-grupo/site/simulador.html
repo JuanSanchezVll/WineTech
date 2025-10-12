@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/assets/main.css">
-    <link rel="stylesheet" href="./style/indexHome.css">
+    <link rel="stylesheet" href="./style/simulador.css">
     <link rel="icon" href="./assets/Logorealrealfinalpng.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <title>Home - Winetech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Simulador Financeiro - Winetech</title>
 </head>
 
 <body>
+
     <div class="header">
         <div class="container">
             <img src="./assets/Logorealrealfinalpng.png" alt="Logo Winetech">
@@ -34,6 +33,106 @@
             </div>
         </div>
     </div>
+
+    <div class="conteudo">
+        <div class="titulo_subtitulo">
+            <label class="titulo"><b>Simulador Financeiro</b></label>
+            <label class="frase">Proteja seu investimento e evite perdas significativas com monitoramento inteligente!</label>
+            <hr>
+        </div>
+
+        <!-- Grupo de inputs -->
+        <div class="input-group">
+            <!-- 1 INPUT: Quantidade de barris em estoque -->
+            <div class="input-box">
+                <label for="inputQuantidadeBarris">Informe a quantidade de barris no estoque:</label>
+                <input type="text" name="inputQuantidadeBarris" id="inputQuantidadeBarris">
+            </div>
+
+            <!-- 2 INPUT: Preço do barril -->
+            <div class="input-box">
+                <label for="inputPrecoBarril">Informe o preço do barril:</label>
+                <input type="text" name="inputPrecoBarril" id="inputPrecoBarril">
+            </div>
+
+            <!-- 3 INPUT: Temperatura do cave -->
+            <div class="input-box">
+                <label for="inputTemperaturaMedia">Informe a temperatura média do cave:</label>
+                <input type="text" name="inputTemperaturaMedia" id="inputTemperaturaMedia">
+            </div>
+
+            <!-- 4 INPUT: Porcentagem de umidade do cave -->
+            <div class="input-box">
+                <label for="inputUmidadeMedia">Informe a umidade média do cave:</label>
+                <input type="text" name="inputUmidadeMedia" id="inputUmidadeMedia">
+            </div>
+        </div>
+
+        <div class="button">
+            <button onclick="simular()" id="button-simular">Simular</button>
+        </div>
+
+        <div class="resultados">
+            <!-- 1 SAIDA: Economia potencial com Winesafe -->
+            <div id="resumoLucro"></div>
+            <!-- 2 SAIDA: Relatório do cave -->
+            <div id="relatorio"></div>
+        </div>
+
+        <div class="saidasWinetech">
+            <!-- 3 SAIDA: Sem Winetech  -->
+            <div id="semWinetech"></div>
+            <!-- 4 SAIDA: Com Winetech -->
+            <div id="comWinetech"></div>
+        </div>
+
+        <div id="estiloResultado">
+            <style> 
+                .resultados {
+                    display: none;
+                }
+    
+                  #semWinetech {
+                    display: none;
+                }  
+    
+                  #comWinetech {
+                    display: none;
+                }
+            </style>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <img src="./assets/Logorealrealfinalpng.png" alt="Logo Winetech">
+            <div>
+                <h3>Sobre</h3>
+                <p>Site da Winetech, empresa </p>
+            </div>
+
+            <div>
+                <h3>Links</h3>
+                <a href="#home">Início</a>
+                <a href="#sobre">sobre nos</a>
+                <a href="#">Contato</a>
+            </div>
+
+            <div>
+                <h3>Redes</h3>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">TikTok</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2025 | WineTech
+        </div>
+    </footer>
+
+    <script src="js/simulador.js"></script>
 </body>
 
 </html>
