@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", system-ui, Segoe UI, Roboto, Arial;
+    background-color: #FFF6F3;
+}
+
+.content {
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+.header {
+
+}
+*/
+
+.titulo {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 5rem;
+}
+
+.input-group {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.875rem;
+}
+
+.input-box {
+    width: 450px;
+    /*
+    width: 100%;
+    max-width: 450px;
+    */
+}
+
+.input-box input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    border: 1px solid #CCCACA;
+    border-radius: 6px;
+    background-color: #FFFDFD;
+}
+
+.input-box input::placeholder {
+    color: #999797;
+}
+
+.input-box input:hover {
+    border: 1px solid #F19890;
+    box-shadow: 0px 0px 2px #BE3C30;
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid #BE3C30;
+}
+
+.buttons {
+    width: 450px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.btn:focus-visible {
+    outline: 1px solid #BE3C30; 
+}
+
+.btn-cadastrar {
+    background-color: #70160E;
+    color: #FFFCFC;
+    padding: 0.8rem 4.2rem;
+}
+
+.btn-cadastrar:hover {
+    background-color: #9b4641;
+}
+
+.btn-voltar {
+    background-color: #A6A4A4;
+    color: #FFFCFC;
+    padding: 0.8rem 5rem;
+    border: none;
+    border-radius: 6px;
+}
+
+.btn-voltar:hover {
+    background-color: #BFBDBD;
+}
