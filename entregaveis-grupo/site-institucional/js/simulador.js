@@ -77,16 +77,18 @@ function simular() {
         // Cenário da situação dos vinhos do cliente
         var cenario = "";
         if (perda == 1) {
-            cenario = "Alerta máximo: Perda total";
+            cenario = '<span style="color: rgba(137, 7, 7, 1);"><b>Alerta máximo: Perda total</b></span>';
         } else if (perda == 0.3) {
-            cenario = "Alerta moderado: Perda moderada";
+            cenario = '<span style="color: rgb(209, 175, 5);"><b>Alerta moderado: Perda moderada</b></span>';
         } else {
-            cenario = "Cenário ideal: Perda mínima";
+            cenario = '<span style="color: rgba(0, 144, 22, 1);"><b>Cenário ideal: Perda mínima</b></span>';
         }
 
         // Variáveis para o cálculo da 2° SAIDA: relatório do cave
-        var garrafaPorBarril = 300;
-        var totalGarrafa = quantidadeBarris * garrafaPorBarril;
+        // CALCULO DA GARRAFA
+        // var garrafaPorBarril = 300;
+        // var totalGarrafa = quantidadeBarris * garrafaPorBarril;
+
         /* Quantidade de garrafas por barril é de 300, e o valor médio de uma garrafa
             de vinho tinto de corpo médio é de 120 R$, ou seja o preço de cada barril
             é de aproximadamente 36000 R$ */
@@ -124,7 +126,7 @@ function simular() {
                     text-align: center;
                     gap: 15px;
                     margin-top: 40px;
-                    border: solid 2px #70160E;
+                    border: solid 3px #000000ff;
                     border-radius: 10px;
                     padding: 10px;
                     background-color: #eeeded;
@@ -143,48 +145,55 @@ function simular() {
                     gap: 40px;
                     }
 
-                    #comWinetech,
-                    #semWinetech {
-                    max-width: 380px;
+                    #comWinetech {
+                    max-width: 455px;
                     max-height: 100%;
                     text-align: center;
                     border-radius: 10px;
                     padding: 10px;
                     background-color: #eeeded;
-                    border: solid 2px #70160E;
+                    border: solid 3px #0e7016ff;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+                    }
+
+                    #semWinetech {
+                    max-width: 403px;
+                    max-height: 100%;
+                    text-align: center;
+                    border-radius: 10px;
+                    padding: 10px;
+                    background-color: #eeeded;
+                    border: solid 3px #70160E;
                     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
                     }
             </style>`;
 
         // 1 SAIDA: Economia potencial com Winesafe
         resumoLucro.innerHTML = `<div class="resumo">
+            <br><b>Cenário:</b> ${cenario}
             <br><b>Economia potencial com nossos serviços:</b><b> R$</b><span style="color: green;"><b>${reducaoPrejuizo.toFixed(2)}</b></span><br>
             </div>`;
 
         // 2 SAIDA: Relatório do cave
         relatorio.innerHTML = `<hr>
-            <h3>Cenário Simulado</h3>
+            <h3>Relatório do Cave</h3>
             <p><b>Quantidade de barris:</b> ${quantidadeBarris}</p>
-            <p><b>Total de garrafas:</b> ${totalGarrafa}</p>
             <p><b>Valor total do cave: </b>R$ ${valorCave}</p>`;
 
         // 3 SAIDA: Sem Winetech
         if (perda == 0.03) {
             semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
                 <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">3%<br></span></b>
-                <b>Cenário:</b> ${cenario}<br>
                 <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
                 <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
         } else if (perda == 0.3) {
             semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
                 <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">30%<br></span></b>
-                <b>Cenário:</b> ${cenario}<br>
                 <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
                 <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
         } else {
             semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
                 <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">100%<br></span></b>
-                <b>Cenário:</b> ${cenario}<br>
                 <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
                 <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
         }
@@ -195,14 +204,14 @@ function simular() {
                 <b>Porcentagem de redução de perda estimada:</b> <b><span style="color: green;">3%</span></b><br>  
                 <b>Redução de prejuízo semestral estimado:</b> <b>R$</b> <b><span style="color: green;">${prejuizo.toFixed(2)}</span></b><br>
                 <b>Barris preservados pelos nossos serviços:</b> <b>${cantoDosAnjos.toFixed(0)}</b> barris<br>
-                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br>
+                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br><br>
                 <b>com a WineTech, seu cave está protegido e o valor do vinho é preservado!</b>`;
         } else {
             comWinetech.innerHTML = `<h1>Com a Winetech</h1>
                 <b>Porcentagem de redução de perda estimada:</b> <b><span style="color: green;">10%</span></b><br>  
                 <b>Redução de prejuízo semestral estimado:</b> <b>R$</b> <b><span style="color: green;">${reducaoPrejuizo.toFixed(2)}</span></b><br>
                 <b>Barris preservados pelos nossos serviços:</b> <b>${cantoDosAnjos.toFixed(0)}</b> barris<br>
-                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br>
+                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br><br>
                 <b>com a WineTech, seu cave está protegido e o valor do vinho é preservado!</b>`;
         }
     }
