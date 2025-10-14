@@ -16,6 +16,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 /*
@@ -25,35 +27,48 @@ body {
 */
 
 .titulo {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: 600;
-    margin-bottom: 5rem;
+    margin-bottom: clamp(2rem, 5vw, 5rem);
+    color: #0D0D0D;
 }
 
 .input-group {
-    width: 30%;
+    width: min(90%, 450px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.875rem;
+    gap: clamp(1rem, 2vw, 1.875rem);
 }
 
 .input-box {
-    width: 450px;
+    width: 100%;
+    position: relative;
     /*
     width: 100%;
     max-width: 450px;
     */
 }
 
+.input-box i {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #BE3C30;
+    pointer-events: none;
+}
+
 .input-box input {
     width: 100%;
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
+    padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.9rem, 1vw, 1rem);
     border: 1px solid #CCCACA;
     border-radius: 6px;
     background-color: #FFFDFD;
+    padding-left: 2.5rem;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-box input::placeholder {
@@ -70,18 +85,23 @@ body {
 }
 
 .buttons {
-    width: 450px;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap-reverse;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .btn {
+    flex: 1;
+    min-width: 130px;
+    padding: clamp(0.7rem, 1.5vw, 0.8rem);
+    font-size: clamp(0.9rem, 1vw, 1rem);
     cursor: pointer;
     border: none;
     border-radius: 6px;
     font-weight: 600;
-    font-size: 1rem;
     transition: background 0.3s ease;
 }
 
@@ -92,7 +112,6 @@ body {
 .btn-cadastrar {
     background-color: #70160E;
     color: #FFFCFC;
-    padding: 0.8rem 4.2rem;
 }
 
 .btn-cadastrar:hover {
@@ -102,11 +121,17 @@ body {
 .btn-voltar {
     background-color: #A6A4A4;
     color: #FFFCFC;
-    padding: 0.8rem 5rem;
     border: none;
     border-radius: 6px;
 }
 
 .btn-voltar:hover {
     background-color: #BFBDBD;
+}
+
+@media (max-width: 400px) {
+    .buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }

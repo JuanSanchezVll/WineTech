@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../style/cadastrar-painel-administrativo.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      referrerpolicy="no-referrer" />
     <title>Cadastrar Funcionário</title>
 </head>
 <body>
@@ -12,32 +15,37 @@
             <h2 class="titulo">Cadastrar Funcionário</h2>
         </header>
 
-        <section class="input-group">
+        <form class="input-group" action="#" method="post">
             <div class="input-box">
+                <i class="fa-solid fa-user"></i>
                 <input type="text" name="nome" id="nome" placeholder="Nome" required>
             </div>
 
             <div class="input-box">
+                <i class="fa-solid fa-user"></i>
                 <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
             </div>
 
             <div class="input-box">
-                <input type="text" name="email" id="email" placeholder="Email" required>
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" name="email" id="email" placeholder="Email" required>
             </div>
 
             <div class="input-box">
-                <input type="text" name="senha" id="senha" placeholder="Senha" required>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="senha" id="senha" placeholder="Senha" minlength="8" autocomplete="off" required>
             </div>
 
             <div class="input-box">
-                <input type="text" name="confirmarSenha" id="confirmarSenha" placeholder="Confirme sua senha" required>
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirme sua senha" minlength="8" autocomplete="off" required>
             </div>
 
             <div class="buttons">
                 <button class="btn btn-voltar">Voltar</button>
                 <button class="btn btn-cadastrar">Cadastrar</button>
             </div>
-        </section>
+        </form>
     
     </main>
 </body>
