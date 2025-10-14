@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WineTech - Caves</title>
+
+  <!-- Fonts / Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style/cave.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo-wrap">
+          <img src="../assets/logo.png" alt="WineTech" class="logo">
+        </div>
+
+        <nav class="nav">
+          <a href="cave.html" class="nav-link active"><i class="fa-solid fa-wine-bottle"></i><span>Caves</span></a>
+          <a href="barril.html" class="nav-link"><i class="fa-solid fa-warehouse"></i><span>Barril</span></a>
+          <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Painel Administrativo</span></a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="btn-logout" onclick="location.href='home.html'">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main">
+      <header class="page-header">
+        <div>
+          <h1>Dashboard de Monitoramento</h1>
+          <p>Controle em tempo real da temperatura e umidade dos barris de vinho tinto.</p>
+        </div>
+      </header>
+
+      <!-- KPIs -->
+      <section class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Sensores Ativos</div>
+            <div class="kpi-value">12 / 12</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot green" title="Normal"></span>
+            <i class="fa-solid fa-signal"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Alertas Hoje</div>
+            <div class="kpi-value">1</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot yellow" title="Atenção"></span>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Temperatura Média</div>
+            <div class="kpi-value">21.6°C</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot green" title="OK"></span>
+            <i class="fa-solid fa-thermometer"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Umidade Média</div>
+            <div class="kpi-value">82%</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot red" title="Atenção Crítica"></span>
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área principal: gráfico 15 dias à esquerda / tabela histórico à direita -->
+      <section class="main-grid">
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3>Alertas nos últimos 15 dias</h3>
+          </div>
+          <div class="card-body">
+            <canvas id="chart15dias"></canvas>
+          </div>
+        </div>
+
+        <div class="card history-card">
+          <div class="card-header">
+            <h3>Histórico de Leituras</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-wrap">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Temperatura</th>
+                    <th>Registro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25/05/2025</td>
+                    <td>32.5°C</td>
+                    <td>Normal</td>
+                  </tr>
+                  <tr>
+                    <td>24/05/2025</td>
+                    <td>34.1°C</td>
+                    <td>Atenção</td>
+                  </tr>
+                  <tr>
+                    <td>23/05/2025</td>
+                    <td>38.2°C</td>
+                    <td>Alerta</td>
+                  </tr>
+                  <tr>
+                    <td>22/05/2025</td>
+                    <td>31.0°C</td>
+                    <td>Normal</td>
+                  </tr>
+                  <tr>
+                    <td>21/05/2025</td>
+                    <td>30.6°C</td>
+                    <td>Normal</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção de Barris (cards) -->
+      <section class="barris-section">
+        <h2>Monitoramento de Barris</h2>
+        <div class="barris-grid">
+          <div class="barril-card normal">
+            <h4>Barril #1</h4>
+            <p>Temp: <strong>18.5°C</strong></p>
+            <p>Umid: <strong>65%</strong></p>
+            <p>há 5 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card alerta">
+            <h4>Barril #2</h4>
+            <p>Temp: <strong>22.1°C</strong></p>
+            <p>Umid: <strong>58%</strong></p>
+            <p>há 3 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card normal">
+            <h4>Barril #3</h4>
+            <p>Temp: <strong>17.9°C</strong></p>
+            <p>Umid: <strong>70%</strong></p>
+            <p>há 6 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <!-- <div class="barril-card alerta">
+            <h4>Barril #4</h4>
+            <p>Temp: <strong>23.3°C</strong></p>
+            <p>Umid: <strong>55%</strong></p>
+            <p>há 2 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card normal">
+            <h4>Barril #5</h4>
+            <p>Temp: <strong>19.1°C</strong></p>
+            <p>Umid: <strong>67%</strong></p>
+            <p>há 4 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card atencao">
+            <h4>Barril #6</h4>
+            <p>Temp: <strong>24.8°C</strong></p>
+            <p>Umid: <strong>52%</strong></p>
+            <p>há 1 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card alerta">
+            <h4>Barril #7</h4>
+            <p>Temp: <strong>26.3°C</strong></p>
+            <p>Umid: <strong>49%</strong></p>
+            <p>há 2 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div>
+
+          <div class="barril-card normal">
+            <h4>Barril #8</h4>
+            <p>Temp: <strong>18.9°C</strong></p>
+            <p>Umid: <strong>69%</strong></p>
+            <p>há 7 min</p><button class="btn-primary">Ver Detalhes</button>
+          </div> -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- <script src="../js/cave.js"></script> -->
+</body>
+
+</html>

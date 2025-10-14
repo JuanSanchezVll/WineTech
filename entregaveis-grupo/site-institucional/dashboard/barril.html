@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WineTech - Barril #1</title>
+
+    <!-- Fonts / Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style/barril.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo-wrap">
+                    <img src="../assets/logo.png" alt="WineTech" class="logo">
+                </div>
+
+                <nav class="nav">
+                    <a href="cave.html" class="nav-link"><i class="fa-solid fa-wine-bottle"></i><span>Caves</span></a>
+                    <a href="barril.html" class="nav-link active"><i class="fa-solid fa-box"></i><span>Barril</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Painel
+                            Administrativo</span></a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="btn-logout" onclick="location.href='home.html'">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main">
+            <header class="page-header">
+                <div>
+                    <h1>Barril #1 - Detalhes</h1>
+                    <p>Monitoramento em tempo real da temperatura e umidade do barril.</p>
+                </div>
+            </header>
+
+            <!-- KPIs do Barril -->
+            <section class="kpi-row">
+                <div class="kpi">
+                    <div class="kpi-left">
+                        <div class="kpi-title">Temperatura Atual</div>
+                        <div class="kpi-value">18.5°C</div>
+                    </div>
+                    <div class="kpi-meta">
+                        <span class="kpi-dot green" title="Normal"></span>
+                        <i class="fa-solid fa-thermometer"></i>
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-left">
+                        <div class="kpi-title">Umidade Atual</div>
+                        <div class="kpi-value">65%</div>
+                    </div>
+                    <div class="kpi-meta">
+                        <span class="kpi-dot green" title="Normal"></span>
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-left">
+                        <div class="kpi-title">Alertas Hoje</div>
+                        <div class="kpi-value">0</div>
+                    </div>
+                    <div class="kpi-meta">
+                        <span class="kpi-dot green" title="Sem Alertas"></span>
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="kpi-left">
+                        <div class="kpi-title">Última Atualização</div>
+                        <div class="kpi-value">há 5 min</div>
+                    </div>
+                    <div class="kpi-meta">
+                        <span class="kpi-dot green"></span>
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gráfico de temperatura e umidade -->
+            <section class="main-grid">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>Temperatura e Umidade nas últimas 24h</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartBarril"></canvas>
+                    </div>
+                </div>
+
+                <!-- Legenda de cores -->
+                <div class="card legenda-card">
+                    <div class="card-header">
+                        <h3>Legenda de Alertas</h3>
+                    </div>
+                    <div class="card-body legenda-body">
+                        <div class="coluna cor1">Normal</div>
+                        <div class="coluna cor2">Atenção</div>
+                        <div class="coluna cor3">Alerta</div>
+                        <div class="coluna cor4">Crítico</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Histórico de leituras -->
+            <section class="history-section">
+                <h2>Histórico de Leituras</h2>
+                <div class="table-wrap">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Temperatura</th>
+                                <th>Umidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>08:00</td>
+                                <td>18.3°C</td>
+                                <td>64%</td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>18.5°C</td>
+                                <td>65%</td>
+                            </tr>
+                            <tr>
+                                <td>10:00</td>
+                                <td>18.6°C</td>
+                                <td>66%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- <script src="../js/barril.js"></script> -->
+</body>
+
+</html>
