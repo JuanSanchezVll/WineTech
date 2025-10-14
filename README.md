@@ -1,6 +1,6 @@
 # WineTech 
 
-<img src="entregaveis-grupo/logos/logo.png">
+<img src="../WineTech/entregaveis-grupo/site-institucional/assets/logo.png">
 
 ## 📖 Descrição do Projeto  
 
