@@ -20,12 +20,6 @@ body {
     margin: 0 auto;
 }
 
-/*
-.header {
-
-}
-*/
-
 .titulo {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: 600;
@@ -45,10 +39,6 @@ body {
 .input-box {
     width: 100%;
     position: relative;
-    /*
-    width: 100%;
-    max-width: 450px;
-    */
 }
 
 .input-box i {
@@ -60,7 +50,7 @@ body {
     pointer-events: none;
 }
 
-.input-box input {
+.input-box input, select {
     width: 100%;
     padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1rem, 2vw, 1.2rem);
     font-size: clamp(0.9rem, 1vw, 1rem);
@@ -75,13 +65,35 @@ body {
     color: #999797;
 }
 
-.input-box input:hover {
+.input-box input:hover, select:hover {
     border: 1px solid #F19890;
     box-shadow: 0px 0px 2px #BE3C30;
 }
 
-.input-box input:focus-visible {
+.input-box input:focus-visible, select:focus-visible {
     outline: 1px solid #BE3C30;
+}
+
+.input-box select {
+    appearance: none;
+
+    padding-right: 2.5rem;
+    
+    background-image: url(./../assets/icones/painel-administrativo/setinha-icon.svg);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5rem auto;
+    border: 1px solid #CCCACA;
+    border-radius: 6px;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+}
+
+.input-box select {
+    color: #999797;
+}
+
+.input-box select:valid {
+    color: #0D0D0D;
 }
 
 .buttons {
