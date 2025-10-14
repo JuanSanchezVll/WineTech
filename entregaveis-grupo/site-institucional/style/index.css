@@ -1,0 +1,284 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
+  color: #1a1a1a;
+}
+
+/* ================= HEADER ================= */
+.header {
+  width: 100%;
+  height: 100px;
+  background: #eeeded;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+  height: 100%;
+}
+
+.header img {
+  width: 85px;
+  height: auto;
+}
+
+/* ======== NAVBAR ======== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #70160E;
+  font-weight: 600;
+}
+
+#login,
+#cadastro {
+  color: #fff;
+  background-color: #70160E;
+  border: 2px solid #70160E;
+  border-radius: 6px;
+  padding: 6px 15px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+#login:hover,
+#cadastro:hover {
+  background-color: transparent;
+  color: #70160E;
+}
+
+/* ================= BANNER ================= */
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 180px 5% 100px 5%;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.banner #container {
+  max-width: 550px;
+}
+
+.banner h1 {
+  color: #70160E;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.banner p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.banner img {
+  width: 650px;
+  height: auto;
+}
+
+button {
+  margin-top: 30px;
+  background-color: #70160E;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #FFFACC;
+  color: #2A1110;
+}
+
+/* ================= SOBRE ================= */
+.sobre {
+  padding: 100px 5%;
+  background-color: #fff;
+}
+
+.sobre .container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.sobre h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #70160E;
+  margin-bottom: 20px;
+  border-bottom: 4px solid #70160E;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.sobre p {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 60px;
+  line-height: 1.7;
+}
+
+/* ================= SOLUÇÃO (cards) ================= */
+.divisao {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+.info {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 30px 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.info:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.info img {
+  width: 75px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.info h3 {
+  font-size: 20px;
+  color: #70160E;
+  margin-bottom: 10px;
+}
+
+.info p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background-color: #eeeded;
+  color: #000;
+  padding: 40px 20px 15px 20px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 25px;
+  max-width: 1200px;
+  margin: auto;
+  text-align: left;
+}
+
+.footer-container img {
+  width: 120px;
+  height: auto;
+}
+
+.footer-container h3 {
+  color: #70160E;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-container a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  margin: 5px 0;
+  transition: 0.3s ease;
+}
+
+.footer-container a:hover {
+  color: #70160E;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+/* ================= RESPONSIVIDADE ================= */
+@media (max-width: 900px) {
+  .banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner img {
+    width: 300px;
+  }
+
+  .sobre h1 {
+    font-size: 32px;
+  }
+
+  .sobre p {
+    font-size: 17px;
+  }
+
+  .info {
+    width: 90%;
+  }
+
+  .navbar ul {
+    gap: 10px;
+  }
+
+  .header img {
+    width: 70px;
+  }
+}
