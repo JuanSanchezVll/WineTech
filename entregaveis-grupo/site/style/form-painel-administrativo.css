@@ -121,12 +121,12 @@ body {
     outline: 1px solid #BE3C30; 
 }
 
-.btn-cadastrar {
+.btn-principal {
     background-color: #70160E;
     color: #FFFCFC;
 }
 
-.btn-cadastrar:hover {
+.btn-principal:hover {
     background-color: #9b4641;
 }
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../../style/form-painel-administrativo.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      referrerpolicy="no-referrer" />
+    <title>Cadastrar Sensor</title>
+</head>
+<body>
+    <main class="content">
+        <header class="header">
+            <h2 class="titulo">Cadastrar Sensor</h2>
+        </header>
+
+        <form action="#" method="post" class="input-group">
+            <div class="input-box">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" name="identificacao" id="identificacao" placeholder="Identificação" required>
+            </div>
+
+            <div class="input-box">
+                <i class="fa-solid fa-user"></i>
+                <select name="barrilAssociado" id="barrilAssociado" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="1">Barril 1</option>
+                    <option value="2">Barril 2</option>
+                    <option value="3">Barril 3</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-voltar">Voltar</button>
+                <button type="button" class="btn btn-principal">Cadastrar</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
