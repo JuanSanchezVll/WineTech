@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../../style/index-painel-administrativo.css">
+    <title>Gerenciar Barris</title>
+</head>
+<body>
+    <main class="content">
+        <nav class="sidebar">
+            <header class="sidebar-header">
+                <img class="logo" src="./../../assets/logo.png" alt="Logo WineTech">
+            </header>
+            
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="./../gerenciar-funcionarios/index.html" class="sidebar-item">
+                        <img src="./../../assets/icones/painel-administrativo/funcionario-icon.svg" alt="Icone de Funcionário">
+                        <span>Gerenciar Funcionários</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./../gerenciar-caves/index.html" class="sidebar-item">
+                        <img src="./../../assets/icones/painel-administrativo/cave-icon.svg" alt="Icone de Cave">
+                        <span>Gerenciar Caves</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="./../gerenciar-vinhos/index.html" class="sidebar-item">
+                        <img src="./../../assets/icones/painel-administrativo/vinho-icon.svg" alt="Icone de Vinho">
+                        <span>Gerenciar Vinhos</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="./../gerenciar-barris/index.html" class="sidebar-item">
+                        <img src="./../../assets/icones/painel-administrativo/barril-icon.svg" alt="Icone de Barris">
+                        <span>Gerenciar Barris</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="./../gerenciar-sensores/index.html" class="sidebar-item">
+                        <img src="./../../assets/icones/painel-administrativo/sensor-icon.svg" alt="Icone de Sensores">
+                        <span>Gerenciar Sensores</span>
+                    </a>
+                </li>
+            </ul>
+
+            <footer class="sidebar-footer">
+                <div class="sidebar-item">
+                    <img src="./../../assets/icones/painel-administrativo/voltar-icon.svg" alt="">
+                    <span><a href="./../../dashboard/cave.html">Voltar</a></span>
+                </div>
+            </footer>
+        </nav>
+
+        <section class="main-content">
+            <header class="main-content-header">
+                <h2 class="title">Gerenciar Barris</h2>
+            </header>
+            
+            <div class="table-container">
+                <div class="actions">
+                    <input type="search" placeholder="Busque por um barril...">
+                    <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Barril</button>
+                </div>
+                
+                <table class="table">
+                    <tr class="table-title">
+                        <th>ID</th>
+                        <th>Identificação</th>
+                        <th>Cave associada</th>
+                        <th>Vinho armazenado</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                    <tr class="table-content">
+                        <td>1</td>
+                        <td>Barril ABC1A</td>
+                        <td>Cave ABC</td>
+                        <td>Merlot</td>
+                        <td><a href="./atualizar.html"><img src="./../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
+                        <td><img src="./../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
+                    </tr>
+                    <tr class="table-content">
+                        <td>2</td>
+                        <td>Barril ABC1B</td>
+                        <td>Cave ABC</td>
+                        <td>Merlot</td>
+                        <td><a href="./atualizar.html"><img src="./../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
+                        <td><img src="./../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
+                    </tr>
+                    <tr class="table-content">
+                        <td>3</td>
+                        <td>Barril ABC1C</td>
+                        <td>Cave ABC</td>
+                        <td>Merlot</td>
+                        <td><a href="./atualizar.html"><img src="./../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
+                        <td><img src="./../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
