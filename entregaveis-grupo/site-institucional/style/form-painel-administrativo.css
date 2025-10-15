@@ -72,6 +72,7 @@ body {
 
 .input-box input:focus-visible, select:focus-visible {
     outline: 1px solid #BE3C30;
+    border: 1px solid #F19890;
 }
 
 .input-box select {
