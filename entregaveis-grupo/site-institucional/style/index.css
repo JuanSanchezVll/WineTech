@@ -112,7 +112,7 @@ body {
   height: auto;
 }
 
-button {
+#container button {
   margin-top: 30px;
   background-color: #70160E;
   color: #fff;
@@ -125,7 +125,7 @@ button {
   transition: 0.3s ease;
 }
 
-button:hover {
+#container button:hover {
   background-color: #FFFACC;
   color: #2A1110;
 }
@@ -228,6 +228,60 @@ button:hover {
   color: #444;
   margin-bottom: 60px;
   line-height: 1.7;
+}
+
+/* ================= SIMULE AQUI ================= */
+#SimuleAqui {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#SimuleAqui .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+}
+
+#SimuleAqui h1 {
+  color: #70160E;
+  font-size: 35px;
+  margin: 0px 0px;
+  margin-top: 40px;
+}
+
+#SimuleAqui p {
+  font-size: 18px;
+  margin: 10px 0px;
+}
+
+#SimuleAqui label {
+  margin-top: 16px;
+}
+
+#SimuleAqui span {
+  color: #8A6602;
+}
+
+.SimuleBotao {
+  margin-top: 30px;
+  color: #fff;
+  background-color: #70160E;
+  width: 180px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.SimuleBotao:hover {
+  color: #2A1110;
+  background-color: #FFFACC;
 }
 
 /* ================= FOOTER ================= */
