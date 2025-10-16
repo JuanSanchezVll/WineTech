@@ -20,7 +20,6 @@ a {
 }
 
 .sidebar {
-    /*linear-gradient(180deg, var(#6b0f0a), #4a0d15 65%);*/
     background-color: #6b0f0a;
     color: #FFF6F3;
     padding: 1rem;
@@ -57,16 +56,26 @@ a {
 }
 
 .sidebar-nav li {
-    list-style-type: none;
+    list-style: none;
 }
 
 .sidebar-item {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
-    gap: 0.3125rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-item img {
+    width: 24px;
+    height: 24px;
 }
 
 .sidebar-item span {
@@ -80,30 +89,25 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: auto;
 }
 
 .sidebar-footer .sidebar-item {
-    width: 60%;
-    display: flex;
-    flex-direction: row;
+    width: 80%;
     justify-content: center;
-    align-items: center;
     border: 1px solid #FFF6F3;
     border-radius: 16px;
-    padding: 0.3125rem 4rem;
+    padding: 0.5rem 1rem;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.sidebar-footer .sidebar-item span {
-    font-size: 0.85rem;
-}
-
-.sidebar-footer .sidebar-item span a {
-    color: #FFF6F3;
+.sidebar-footer .sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.03);
 }
 
 .main-content {
     flex: 1;
-    width: 75vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -134,7 +138,6 @@ a {
     width: 80%;
     margin-bottom: 1.5rem;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -169,11 +172,11 @@ a {
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto;
+.actions button:hover {
+    background-color: #4a0d15;
 }
 
 .table {
@@ -183,10 +186,6 @@ a {
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.table td {
-    background-color: #FFFCFC;
 }
 
 .table th, .table td {
@@ -201,11 +200,6 @@ a {
     font-weight: 600;
     position: sticky;
     top: 0;
-    z-index: 1;
-}
-
-.table tr:nth-child(even) {
-    background-color: #E5E3E3;
 }
 
 .table tr:hover td {
@@ -219,7 +213,6 @@ a {
 
 .action-icon {
     cursor: pointer;
-    transition: 0.3s ease;
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
@@ -234,11 +227,7 @@ a {
         align-items: stretch;
     }
 
-    .actions input {
-        width: 100%;
-    }
-
-    .actions button {
+    .actions input, .actions button {
         width: 100%;
     }
 
