@@ -41,7 +41,7 @@ body {
     position: relative;
 }
 
-.input-box i {
+.input-box i, img {
     position: absolute;
     left: 0.9rem;
     top: 50%;
