@@ -242,39 +242,40 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 320px;
+  height: 450px;
 }
 
 #SimuleAqui h1 {
   color: #70160E;
-  font-size: 35px;
+  font-size: 50px;
   margin: 0px 0px;
   margin-top: 40px;
 }
 
 #SimuleAqui p {
-  font-size: 18px;
+  font-size: 22px;
   margin: 10px 0px;
 }
 
 #SimuleAqui label {
   margin-top: 16px;
+  font-size: 18px;
 }
 
 #SimuleAqui span {
-  color: #8A6602;
+  color: #70160E;
 }
 
 .SimuleBotao {
-  margin-top: 30px;
+  margin-top: 35px;
   color: #fff;
   background-color: #70160E;
-  width: 180px;
+  width: 220px;
   font-weight: bold;
   border: none;
   border-radius: 6px;
   padding: 12px 25px;
-  font-size: 20px;
+  font-size: 26px;
   cursor: pointer;
   transition: 0.3s ease;
 }
