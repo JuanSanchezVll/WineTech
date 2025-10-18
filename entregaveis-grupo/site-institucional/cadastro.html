@@ -34,30 +34,120 @@
             <form>
                 <div class="input-group">
                     <i class="fa-solid fa-id-card"></i>
-                    <input type="text" placeholder="CNPJ" required>
+                    <input oninput="validarCNPJ(), cadastro()" id="inputCNPJ" type="text" placeholder="CNPJ">
+                    <div id="errCNPJ"></div>
                 </div>
+                
 
                 <div class="input-group">
                     <i class="fa-solid fa-building"></i>
-                    <input type="text" placeholder="Razão Social" required>
+                    <input oninput="validarRS(), cadastro()" id="inputRS" type="text" placeholder="Razão Social" >
+                    <div id="errRS"></div>
+
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-store"></i>
-                    <input type="text" placeholder="Nome Fantasia" required>
+                    <input type="text" oninput="validarNF(), cadastro()" id="inputNF"  placeholder="Nome Fantasia" >
+                    <div id="errNF"></div>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="Email de Contato" required>
+                    <input type="email" oninput="validarEmail(), cadastro()" id="inputEmail" placeholder="Email de Contato" >
+                    <div id="errEmail"></div>
+
                 </div>
 
-                <button type="submit" onclick="location.href='cadastro-funcionario.html'">Cadastrar</button>
+                <button type="button" id="btnCadastro" onclick="">Cadastrar</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
         </section>
     </main>
 </body>
+
+<script>
+
+    cnpjValido = false
+    razaoSocial = false
+    nomeFantasia = false
+    email = false
+
+    function validarCNPJ() {
+
+        if(inputCNPJ.value.length != 14 || isNaN(inputCNPJ.value))
+        {
+            errCNPJ.innerHTML = `<b style="font-size: 9px; color: red;" ">CNPJ DEVE CONTER APENAS 14 NUMEROS</b> <br>`
+            cnpjValido = false
+            
+        } else {
+
+            errCNPJ.innerHTML = ``
+            cnpjValido = true
+        }
+    }
+
+    function validarRS() {
+
+        if(inputRS.value.length < 3)
+        {
+            errRS.innerHTML = `<b style="font-size: 9px; color: red;" ">RAZÃO SOCIAL DEVE TER MAIS QUE 3 CARACTERES!</b> <br>`
+            razaoSocial = false
+            
+        } else {
+
+            errRS.innerHTML = ``
+            razaoSocial = true
+        }
+        
+    }
+
+      function validarNF() {
+
+        if(inputNF.value.length < 3)
+        {
+            errNF.innerHTML = `<b style="font-size: 9px; color: red;" ">NOME FANTASIA DEVE TER MAIS QUE 3 CARACTERES!</b> <br>`
+            nomeFantasia = false
+            
+        } else {
+
+            errNF.innerHTML = ``
+            nomeFantasia = true
+        }
+        
+    }
+
+         function validarEmail() {
+
+        if(inputEmail.value.length < 5)
+        {
+            errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">INSIRA UM EMAIL VALIDO!</b> <br>`
+            email = false
+            
+        } else {
+
+            errEmail.innerHTML = ``
+            email = true
+        }
+        
+    }
+
+    function cadastro() {
+
+        const btnCad = document.getElementById('btnCadastro')
+        
+        if (cnpjValido == true && razaoSocial == true && nomeFantasia == true && email == true) {
+            btnCad.onclick = function () { location.href='cadastro-funcionario.html' }
+
+        } else{
+            btnCad.onclick = function () { alert("Complete o cadastro antes de seguir!")}
+        }
+
+        
+    }
+
+
+</script>
 
 </html>

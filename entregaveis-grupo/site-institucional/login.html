@@ -33,20 +33,85 @@
             <form>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="Email" required>
+                    <input oninput="validarEmail(), login()" id="inputEmail" type="email" placeholder="Email" required>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Senha" required>
+                    <input oninput="validarSenha(), login()" id="inputSenha" type="password" placeholder="Senha" required>
                 </div>
 
-                <button type="submit" onclick="location.href='dashboard/cave.html'">Entrar</button>
+                <button type="button" id="btnLogin" onclick="">Entrar</button>
+                <div id="errLogin">                    
+                </div>
+
             </form>
 
+            <button type="button" onclick="bugss()">aaa</button>
+            
             <p class="register">Não tem uma conta? <a href="cadastro.html">Registre-se</a></p>
         </section>
     </main>
 </body>
+
+<script>
+
+    email = false
+    senha = false
+
+          function validarSenha() {
+
+        if(inputSenha.value != "123abc")
+        {
+            // errLogin.innerHTML = `<b style="font-size: 9px; color: red;" "> Senha ou email incorretos!</b> <br>`
+            senha = false
+            
+        } else {
+
+            senha = true
+        }
+        
+    }
+
+    
+         function validarEmail() {
+
+        if(inputEmail.value != "123@123.com")
+        {
+            // errLoginl.innerHTML = `<b style="font-size: 9px; color: red;" ">Senha ou email incorretos!</b> <br>`
+            email = false
+            
+        } else {
+
+            email = true
+        }
+        
+    }
+
+    function login() {
+
+        const btnCad = document.getElementById('btnLogin')
+        
+        if (email == true && senha == true) {
+            btnCad.onclick = function () { location.href='cadastro-funcionario.html' }
+
+        } else{
+            btnCad.onclick = function () { 
+                errLogin.innerHTML = `<b style="font-size: 9px; color: red;" "> Senha ou email incorretos!</b> <br>`
+            }
+        }
+
+  
+        
+    }
+
+          function bugss() 
+        {
+            console.log(email, senha)
+        }
+
+
+
+</script>
 
 </html>

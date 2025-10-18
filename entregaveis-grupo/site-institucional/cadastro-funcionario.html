@@ -34,36 +34,144 @@
             <form>
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Nome" required>
+                    <input oninput="validarNome(), cadastro()" id="inputNome" type="text" placeholder="Nome" >
+                    <div id="errNome"></div>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Sobrenome" required>
+                    <input oninput="validarSobrenome(), cadastro()" id="inputSobrenome" type="text" placeholder="Sobrenome" >
+                    <div id="errSobrenome"></div>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="text" placeholder="Email" required>
+                    <input oninput="validarEmail(), cadastro()" id="inputEmail" type="email" placeholder="Email">
+                    <div id="errEmail"></div>
+
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Senha" required>
+                    <input oninput="validarSenha(), cadastro()" id="inputSenha" type="password" placeholder="Senha">
+                    <div id="errSenha"></div>
+                    
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-key"></i>
-                    <input type="text" placeholder="Token" required>
+                    <input oninput="validarToken(), cadastro()" id="inputToken" type="text" placeholder="Token">
+                    <div id="errToken"></div>
+                    
                 </div>
 
 
-                <button type="submit" onclick="location.href='login.html'">Cadastrar Usuario</button>
+                <button type="button" id="btnCadastro" onclick="">Cadastrar Usuario</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
         </section>
     </main>
 </body>
+
+<script>
+
+    nomeValido = false
+    sobrenome = false
+    senha = false
+    email = false
+    token = false
+
+    function validarNome() {
+
+        if(inputNome.value.length < 3)
+        {
+            errNome.innerHTML = `<b style="font-size: 9px; color: red;" ">INSIRA UM NOME VALIDO!</b> <br>`
+            nomeValido = false
+            
+        } else {
+
+            errNome.innerHTML = ``
+            nomeValido = true
+        }
+    }
+
+    function validarSobrenome() {
+
+        if(inputSobrenome.value.length < 3)
+        {
+            errSobrenome.innerHTML = `<b style="font-size: 9px; color: red;" ">INSIRA UM SOBRENOME VALIDO</b> <br>`
+            sobrenome = false
+            
+        } else {
+
+            errSobrenome.innerHTML = ``
+            sobrenome = true
+        }
+        
+    }
+
+      function validarSenha() {
+
+        if(inputSenha.value.length < 8)
+        {
+            errNF.innerHTML = `<b style="font-size: 9px; color: red;" ">A SENHA DEVE CONTER NO MINIMO 8 CARACTERES!</b> <br>`
+            senha = false
+            
+        } else {
+
+            errNF.innerHTML = ``
+            senha = true
+        }
+        
+    }
+
+         function validarEmail() {
+
+        if(inputEmail.value.length < 5)
+        {
+            errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">INSIRA UM EMAIL VALIDO!</b> <br>`
+            email = false
+            
+        } else {
+
+            errEmail.innerHTML = ``
+            email = true
+        }
+        
+    }
+
+    
+         function validarToken() {
+
+        if(inputToken.value != "12341234")
+        {
+            errToken.innerHTML = `<b style="font-size: 9px; color: red;" ">TOKEN NÃO RECONHECIDO!</b> <br>`
+            token = false
+            
+        } else {
+
+            errToken.innerHTML = `<b style="font-size: 9px; color: green;" ">TOKEN VALIDADO PARA A EMPRESA "XPTO VINHOS"!</b> <br>`
+            token = true
+        }
+        
+    }
+
+    function cadastro() {
+
+        const btnCad = document.getElementById('btnCadastro')
+        
+        if (nomeValido == true && soibrenome == true && email == true && senha == true && token == true) {
+            btnCad.onclick = function () { location.href='cadastro-funcionario.html' }
+
+        } else{
+            btnCad.onclick = function () { alert("Complete o cadastro antes de seguir!")}
+        }
+
+        
+    }
+
+
+</script>
 
 </html>
