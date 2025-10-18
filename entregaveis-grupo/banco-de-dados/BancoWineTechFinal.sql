@@ -22,7 +22,7 @@ CREATE TABLE empresa (
   codigoSeguranca VARCHAR(255) UNIQUE NOT NULL,
   situacaoContrato BOOLEAN DEFAULT FALSE,
   dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  idEndereco INT,
+  idEndereco INT UNIQUE,
   CONSTRAINT fkEmpresaEndereco FOREIGN KEY (idEndereco) REFERENCES endereco(idEndereco)
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE funcionario (
 CREATE TABLE cave (
   idCave INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  idEmpresa INT,
+  idEmpresa INT UNIQUE,
   CONSTRAINT fkCaveEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
 );
 
@@ -60,8 +60,8 @@ CREATE TABLE tipoUva (
 CREATE TABLE barril (
   idBarril INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  idCave INT NOT NULL,
-  idTipoUva INT NOT NULL,
+  idCave INT NOT NULL UNIQUE,
+  idTipoUva INT NOT NULL UNIQUE,
  CONSTRAINT fkBarrilCave  FOREIGN KEY (idCave) REFERENCES cave(idCave),
  CONSTRAINT fkBarrilTipoUva  FOREIGN KEY (idTipoUva) REFERENCES tipoUva(idTipoUva)
 );
@@ -69,7 +69,7 @@ CREATE TABLE barril (
 CREATE TABLE sensor (
   idSensor INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  idBarril INT NOT NULL,
+  idBarril INT NOT NULL UNIQUE,
  CONSTRAINT fkSensorBarril FOREIGN KEY (idBarril) REFERENCES barril(idBarril)
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE leituraSensor (
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
   dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  idSensor INT,
+  idSensor INT UNIQUE,
   CONSTRAINT fkLeituraSensor FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
 );
 
