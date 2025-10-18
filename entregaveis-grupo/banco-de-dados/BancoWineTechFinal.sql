@@ -44,7 +44,7 @@ CREATE TABLE funcionario (
 CREATE TABLE cave (
   idCave INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  idEmpresa INT UNIQUE,
+  idEmpresa INT,
   CONSTRAINT fkCaveEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
 );
 
@@ -60,8 +60,8 @@ CREATE TABLE tipoUva (
 CREATE TABLE barril (
   idBarril INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  idCave INT NOT NULL UNIQUE,
-  idTipoUva INT NOT NULL UNIQUE,
+  idCave INT NOT NULL,
+  idTipoUva INT NOT NULL,
  CONSTRAINT fkBarrilCave  FOREIGN KEY (idCave) REFERENCES cave(idCave),
  CONSTRAINT fkBarrilTipoUva  FOREIGN KEY (idTipoUva) REFERENCES tipoUva(idTipoUva)
 );
@@ -78,7 +78,7 @@ CREATE TABLE leituraSensor (
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
   dataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  idSensor INT UNIQUE,
+  idSensor INT,
   CONSTRAINT fkLeituraSensor FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
 );
 
