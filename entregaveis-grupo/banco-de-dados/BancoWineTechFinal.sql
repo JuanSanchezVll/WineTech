@@ -82,14 +82,6 @@ CREATE TABLE leituraSensor (
   CONSTRAINT fkLeituraSensor FOREIGN KEY (idSensor) REFERENCES sensor(idSensor)
 );
 
-CREATE TABLE alerta (
-  idAlerta INT PRIMARY KEY AUTO_INCREMENT,
-  gravidadeAlerta VARCHAR(30) NOT NULL,
-  dataRegistro DATETIME NOT NULL,
-  statusManutencao VARCHAR(45),
-  idLeituraSensor INT NOT NULL,
- CONSTRAINT fkAlertaLeituraSensor FOREIGN KEY (idLeituraSensor) REFERENCES leituraSensor(idLeituraSensor)
-);
 
 INSERT INTO endereco (logradouro, numero, complemento, bairro, cidade, estado, cep) VALUES
 ('Rua dos Aromas', '45', 'Galpão A', 'Vinhedo Central', 'Jundiaí', 'SP', '13200001'),
@@ -130,12 +122,8 @@ INSERT INTO leituraSensor (temperatura, umidade, dataRegistro, idSensor) VALUES
 (15.50, 68.00, '2024-09-25 16:00:00', 1),
 (18.20, 81.00, '2024-09-25 16:05:00', 2),
 (10.00, 72.00, '2024-09-25 16:10:00', 3);
-
-INSERT INTO alerta (gravidadeAlerta, dataRegistro, statusManutencao, idLeituraSensor) VALUES
-('URGENTE', '2024-09-25 16:00:01', 'CORRIGIDO', 1),
-('CRÍTICA', '2024-09-25 16:05:01', 'PENDENTE', 2),
-('MODERADA', '2024-09-25 16:10:01', 'AGENDADO', 3); 
-
+ 
+ 
 SELECT
     b.identificacao AS Barril,
     t.nome AS TipoUva,

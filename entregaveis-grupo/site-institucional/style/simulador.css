@@ -12,75 +12,89 @@ body {
 /* ================= HEADER ================= */
 .header {
   width: 100%;
-  height: 100px;
-  background: #eeeded;
+  height: 80px;
+  background: #fff;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin: auto;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 100%;
+  gap: 20px;
 }
 
+/* logo (esquerda) */
 .header img {
-  width: 85px;
+  width: 80px;
   height: auto;
+  flex: 0 0 auto;
 }
 
-/* ======== NAVBAR ======== */
+/* NAVBAR ocupa o restante do espaço entre logo e borda direita */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 25px;
+  flex: 1 1 auto;    /* ocupa espaço restante */
+  gap: 20px;
 }
 
-.navbar ul {
+/* centro: usamos margin: 0 auto para centralizar dentro da navbar */
+.menu-center {
   display: flex;
-  gap: 25px;
+  gap: 35px;
+  list-style: none;
+  margin: 0 auto;    /* <-- aqui é a mágica: centraliza o menu */
+  padding: 0;
+  align-items: center;
+}
+
+/* direita: fica logo após o centro; sem posicionamento absoluto */
+.menu-right {
+  display: flex;
+  gap: 15px;
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
+/* links */
 .navbar a {
   text-decoration: none;
-  color: #000;
+  color: #1a1a1a;
   font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  transition: color 0.25s ease;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar a.active {
   color: #70160E;
-  font-weight: 600;
 }
 
-#login,
-#cadastro {
-  font-family: "Poppins", sans-serif;
-  color: #fff;
-  background-color: #70160E;
-  border: 2px solid #70160E;
+/* botões login/cadastro */
+#login, #cadastro {
+  font-weight: 600;
   border-radius: 6px;
-  padding: 6px 15px;
-  font-weight: 600;
-  transition: 0.3s ease;
+  padding: 8px 16px;
+  border: 2px solid #70160E;
+  background: #70160E;
+  color: #fff;
+  transition: all 0.25s ease;
 }
 
-#login:hover,
-#cadastro:hover {
-  background-color: transparent;
+#login:hover, #cadastro:hover {
+  background: transparent;
   color: #70160E;
 }
-
 /* ================= SIMULADOR ================= */
 .conteudo {
   display: flex;
@@ -143,12 +157,12 @@ body {
   color: #70160E;
   background-color: #fff;
 }
-
 /* ================= FOOTER ================= */
+
 footer {
   background-color: #eeeded;
   color: #000;
-  padding: 40px 20px 15px 20px;
+  padding: 40px 20px 15px;
   margin-top: 60px;
 }
 
@@ -163,7 +177,7 @@ footer {
 }
 
 .footer-container img {
-  width: 160px;
+  width: 200px;
   height: auto;
 }
 
