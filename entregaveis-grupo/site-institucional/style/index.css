@@ -95,6 +95,7 @@ body {
   background: transparent;
   color: #70160E;
 }
+
 /* ================= BANNER ================= */
 .banner {
   display: flex;
@@ -103,6 +104,7 @@ body {
   padding: 180px 5% 100px 5%;
   gap: 40px;
   flex-wrap: wrap;
+  background-color: #70160E;
 }
 
 .banner #container {
@@ -110,7 +112,7 @@ body {
 }
 
 .banner h1 {
-  color: #70160E;
+  color: #fff;
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 15px;
@@ -119,7 +121,8 @@ body {
 .banner p {
   font-size: 18px;
   line-height: 1.6;
-  color: #333;
+  font-weight: 200;
+  color: #fff;
 }
 
 .banner img {
@@ -129,10 +132,10 @@ body {
 
 #container button {
   margin-top: 30px;
-  background-color: #70160E;
-  color: #fff;
-  font-weight: 600;
-  border: none;
+  background-color: #eeeded;
+  border: 2px solid #eeeded;
+  color: #70160E;
+  font-weight: bold;
   border-radius: 6px;
   padding: 12px 25px;
   font-size: 16px;
@@ -141,8 +144,8 @@ body {
 }
 
 #container button:hover {
-  background-color: #FFFACC;
-  color: #2A1110;
+  background-color: transparent;
+  color: #eeeded;
 }
 
 /* ================= SOBRE ================= */
@@ -245,6 +248,80 @@ body {
   line-height: 1.7;
 }
 
+/* ================= NOSSOS SERVIÇOS ================= */
+#NossoServico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #70160E;
+  height: 600px;
+}
+
+.apresentacao {
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-right: 20px;
+}
+
+.apresentacao h1 {
+  font-size: 45px;
+  color: #fff; 
+  margin: 0px 0px;
+}
+
+.apresentacao p {
+  font-size: 15px;
+  font-weight: 200;
+  color: #fff;
+}
+
+.cardServico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.primeiraParte {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.primeiraParte .info {
+  margin: 12px;
+  width: 283px;
+  height: 243px;
+  background-color: #fff;
+}
+
+.primeiraParte h3 {
+  margin: 10px 0px 0px;
+}
+
+.primeiraParte img {
+  margin: 0px 0px;
+}
+
+.segundaParte {
+  display: flex;
+  justify-content: center;
+}
+
+.segundaParte .info {
+  width: 88%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.segundaParte h3 {
+  margin: 0px 0px 0px;
+}
+
+.segundaParte img {
+  margin: 0px 0px;
+}
+
 /* ================= SIMULE AQUI ================= */
 #SimuleAqui {
   display: flex;
@@ -262,19 +339,19 @@ body {
 
 #SimuleAqui h1 {
   color: #70160E;
-  font-size: 50px;
+  font-size: 40px;
   margin: 0px 0px;
   margin-top: 40px;
 }
 
 #SimuleAqui p {
-  font-size: 22px;
+  font-size: 20px;
   margin: 10px 0px;
 }
 
 #SimuleAqui label {
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #SimuleAqui span {
@@ -285,19 +362,19 @@ body {
   margin-top: 35px;
   color: #fff;
   background-color: #70160E;
-  width: 220px;
+  border: 2px solid #70160E;
+  width: 180px;
   font-weight: bold;
-  border: none;
   border-radius: 6px;
   padding: 12px 25px;
-  font-size: 26px;
+  font-size: 20px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .SimuleBotao:hover {
-  color: #2A1110;
-  background-color: #FFFACC;
+  background-color: transparent;
+  color: #70160E;
 }
 
 /* ================= FOOTER ================= */
