@@ -23,7 +23,7 @@ const serial = async (
             user: 'winetech-sensor',
             password: 'Winetech.2025',
             database: 'winetech',
-            port: 3308
+            port: 3307
         }
     ).promise();
 
