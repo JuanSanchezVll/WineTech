@@ -1,4 +1,4 @@
-#include "DHT.h"           // biblioteca para sensores DHT
+#include "DHT.h"  // biblioteca para sensores DHT
 #define TIPO_SENSOR DHT11  // tipo do sensor: DHT11
 
 // Pino onde o sensor está ligado.
