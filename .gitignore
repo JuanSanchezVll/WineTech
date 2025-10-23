@@ -1,2 +1,9 @@
-tasks
-**/.vscode/
+# A linha abaixo determina que o diretório node_modules não será enviado ao repositório remoto
+node_modules
+package-lock.json
+
+.github
+
+vscode
+
+package-lock.json
