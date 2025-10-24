@@ -1,4 +1,3 @@
-/* ===== BASE E RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -11,8 +10,6 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-
-/* ===== LOGO ===== */
 .logo {
     width: 160px;
     height: auto;
@@ -20,8 +17,6 @@ body {
     top: 25px;
     left: 20px;
 }
-
-/* ===== CONTAINER PRINCIPAL ===== */
 .container {
     display: flex;
     align-items: center;
@@ -31,22 +26,17 @@ body {
     padding: 0 120px;
     background-color: #fff6f3;
 }
-
-/* ===== LADO ESQUERDO - IMAGEM ===== */
 .image-side img {
     width: 630px; /* AUMENTADO (antes 530px) */
     margin-left: -620px;
     margin-top: 30px;
 }
-
-/* ===== LADO DIREITO - LOGIN ===== */
 .login-side {
     max-width: 443px;
     right: 270px;
     position: absolute;
 }
 
-/* ===== TÍTULO PRINCIPAL ===== */
 .login-side h1 {
     font-size: 2rem;
     font-weight: 900;
@@ -65,8 +55,6 @@ body {
     margin-bottom: 25px;
     line-height: 1.5;
 }
-
-/* ===== INPUTS ===== */
 .input-group {
     position: relative;
     margin-bottom: 18px;
@@ -97,7 +85,6 @@ body {
     color: #999;
 }
 
-/* ===== BOTÃO ===== */
 button {
     width: 100%;
     background-color: #6b0f0a;
@@ -115,8 +102,6 @@ button {
 button:hover {
     background-color: #9b4641;
 }
-
-/* ===== REGISTRO ===== */
 .register {
     text-align: center;
     margin-top: 25px;
