@@ -38,63 +38,6 @@ body {
   flex: 0 0 auto;
 }
 
-/* NAVBAR ocupa o restante do espaço entre logo e borda direita */
-.navbar {
-  display: flex;
-  align-items: center;
-  flex: 1 1 auto;    /* ocupa espaço restante */
-  gap: 20px;
-}
-
-/* centro: usamos margin: 0 auto para centralizar dentro da navbar */
-.menu-center {
-  display: flex;
-  gap: 35px;
-  list-style: none;
-  margin: 0 auto;    /* <-- aqui é a mágica: centraliza o menu */
-  padding: 0;
-  align-items: center;
-}
-
-/* direita: fica logo após o centro; sem posicionamento absoluto */
-.menu-right {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-/* links */
-.navbar a {
-  text-decoration: none;
-  color: #1a1a1a;
-  font-weight: 500;
-  font-size: 16px;
-  transition: color 0.25s ease;
-}
-
-.navbar a:hover,
-.navbar a.active {
-  color: #70160E;
-}
-
-/* botões login/cadastro */
-#login, #cadastro {
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 8px 16px;
-  border: 2px solid #70160E;
-  background: #70160E;
-  color: #fff;
-  transition: all 0.25s ease;
-}
-
-#login:hover, #cadastro:hover {
-  background: transparent;
-  color: #70160E;
-}
 
 /* ================= BANNER ================= */
 .banner {
@@ -375,53 +318,4 @@ body {
 .SimuleBotao:hover {
   background-color: transparent;
   color: #70160E;
-}
-
-/* ================= FOOTER ================= */
-footer {
-  background-color: #eeeded;
-  color: #000;
-  padding: 40px 20px 15px;
-  margin-top: 60px;
-}
-
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 25px;
-  max-width: 1200px;
-  margin: auto;
-  text-align: left;
-}
-
-.footer-container img {
-  width: 200px;
-  height: 150px;
-}
-
-.footer-container h3 {
-  color: #70160E;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.footer-container a {
-  color: #000;
-  text-decoration: none;
-  display: block;
-  margin: 5px 0;
-  transition: 0.3s ease;
-}
-
-.footer-container a:hover {
-  color: #70160E;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.9em;
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
 }
