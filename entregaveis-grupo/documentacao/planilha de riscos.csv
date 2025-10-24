@@ -1,0 +1,16 @@
+,,,,,,ID,Descrição do risco,possibilidade,impacto,Fator do risco,Evitar/Mitigar,Como?
+,3 (Alta),medio,alto,alto,,1-,Falha de sensor (não coleta dados),2,3,6,Mitigar,Implementar sistema de alerta para falha de leitura;
+Possibilidade,2 (Media),baixo,medio,alto,,2-,Perda de conexão com a internet nos barris,3,2,6,Evitar,Orientar o cliente a contratar uma internet de qualidade;
+,1 (Baixa),baixo,baixo,medio,,3-,Dashboard fora do ar (servidor instável),2,3,6,Evitar,Hospedar dashboard em servidor com alta disponibilidade;
+,,1 (Alto),2 (Medio),3 (Alto),,4-,Atraso na entrega/manutenção dos sensores,1,2,2,Evitar,Estabelecer cronograma fixo de manutenção preventiva;
+,,,Impacto,,,5-,Cliente não entende como usar a dashboard,1,1,1,Evitar,Criação de dashboard intuitiva;
+,,,,,,6-,Mudança ambiental inesperada (ex: temperatura da adega varia rápido),2,2,4,- ,-
+Grupo 11,,,,,,7-,Vazamento de dados dos clientes,1,3,3,Evitar,Realizar auditorias de segurança periódicas.
+Otavio,,,,,,8-,Roubo ou dano físico dos sensores,1,2,2,Mitigar,Orientar o cliente sobre segurança
+Rafael,,,,,,9-,Aumento súbito no custo de componentes ,2,3,6,Mitigar,Manter estoque mínimo estratégico de componentes críticos.
+Juan,,,,,,10-,"Lei seca no brasil, acarretando no fechamento de adegas",1,2,2,Mitigar,Acompanhar legislações e políticas públicas do setor;
+Marlon,,,,,,11 -,Atraso nas entregas das tasks ,3,2,6,Mitigar,Entregar a task para o membro que está mais livre
+Yuri,,,,,,12 -,Um membro da equipe sair,1,3,3,Mitigar,Reorganização das tasks da Sprint levando em conta a ausência do integrante
+Leonardo,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
