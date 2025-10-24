@@ -8,54 +8,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/cadastro.css">
+    <link rel="stylesheet" href="style/site-institucional/cadastro.css">
+    
 </head>
 
 <body>
-    <!-- LOGO -->
     <header>
-        <a href="../site-institucional/index.html">
-            <img src="assets/logo-winetech.svg" alt="WineTech Logo" class="logo">
+        <a href="index.html">
+            <img src="assets/imgs/logo-preta.svg" alt="WineTech Logo" class="logo">
         </a>
     </header>
-
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="container">
-        <!-- LADO ESQUERDO (IMAGEM) -->
         <section class="image-side">
-            <img src="assets/barril.png" alt="Barril de vinho">
+            <img src="assets/figuras/barril.png" alt="Barril de vinho">
         </section>
 
-        <!-- LADO DIREITO (FORMULÁRIO) -->
         <section class="form-side">
             <h1>Cadastre-se na <span>WineTech!</span></h1>
             <p>Gerencie seus barris e acompanhe seus vinhos com a melhor tecnologia da WineTech!</p>
 
             <form>
+                <div id="errCNPJ"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-id-card"></i>
                     <input oninput="validarCNPJ(), cadastro()" id="inputCNPJ" type="text" placeholder="CNPJ" maxlength="14">
-                    <div id="errCNPJ"></div>
                 </div>  
                 
 
+                <div id="errRS"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-building"></i>
                     <input oninput="validarRS(), cadastro()" id="inputRS" type="text" placeholder="Razão Social" >
-                    <div id="errRS"></div>
 
                 </div>
 
+                <div id="errNF"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-store"></i>
                     <input type="text" oninput="validarNF(), cadastro()" id="inputNF"  placeholder="Nome Fantasia" >
-                    <div id="errNF"></div>
                 </div>
 
+                <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" oninput="validarEmail(), cadastro()" id="inputEmail" placeholder="Email de Contato" >
-                    <div id="errEmail"></div>
+                    <input type="email" oninput="verarroba(),validarEmail(), cadastro()" id="inputEmail" placeholder="Email de Contato" >
 
                 </div>
 
@@ -73,6 +69,8 @@
     razaoSocial = false
     nomeFantasia = false
     email = false
+    tem = false
+
 
     function validarCNPJ() {
 
@@ -118,21 +116,37 @@
         
     }
 
-         function validarEmail() {
+         function verarroba() {
 
-        if(inputEmail.value.length < 5)
-        {
-            errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">INSIRA UM EMAIL VALIDO!</b> <br>`
-            email = false
+            for (let index = 0; index < inputEmail.value.length; index++) {
+                if (inputEmail.value[index] === '@') {
+                    tem = true
+                    break
+                    
+                } else {
+                    tem = false
+                    
+                
+                }
+                
+            }
             
-        } else {
-
-            errEmail.innerHTML = ``
-            email = true
         }
-        
-    }
 
+    function validarEmail() {
+            
+        
+            if (tem) {
+                errEmail.innerHTML = ``
+                email = true
+
+                
+            } else {
+                errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@")</b> <br>`
+                email = false
+            }
+
+    }
     function cadastro() {
 
         const btnCad = document.getElementById('btnCadastro')

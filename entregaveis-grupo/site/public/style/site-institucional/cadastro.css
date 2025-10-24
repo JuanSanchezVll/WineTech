@@ -98,6 +98,12 @@ body {
     color: #999;
 }
 
+ #errCNPJ
+ {
+    margin: 0px;
+
+ }
+
 /* ===== BOTÃO ===== */
 button {
     width: 100%;
