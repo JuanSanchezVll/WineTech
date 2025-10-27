@@ -30,7 +30,6 @@ body {
     min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
 .sidebar {
     width: var(--sidebar-w);
     background: linear-gradient(180deg, var(--vinho-escuro), #3b0b10 70%);

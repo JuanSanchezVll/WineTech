@@ -9,7 +9,6 @@ body {
   color: #1a1a1a;
 }
 
-/* ================= HEADER ================= */
 .header {
   width: 100%;
   height: 80px;
@@ -39,7 +38,6 @@ body {
 }
 
 
-/* ================= BANNER ================= */
 .banner {
   display: flex;
   justify-content: space-between;
@@ -91,7 +89,6 @@ body {
   color: #eeeded;
 }
 
-/* ================= SOBRE ================= */
 .sobre {
   padding: 100px 5%;
   background-color: #fff;
@@ -120,7 +117,6 @@ body {
   line-height: 1.7;
 }
 
-/* ================= SOLUÇÃO (cards) ================= */
 .divisao {
   display: flex;
   justify-content: center;
@@ -162,7 +158,6 @@ body {
   line-height: 1.6;
 }
 
-/* ================= NOSSA MISSÃO ================= */
 .NossaMissao {
   padding: 150px 5% 100px; /* pra não ficar atrás do header fixo */
   background-color: #fff;
@@ -191,7 +186,6 @@ body {
   line-height: 1.7;
 }
 
-/* ================= NOSSOS SERVIÇOS ================= */
 #NossoServico {
   display: flex;
   justify-content: space-between;
@@ -265,7 +259,6 @@ body {
   margin: 0px 0px;
 }
 
-/* ================= SIMULE AQUI ================= */
 #SimuleAqui {
   display: flex;
   justify-content: center;
