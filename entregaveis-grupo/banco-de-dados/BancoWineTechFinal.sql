@@ -2,17 +2,6 @@ CREATE DATABASE winetech;
 
 USE winetech;
 
-CREATE TABLE endereco (
-  id_endereco INT PRIMARY KEY AUTO_INCREMENT,
-  logradouro VARCHAR(255) NOT NULL,
-  numero VARCHAR(10) NOT NULL,
-  complemento VARCHAR(100),
-  bairro VARCHAR(100) NOT NULL,
-  cidade VARCHAR(100) NOT NULL,
-  estado CHAR(2) NOT NULL,
-  cep CHAR(8) NOT NULL
-);
-
 CREATE TABLE empresa (
   id_empresa INT PRIMARY KEY AUTO_INCREMENT,
   cnpj CHAR(14) UNIQUE NOT NULL,
@@ -21,9 +10,29 @@ CREATE TABLE empresa (
   email_contato VARCHAR(150) UNIQUE NOT NULL,
   codigo_seguranca VARCHAR(255) UNIQUE NOT NULL,
   situacao_contrato BOOLEAN DEFAULT FALSE,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  id_endereco INT UNIQUE,
-  CONSTRAINT fk_empresa_endereco FOREIGN KEY (id_endereco) REFERENCES endereco (id_endereco)
+  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE endereco (
+  id_endereco INT PRIMARY KEY AUTO_INCREMENT,
+  logradouro VARCHAR(255) NOT NULL,
+  numero VARCHAR(10) NOT NULL,
+  complemento VARCHAR(100),
+  bairro VARCHAR(100) NOT NULL,
+  cidade VARCHAR(100) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  cep CHAR(8) NOT NULL,
+  id_empresa INT NOT NULL,
+
+  CONSTRAINT fk_endereco_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa)
+);
+
+CREATE TABLE nivel_acesso (
+  id_nivel_acesso TINYINT PRIMARY KEY,
+  nome VARCHAR(45) NOT NULL,
+  descricao VARCHAR(255),
+
+  CONSTRAINT chk_id_nivel_acesso CHECK (id_nivel_acesso in (1, 2, 3, 4))
 );
 
 CREATE TABLE funcionario (
@@ -35,16 +44,17 @@ CREATE TABLE funcionario (
   nivel_acesso TINYINT NOT NULL DEFAULT 3,
   ativo BOOLEAN DEFAULT TRUE,
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  id_empresa INT,
+  id_empresa INT NOT NULL,
+  id_nivel_acesso TINYINT NOT NULL,
   CONSTRAINT fk_funcionario_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa),
-  CONSTRAINT chk_nivel_acesso CHECK (nivel_acesso in (0, 1, 2, 3)),
-  CONSTRAINT chk_empresa_usuario CHECK ((nivel_acesso = 0 and id_empresa is null) or (nivel_acesso >= 1 and id_empresa is not null))
+  CONSTRAINT fk_funcionario_nivel_acesso FOREIGN KEY (id_nivel_acesso) REFERENCES nivel_acesso (id_nivel_acesso),
+  CONSTRAINT chk_empresa_usuario CHECK ((id_nivel_acesso = 1 and id_empresa is null) or (id_nivel_acesso > 1 and id_empresa is not null))
 );
 
 CREATE TABLE cave (
   id_cave INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
-  id_empresa INT,
+  id_empresa INT NOT NULL,
   CONSTRAINT fk_cave_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa)
 );
 
@@ -62,15 +72,15 @@ CREATE TABLE barril (
   identificacao VARCHAR(45) NOT NULL,
   id_cave INT NOT NULL,
   id_tipo_uva INT NOT NULL,
- CONSTRAINT fk_barril_cave  FOREIGN KEY (id_cave) REFERENCES cave (id_cave),
- CONSTRAINT fk_barril_tipo_uva  FOREIGN KEY (id_tipo_uva) REFERENCES tipo_uva (id_tipo_uva)
+ CONSTRAINT fk_barril_cave FOREIGN KEY (id_cave) REFERENCES cave (id_cave),
+ CONSTRAINT fk_barril_tipo_uva FOREIGN KEY (id_tipo_uva) REFERENCES tipo_uva (id_tipo_uva)
 );
 
 CREATE TABLE sensor (
   id_sensor INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
   id_barril INT NOT NULL UNIQUE,
- CONSTRAINT fk_sensor_barril FOREIGN KEY (id_barril) REFERENCES barril (id_barril)
+  CONSTRAINT fk_sensor_barril FOREIGN KEY (id_barril) REFERENCES barril (id_barril)
 );
 
 CREATE TABLE leitura_sensor (
@@ -78,40 +88,57 @@ CREATE TABLE leitura_sensor (
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  id_sensor INT,
-  CONSTRAINT fk_leitura_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
+  id_sensor INT NOT NULL,
+  CONSTRAINT fk_leitura_sensor_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
 );
 
+CREATE TABLE alerta (
+  id_alerta INT PRIMARY KEY AUTO_INCREMENT,
+  gravidade VARCHAR(45) NOT NULL,
+  status VARCHAR(45) NOT NULL,
+  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+  id_leitura_sensor INT NOT NULL UNIQUE,
 
-INSERT INTO endereco (logradouro, numero, complemento, bairro, cidade, estado, cep) VALUES
-('Rua dos Aromas', '45', 'Galpão A', 'Vinhedo Central', 'Jundiaí', 'SP', '13200001'),
-('Avenida do Sol', '1200', 'Escritório', 'Laranjeiras', 'Caxias do Sul', 'RS', '95000002'),
-('Travessa da Lua', '22', 'Fundos', 'Centro Velho', 'Bento Gonçalves', 'RS', '95700003');
+  CONSTRAINT fk_alerta_leitura_sensor FOREIGN KEY (id_leitura_sensor) REFERENCES leitura_sensor (id_leitura_sensor),
+  CONSTRAINT chk_gravidade CHECK (gravidade IN ('baixa', 'media', 'alta')),
+  CONSTRAINT chk_status CHECK (status IN ('nao resolvido', 'em manutencao', 'resolvido'))
+);
 
-INSERT INTO tipo_uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima) VALUES
-('Merlot', 14.00, 16.00, 60.00, 75.00),
-('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00),
-('Malbec', 14.00, 16.00, 60.00, 75.00);
+INSERT INTO empresa (cnpj, razao_social, nome_fantasia, email_contato, codigo_seguranca, data_registro) VALUES
+('00000000000001', 'Vinícola Nova Era S.A.', 'Nova Era Vinhos', 'contato@novaera.com', 'SEGRT54321', '2024-01-01 10:00:00'),
+('00000000000002', 'Adega Superior Ltda.', 'Adega Master', 'suporte@masteradega.com', 'XCVBN09876', '2024-01-02 11:00:00'),
+('00000000000003', 'Vinhos Finos do Sul', 'Vino Sul', 'financeiro@vinosul.com.br', 'QWERT67890', '2024-01-03 12:00:00');
 
-INSERT INTO empresa (cnpj, razao_social, nome_fantasia, email_contato, codigo_seguranca, situacao_contrato, data_registro, id_endereco) VALUES
-('00000000000001', 'Vinícola Nova Era S.A.', 'Nova Era Vinhos', 'contato@novaera.com', 'SEGRT54321', 1, '2024-01-01 10:00:00', 1),
-('00000000000002', 'Adega Superior Ltda.', 'Adega Master', 'suporte@masteradega.com', 'XCVBN09876', 1, '2024-01-02 11:00:00', 2),
-('00000000000003', 'Vinhos Finos do Sul', 'Vino Sul', 'financeiro@vinosul.com.br', 'QWERT67890', 0, '2024-01-03 12:00:00', 3);
+INSERT INTO endereco (logradouro, numero, complemento, bairro, cidade, estado, cep, id_empresa) VALUES
+('Rua dos Aromas', '45', 'Galpão A', 'Vinhedo Central', 'Jundiaí', 'SP', '13200001', 1),
+('Avenida do Sol', '1200', 'Escritório', 'Laranjeiras', 'Caxias do Sul', 'RS', '95000002', 2),
+('Travessa da Lua', '22', 'Fundos', 'Centro Velho', 'Bento Gonçalves', 'RS', '95700003', 3);
 
-INSERT INTO funcionario (nome, sobrenome, email, senha, nivel_acesso, ativo, data_registro, id_empresa) VALUES
-('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', 2, 1, '2024-01-04 13:00:00', 1),
-('Pedro', 'Santos', 'pedro.s@novaera.com', 'senha002', 1, 1, '2024-01-05 14:00:00', 1),
-('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', 2, 1, '2024-01-06 15:00:00', 2);
+INSERT INTO nivel_acesso (id_nivel_acesso, nome, descricao) VALUES
+  (1, 'Equipe WineTech', 'Visualiza todas as empresas cadastradas e pode alterar a situação de constrato (ativo/inativo)'),
+  (2, 'Administrador', 'Tem permissão total nas entidades da empresa'),
+  (3, 'Enólogo', 'Tem permissão total nas entidades da empresa exceto em funcionários'),
+  (4, 'Operador', 'Tem acesso apenas a dashboard');
+
+INSERT INTO funcionario (nome, sobrenome, email, senha, data_registro, id_empresa, id_nivel_acesso) VALUES
+('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', '2024-01-04 13:00:00', 1, 2),
+('Pedro', 'Santos', 'pedro.s@novaera.com', 'senha002', '2024-01-05 14:00:00', 1, 3),
+('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', '2024-01-06 15:00:00',1, 4);
 
 INSERT INTO cave (identificacao, id_empresa) VALUES
 ('CAVE-JDI-A', 1),
 ('CAVE-JDI-B', 1),
 ('CAVE-CSUL-A', 2);
 
+INSERT INTO tipo_uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima) VALUES
+('Merlot', 14.00, 16.00, 60.00, 75.00),
+('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00),
+('Malbec', 14.00, 16.00, 60.00, 75.00);
+
 INSERT INTO barril (identificacao, id_cave, id_tipo_uva) VALUES
-('BARRIL-001A', 1, 1), -- Cave JDI-A, Tannat
-('BARRIL-002B', 1, 2), -- Cave JDI-A, Merlot
-('BARRIL-003C', 2, 3); -- Cave JDI-B, Sauvignon Blanc
+('BARRIL-001A', 1, 1),
+('BARRIL-002B', 1, 2),
+('BARRIL-003C', 2, 3);
 
 INSERT INTO sensor (identificacao, id_barril) VALUES
 ('SEN-T-001', 1),
@@ -123,39 +150,44 @@ INSERT INTO leitura_sensor (temperatura, umidade, data_registro, id_sensor) VALU
 (18.20, 81.00, '2024-09-25 16:05:00', 2),
 (10.00, 72.00, '2024-09-25 16:10:00', 3);
  
- 
+INSERT INTO alerta (gravidade, status, id_leitura_sensor) VALUES
+  ('media', 'nao resolvido', 2),
+  ('baixa', 'nao resolvido', 3);
+
 SELECT
     b.identificacao AS Barril,
-    t.nome AS TipoUva,
-    ls.temperatura AS 'Temperatura Atual',
-    ls.umidade AS 'Umidade Atual',
-    CONCAT(t.temperatura_minima, '°C - ', t.temperatura_maxima, '°C') AS 'Faixa ideal de temperatura',
-    CONCAT(t.umidade_minima, '% - ', t.umidade_maxima, '%') AS 'Faixa ideal de umidade',
+    tu.nome AS 'Vinho armazenado',
+    ls.temperatura as Temperatura,
+    CONCAT(tu.temperatura_minima, 'C - ', tu.temperatura_maxima, 'C') AS 'Faixa de Temperatura Ideal',
     CASE
-        WHEN ls.temperatura < t.temperatura_minima THEN '❌ Temperatura BAIXA'
-        WHEN ls.temperatura > t.temperatura_maxima THEN '❌ Temperatura ALTA'
-        ELSE '✅ Temperatura OK'
+      WHEN ls.temperatura > tu.temperatura_maxima THEN 'Temperatura ALTA'
+      WHEN ls.temperatura < tu.temperatura_minima THEN 'Temperatura BAIXA'
+      ELSE 'OK'
     END AS 'Status Temperatura',
-    
+    ls.umidade as Umidade,
+    CONCAT(tu.umidade_minima, '% - ', tu.umidade_maxima, '%') AS 'Faixa de Umidade Ideal',
     CASE
-        WHEN ls.umidade < t.umidade_minima THEN '❌ Umidade BAIXA'
-        WHEN ls.umidade > t.umidade_maxima THEN '❌ Umidade ALTA'
-        ELSE '✅ Umidade OK'
-    END AS 'Status Umidade'
-FROM leitura_sensor ls
-JOIN sensor s ON ls.id_sensor = s.id_sensor
-JOIN barril b ON s.id_barril = b.id_barril
-JOIN tipo_uva t ON b.id_tipo_uva = t.id_tipo_uva;
-
+      WHEN ls.umidade > tu.umidade_maxima THEN 'Umidade ALTA'
+      WHEN ls.umidade < tu.umidade_minima THEN 'Umidade BAIXA'
+      ELSE 'OK'
+    END AS 'Status Umidade',
+    ls.data_registro AS 'Data e Hora Leitura'
+  FROM barril AS b
+    JOIN tipo_uva AS tu
+        ON b.id_tipo_uva = tu.id_tipo_uva
+    JOIN sensor AS s
+        ON b.id_barril = s.id_barril
+    JOIN leitura_sensor AS ls
+        ON s.id_sensor = ls.id_sensor;
 
 -- CRIAR USUÁRIO E DAR AS PERMISSÕES
 CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
-GRANT INSERT on winetech.leitura_sensor to 'winetech-sensor'@'%';
+GRANT INSERT ON winetech.leitura_sensor TO 'winetech-sensor'@'%';
 
 CREATE USER 'winetech'@'%' IDENTIFIED BY 'Winetech.2026';
 
-GRANT ALL PRIVILEGES ON winetech.* TO'winetech'@'%';
+GRANT ALL PRIVILEGES ON winetech.* TO 'winetech'@'%';
 
 flush privileges;
 
