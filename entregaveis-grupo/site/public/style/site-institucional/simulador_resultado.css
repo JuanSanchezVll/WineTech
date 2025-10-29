@@ -1,0 +1,113 @@
+.tabela {
+  width: 40%;
+  border: 1px solid #dfdddd;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  padding: 5px;
+}
+
+.cenario {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fafafa;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.linha {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fafafa;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.linha.recovery {
+  background-color: #fafafa;
+}
+
+.linha.after-monitoring {
+  border-top: 2px;
+  border-bottom: none;
+}
+
+#colunaSituacao {
+  position: initial;
+  padding: 8px 12px;
+}
+
+#colunaPerda {
+  margin-left: 140px;
+  padding: 8px 12px;
+}
+
+#colunaValor {
+  margin-left: 127px;
+  padding: 8px 12px;
+}
+
+#colunaFatorPerda {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 13px;
+}
+
+#colunaFatorRecuperado {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 13px;
+}
+
+#colunaFatorFinal {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 13px;
+}
+
+#colunaPorcentagem {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 148px;
+}
+
+#colunaValorPerdido {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 200px;
+}
+
+#colunaPercentualRecuperado {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 109px;
+}
+
+#colunaValorRecuperado {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 226px;
+}
+
+#colunaPercentualFinal {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 130px;
+}
+
+#colunaValorFinal {
+  font-size: 15px;
+  font-weight: lighter;
+  margin-left: 200px;
+}

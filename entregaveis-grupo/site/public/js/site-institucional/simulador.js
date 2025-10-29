@@ -54,9 +54,9 @@ function simular() {
         var perdaUmid = 0;
         if (umidade < 50) {
             perdaUmid = 0.05;
-        } else if (umidade >= 50 && umidade < 60) {
+        } else if (umidade >= 50 && umidade <= 60) {
             perdaUmid = 0.02;
-        } else if (umidade >= 60 && umidade <= 75) {
+        } else if (umidade >= 65 && umidade <= 75) {
             perdaUmid = 0;
         } else if (umidade > 75 && umidade <= 85) {
             perdaUmid = 0.02;
@@ -118,7 +118,7 @@ function simular() {
         }
 
         // Link do css do resultado do simulador
-        estiloResultado.innerHTML = `<link rel="stylesheet" href="simulador_resultado.css">`
+        estiloResultado.innerHTML = `<link rel="stylesheet" href="style/site-institucional/simulador_resultado.css">`
 
         colunaCenario.innerHTML = `${cenario}`;
 
