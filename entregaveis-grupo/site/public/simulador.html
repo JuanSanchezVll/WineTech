@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/site-institucional/navbar_footer.css">
-    <link rel="stylesheet" href="./style/site-institucional/simulador.css">
+    <link rel="stylesheet" href="simulador2.css">
     <link rel="icon" href="./assets/Logorealrealfinalpng.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,14 +66,14 @@
 
             <!-- 3 INPUT: Temperatura do cave -->
             <div class="input-box">
-                <label for="inputTemperaturaMedia">Informe a temperatura média do cave:</label>
+                <label for="inputTemperaturaMedia">Informe a temperatura média mensal do cave:</label>
                 <input type="text" name="inputTemperaturaMedia" placeholder="Temperatura média do cave"
                     id="inputTemperaturaMedia">
             </div>
 
             <!-- 4 INPUT: Porcentagem de umidade do cave -->
             <div class="input-box">
-                <label for="inputUmidadeMedia">Informe a umidade média do cave:</label>
+                <label for="inputUmidadeMedia">Informe a umidade média mensal do cave:</label>
                 <input type="text" name="inputUmidadeMedia" placeholder="Umidade média do cave" id="inputUmidadeMedia">
             </div>
         </div>
@@ -82,36 +82,45 @@
             <button onclick="simular()" id="button-simular">Simular</button>
         </div>
 
-        <div class="resultados">
-            <!-- 1 SAIDA: Economia potencial com Winesafe -->
-            <div id="resumoLucro"></div>
-            <!-- 2 SAIDA: Relatório do cave -->
-            <div id="relatorio"></div>
+        <div id="estiloResultado"></div>
+
+        <div class="tabela">
+
+            <div class="cenario">
+                <div id="colunaCenario"></div>
+            </div>
+
+            <div class="linha">
+                <div id="colunaSituacao"></div>
+                <div id="colunaPerda"></div>
+                <div id="colunaValor"></div>
+            </div>
+
+            <div class="linha">
+                <div id="colunaFatorPerda"></div>
+                <div id="colunaPorcentagem"></div>
+                <div id="colunaValorPerdido"></div>
+            </div>
+
+            <div class="linha recovery">
+                <div id="colunaFatorRecuperado"></div>
+                <div id="colunaPercentualRecuperado"></div>
+                <div id="colunaValorRecuperado"></div>
+            </div>
+
+            <div class="linha after-monitoring">
+                <div id="colunaFatorFinal"></div>
+                <div id="colunaPercentualFinal"></div>
+                <div id="colunaValorFinal"></div>
+            </div>
         </div>
 
         <div class="saidasWinetech">
             <!-- 3 SAIDA: Sem Winetech  -->
-            <div id="semWinetech"></div>
+            <div id="semWinetech"></div>    
             <!-- 4 SAIDA: Com Winetech -->
             <div id="comWinetech"></div>
         </div>
-
-        <div id="estiloResultado">
-            <style>
-                .resultados {
-                    display: none;
-                }
-
-                #semWinetech {
-                    display: none;
-                }
-
-                #comWinetech {
-                    display: none;
-                }
-            </style>
-        </div>
-
     </div>
 
     <footer>
@@ -137,9 +146,9 @@
         <div class="footer-bottom">
             Copyright © 2025 | WineTech
         </div>
-    </footer>x
+    </footer>
 
-    <script src="js/simulador.js"></script>
+    <script src="simulador2.js"></script>
 </body>
 
 </html>
