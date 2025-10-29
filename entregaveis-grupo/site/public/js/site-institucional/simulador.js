@@ -1,4 +1,4 @@
-function simular() {
+function simular() {  
     // Variáveis para os cálculos
     var quantidadeBarris = Number(inputQuantidadeBarris.value);
     var precoBarril = Number(inputPrecoBarril.value);
@@ -38,30 +38,30 @@ function simular() {
     } else {
         // Variável para o cálculo de temperatura
         var perdaTemp = 0;
-        if (temperatura < 10) {
-            perdaTemp = 1;
-        } else if (temperatura >= 10 && temperatura <= 13) {
-            perdaTemp = 0.3;
-        } else if (temperatura >= 14 && temperatura <= 16) {
-            perdaTemp = 0.03;
-        } else if (temperatura > 16 && temperatura <= 20) {
-            perdaTemp = 0.3;
+        if (temperatura < 0) {
+            perdaTemp = 0.1;
+        } else if (temperatura > 0 && temperatura < 5) {
+            perdaTemp = 0.06;
+        } else if (temperatura >= 5 && temperatura <= 15) {
+            perdaTemp = 0.015;
+        } else if (temperatura > 15 && temperatura <= 20) {
+            perdaTemp = 0.06;
         } else if (temperatura > 20) {
-            perdaTemp = 1;
+            perdaTemp = 0.1;
         }
 
         // Variável para o cálculo de umidade
         var perdaUmid = 0;
         if (umidade < 50) {
-            perdaUmid = 1;
+            perdaUmid = 0.05;
         } else if (umidade >= 50 && umidade < 60) {
-            perdaUmid = 0.3;
+            perdaUmid = 0.02;
         } else if (umidade >= 60 && umidade <= 75) {
-            perdaUmid = 0.03;
+            perdaUmid = 0;
         } else if (umidade > 75 && umidade <= 85) {
-            perdaUmid = 0.3;
+            perdaUmid = 0.02;
         } else if (umidade > 85) {
-            perdaUmid = 1;
+            perdaUmid = 0.05;
         }
 
         /* Nessa parte ele vai atribuir a variavel perda, qual for a perda maior, 
@@ -74,145 +74,69 @@ function simular() {
             perda = perdaUmid;
         }
 
+        // Calcular a a porcentagem com a Winetech
+        var porcentagemFinal = perda - (perda * 0.1)
+
         // Cenário da situação dos vinhos do cliente
         var cenario = "";
-        if (perda == 1) {
-            cenario = '<span style="color: rgba(137, 7, 7, 1);"><b>Alerta máximo: Perda total</b></span>';
-        } else if (perda == 0.3) {
+        if (perda > 0.06) {
+            cenario = '<span style="color: rgba(137, 7, 7, 1);"><b>Alerta máximo: Perda máxima</b></span>';
+        } else if (perda >= 0.02 && perda <= 0.06) {
             cenario = '<span style="color: rgb(209, 175, 5);"><b>Alerta moderado: Perda moderada</b></span>';
         } else {
             cenario = '<span style="color: rgba(0, 144, 22, 1);"><b>Cenário ideal: Perda mínima</b></span>';
         }
 
-        // Variáveis para o cálculo da 2° SAIDA: relatório do cave
-        // CALCULO DA GARRAFA
-        // var garrafaPorBarril = 300;
-        // var totalGarrafa = quantidadeBarris * garrafaPorBarril;
-
-        /* Quantidade de garrafas por barril é de 300, e o valor médio de uma garrafa
-            de vinho tinto de corpo médio é de 120 R$, ou seja o preço de cada barril
-            é de aproximadamente 36000 R$ */
-        var valorCave = quantidadeBarris * precoBarril;
-
         // Variáveis para a 3° SAIDA: Sem Winetech
-        var barrisPerdidos = Math.round(quantidadeBarris * perda);
-        var totalMensal = precoBarril * quantidadeBarris * 6;
-        var prejuizo = precoBarril * barrisPerdidos * 6;
-        var porcentagemPrejuizo = (prejuizo / totalMensal) * 100;
+        var precoTotal = quantidadeBarris * precoBarril;
+        var prejuizo = precoTotal * perda;
+        var valorRecuperado = prejuizo * 0.1;
+        var valorFinal = prejuizo - valorRecuperado;
 
-        // Variáveis para a 4° SAIDA: Com Winetech | 1° SAIDA:
-        if (perda == 0.03) {
-            var reducaoPrejuizo = precoBarril * barrisPerdidos;
-            var cantoDosAnjosPercent = 0.03;
-        } else {
-            var reducaoPrejuizo = prejuizo * 0.1;
-            var cantoDosAnjosPercent = 0.1;
-        }
-        var cantoDosAnjos = quantidadeBarris * cantoDosAnjosPercent;
-        var barrisPreservados = quantidadeBarris - barrisPerdidos + cantoDosAnjos;
-        if (barrisPreservados < 0) {
-            barrisPreservados = 0;
+        if (perda == 0.015) {
+            perda = '01,5';
+        } else if (perda == 0.02) {
+            perda = '02,0';
+        } else if (perda == 0.05) {
+            perda = '05,0';
+        } else if (perda == 0.06) {
+            perda = '06,0';
+        } else if (perda == 0.1) {
+            perda = '10.0';
         }
 
-        // Estilização do CSS
-        estiloResultado.innerHTML = `<style>
-                .resultados {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    max-width: 350px;
-                    max-height: 100%;
-                    text-align: center;
-                    gap: 15px;
-                    margin-top: 40px;
-                    border: solid 3px #000000ff;
-                    border-radius: 10px;
-                    padding: 10px;
-                    background-color: #eeeded;
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .resultados hr {
-                        width: 300px;
-                    }
-
-                    .saidasWinetech {
-                    margin-top: 30px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    gap: 40px;
-                    }
-
-                    #comWinetech {
-                    max-width: 455px;
-                    max-height: 100%;
-                    text-align: center;
-                    border-radius: 10px;
-                    padding: 10px;
-                    background-color: #eeeded;
-                    border: solid 3px #0e7016ff;
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-                    }
-
-                    #semWinetech {
-                    max-width: 403px;
-                    max-height: 100%;
-                    text-align: center;
-                    border-radius: 10px;
-                    padding: 10px;
-                    background-color: #eeeded;
-                    border: solid 3px #70160E;
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-                    }
-            </style>`;
-
-        // 1 SAIDA: Economia potencial com Winesafe
-        resumoLucro.innerHTML = `<div class="resumo">
-            <br><b>Cenário:</b> ${cenario}
-            <br><b>Economia potencial com nossos serviços:</b><b> R$</b><span style="color: green;"><b>${reducaoPrejuizo.toFixed(2)}</b></span><br>
-            </div>`;
-
-        // 2 SAIDA: Relatório do cave
-        relatorio.innerHTML = `<hr>
-            <h3>Relatório do Cave</h3>
-            <p><b>Quantidade de barris:</b> ${quantidadeBarris}</p>
-            <p><b>Valor total do cave: </b>R$ ${valorCave}</p>`;
-
-        // 3 SAIDA: Sem Winetech
-        if (perda == 0.03) {
-            semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
-                <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">3%<br></span></b>
-                <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
-                <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
-        } else if (perda == 0.3) {
-            semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
-                <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">30%<br></span></b>
-                <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
-                <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
-        } else {
-            semWinetech.innerHTML = `<h1>Sem a Winetech</h1>
-                <b>Porcentagem de perda estimada:</b> <b><span style="color: red;">100%<br></span></b>
-                <b>Quantidade de barris perdidos:</b> <b>${barrisPerdidos}</b> barris perdidos<br>
-                <b>Prejuízo semestral estimado:</b> <b>R$</b> <span style="color: red;">${prejuizo.toFixed(2)}</span>`;
+        if (porcentagemFinal == 0.0135) {
+            porcentagemFinal = '01,3';
+        } else if (porcentagemFinal == 0.018) {
+            porcentagemFinal = '01,8';
+        } else if (porcentagemFinal == 0.045) {
+            porcentagemFinal = '04,5';
+        } else if (porcentagemFinal == 0.054) {
+            porcentagemFinal = '05,4';
+        } else if (porcentagemFinal == 0.09) {
+            porcentagemFinal = '09,0';
         }
 
-        // 4 SAIDA: Com Winetech
-        if (perda == 0.03) {
-            comWinetech.innerHTML = `<h1>Com a Winetech</h1>
-                <b>Porcentagem de redução de perda estimada:</b> <b><span style="color: green;">3%</span></b><br>  
-                <b>Redução de prejuízo semestral estimado:</b> <b>R$</b> <b><span style="color: green;">${prejuizo.toFixed(2)}</span></b><br>
-                <b>Barris preservados pelos nossos serviços:</b> <b>${cantoDosAnjos.toFixed(0)}</b> barris<br>
-                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br><br>
-                <b>com a WineTech, seu cave está protegido e o valor do vinho é preservado!</b>`;
-        } else {
-            comWinetech.innerHTML = `<h1>Com a Winetech</h1>
-                <b>Porcentagem de redução de perda estimada:</b> <b><span style="color: green;">10%</span></b><br>  
-                <b>Redução de prejuízo semestral estimado:</b> <b>R$</b> <b><span style="color: green;">${reducaoPrejuizo.toFixed(2)}</span></b><br>
-                <b>Barris preservados pelos nossos serviços:</b> <b>${cantoDosAnjos.toFixed(0)}</b> barris<br>
-                <b>Total de barris preservados:</b> <b>${barrisPreservados.toFixed(0)}</b> barris preservados<br><br>
-                <b>com a WineTech, seu cave está protegido e o valor do vinho é preservado!</b>`;
-        }
+        // Link do css do resultado do simulador
+        estiloResultado.innerHTML = `<link rel="stylesheet" href="simulador_resultado.css">`
+
+        colunaCenario.innerHTML = `${cenario}`;
+
+        colunaSituacao.innerHTML = `Situação`;
+        colunaPerda.innerHTML = `Perda (%)`;
+        colunaValor.innerHTML = `Valor (R$)`;
+
+        colunaFatorPerda.innerHTML = `<b>Sem Controle</b>`
+        colunaPorcentagem.innerHTML = `<span style="color:rgb(189, 0, 0);"><b>${perda}%</b></span>`;
+        colunaValorPerdido.innerHTML = `<span style="color:rgb(189, 0, 0);"><b>${prejuizo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b></span>`;
+
+        colunaFatorRecuperado.innerHTML = `<b>Recuperação (10%)</b>`
+        colunaPercentualRecuperado.innerHTML = `—`;
+        colunaValorRecuperado.innerHTML = `<span style="color:green;"><b>+ ${valorRecuperado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b></span>`;
+
+        colunaFatorFinal.innerHTML = `<b>Com a Winetech</b>`
+        colunaPercentualFinal.innerHTML = `<b>${porcentagemFinal}%</b>`;
+        colunaValorFinal.innerHTML = `<b>${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>`;
+
     }
 }
