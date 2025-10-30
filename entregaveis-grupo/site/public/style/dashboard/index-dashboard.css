@@ -14,7 +14,6 @@
   --muted: #7a5a4f;
   --shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
   --sidebar-w: 220px;
-  /* menor largura */
 }
 
 body {
@@ -25,7 +24,7 @@ body {
 }
 
 /* LAYOUT */
-.app {
+.container {
   display: flex;
   min-height: 100vh;
 }
