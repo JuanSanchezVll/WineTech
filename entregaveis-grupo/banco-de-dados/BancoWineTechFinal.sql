@@ -84,7 +84,7 @@ CREATE TABLE sensor (
 );
 
 CREATE TABLE leitura_sensor (
-  id_leitura_sensor INT,
+  id_leitura_sensor INT AUTO_INCREMENT,
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
