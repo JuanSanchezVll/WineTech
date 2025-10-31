@@ -90,17 +90,18 @@ CREATE TABLE leitura_sensor (
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_sensor INT NOT NULL,
 
-  CONSTRAINT pk_leitura_sensor (id_leitura_sensor, id_sensor),
+  CONSTRAINT pk_leitura_sensor PRIMARY KEY (id_leitura_sensor, id_sensor),
   CONSTRAINT fk_leitura_sensor_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
 );
 
 CREATE TABLE alerta (
-  id_alerta INT PRIMARY KEY AUTO_INCREMENT,
+  id_alerta INT AUTO_INCREMENT,
   gravidade VARCHAR(45) NOT NULL,
   status VARCHAR(45) NOT NULL,
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_leitura_sensor INT NOT NULL UNIQUE,
 
+  CONSTRAINT pk_alerta PRIMARY KEY (id_alerta, id_leitura_sensor),
   CONSTRAINT fk_alerta_leitura_sensor FOREIGN KEY (id_leitura_sensor) REFERENCES leitura_sensor (id_leitura_sensor),
   CONSTRAINT chk_gravidade CHECK (gravidade IN ('baixa', 'media', 'alta')),
   CONSTRAINT chk_status CHECK (status IN ('nao resolvido', 'em manutencao', 'resolvido'))
@@ -122,7 +123,7 @@ INSERT INTO nivel_acesso (id_nivel_acesso, nome, descricao) VALUES
   (3, 'Enólogo', 'Tem permissão total nas entidades da empresa exceto em funcionários'),
   (4, 'Operador', 'Tem acesso apenas a dashboard');
 
-INSERT INTO funcionario (nome, sobrenome, email, senha, data_registro, id_empresa, id_nivel_acesso) VALUES
+INSERT INTO usuario (nome, sobrenome, email, senha, data_registro, id_empresa, id_nivel_acesso) VALUES
 ('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', '2024-01-04 13:00:00', 1, 2),
 ('Pedro', 'Santos', 'pedro.s@novaera.com', 'senha002', '2024-01-05 14:00:00', 1, 3),
 ('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', '2024-01-06 15:00:00',1, 4);
