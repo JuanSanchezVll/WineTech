@@ -51,7 +51,7 @@
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" oninput="verarroba(),validarEmail()" id="inputEmail" placeholder="Email de Contato" >
+                    <input type="text" oninput="verarroba(), cadastro() ,validarEmail()" id="inputEmail" placeholder="Email de Contato" >
 
                 </div>
 
@@ -120,9 +120,7 @@
 
             for (let index = 0; index < inputEmail.value.length; index++) {
                 if (inputEmail.value[index] === '@') {
-                    tem = true
-                    break
-                    
+                    tem = true        
                 } else {
                     tem = false
                     
@@ -136,9 +134,9 @@
     function validarEmail() {
             
         
-            if (tem) {
+            if (tem == true) {
                 errEmail.innerHTML = ``
-                email = true
+                email = true    
 
                 
             } else {
