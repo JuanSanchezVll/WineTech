@@ -138,5 +138,15 @@ function simular() {
         colunaPercentualFinal.innerHTML = `<b>${porcentagemFinal}%</b>`;
         colunaValorFinal.innerHTML = `<b>${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>`;
 
+        new Chart("graficoPrejuizo", {
+            type: "pie",
+            data: {
+            labels: ["Prejuízo" + ` ${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`, "Valor recuperado" + ` ${valorRecuperado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`],
+            datasets: [{
+                data: [valorFinal, valorRecuperado],
+                backgroundColor: ["#70160E", "green"]
+            }]
+            }
+        });
     }
 }
