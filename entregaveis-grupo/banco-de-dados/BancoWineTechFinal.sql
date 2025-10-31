@@ -35,7 +35,7 @@ CREATE TABLE nivel_acesso (
   CONSTRAINT chk_id_nivel_acesso CHECK (id_nivel_acesso in (1, 2, 3, 4))
 );
 
-CREATE TABLE funcionario (
+CREATE TABLE usuario (
   id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   sobrenome VARCHAR(100) NOT NULL,
@@ -84,11 +84,13 @@ CREATE TABLE sensor (
 );
 
 CREATE TABLE leitura_sensor (
-  id_leitura_sensor INT PRIMARY KEY AUTO_INCREMENT,
+  id_leitura_sensor INT,
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
   data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_sensor INT NOT NULL,
+
+  CONSTRAINT pk_leitura_sensor (id_leitura_sensor, id_sensor),
   CONSTRAINT fk_leitura_sensor_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
 );
 
