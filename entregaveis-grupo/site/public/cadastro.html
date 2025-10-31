@@ -51,11 +51,18 @@
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" oninput="verarroba(),validarEmail(), cadastro()" id="inputEmail" placeholder="Email de Contato" >
+                    <input type="email" oninput="verarroba(),validarEmail()" id="inputEmail" placeholder="Email de Contato" >
 
                 </div>
 
-                <button type="button" id="btnCadastro" onclick="">Cadastrar</button>
+                <div id="errToken"></div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="text" oninput="validarToken()" id="inputToken" placeholder="Token da sua empresa" >
+
+                </div>
+
+                <button type="button" id="btnCadastro" onclick="cadastro()">Cadastrar</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
@@ -142,11 +149,13 @@
 
                 
             } else {
-                errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@")</b> <br>`
+                errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@" e ".")</b> <br>`
                 email = false
             }
 
     }
+
+
     function cadastro() {
 
         const btnCad = document.getElementById('btnCadastro')
@@ -155,7 +164,9 @@
             btnCad.onclick = function () { location.href='cadastro-funcionario.html' }
 
         } else{
+            console.log(cnpjValido, razaoSocial,nomeFantasia, email);
             btnCad.onclick = function () { alert("Complete o cadastro antes de seguir!")}
+            
         }
 
         

@@ -47,53 +47,6 @@
     </main>
 </body>
 
-<script>
-
-    email = false
-    senha = false
-
-    function validarSenha() {
-
-        if (inputSenha.value != "123abc") {
-            // errLogin.innerHTML = `<b style="font-size: 9px; color: red;" "> Senha ou email incorretos!</b> <br>`
-            senha = false
-
-        } else {
-
-            senha = true
-        }
-
-    }
-
-
-    function validarEmail() {
-
-        if (inputEmail.value != "123@123.com") {
-            // errLoginl.innerHTML = `<b style="font-size: 9px; color: red;" ">Senha ou email incorretos!</b> <br>`
-            email = false
-
-        } else {
-
-            email = true
-        }
-
-    }
-
-    function login() {
-
-        const btnCad = document.getElementById('btnLogin')
-
-        if (email == true && senha == true) {
-            btnCad.onclick = function () { location.href = './dashboard/index-dashboard.html' }
-
-        } else {
-            btnCad.onclick = function () {
-                errLogin.innerHTML = `<b style="font-size: 9px; color: red;" "> Senha ou email incorretos!</b> <br>`
-            }
-        }
-
-    }
-
-</script>
+<script src="js/site-institucional/login.js"></script>
 
 </html>

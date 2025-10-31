@@ -45,7 +45,7 @@
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input oninput="validarEmail(),verarroba(), cadastro()" id="inputEmail" type="email" placeholder="Email">
+                    <input oninput="validarEmail() , verarroba(), cadastro()" id="inputEmail" type="email" placeholder="Email">
 
                 </div>
                 
@@ -55,16 +55,14 @@
                     <input oninput="validarSenha(), cadastro()" id="inputSenha" type="password" placeholder="Senha">
 
                 </div>
-
-                <div id="errToken"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-key"></i>
-                    <input oninput="cadastro()" id="inputToken" type="text" placeholder="Token">
+                    <input oninput="cadastro(), validarToken()" id="inputToken" type="text" placeholder="Token">
 
                 </div>
 
 
-                <button type="button" id="btnCadastro" onclick="">Cadastrar Usuario</button>
+                <button type="button" id="btnCadastro" onclick="cadastro()">Cadastrar Usuario</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
@@ -144,7 +142,7 @@
     function validarEmail() {
             
         
-            if (tem) {
+            if (tem == true) {
                 errEmail.innerHTML = ``
                 email = true
 
@@ -156,15 +154,37 @@
 
     }
 
+    function validarToken() {
+        if (inputToken.value == "12341234") {
+            token = true
+        }
+
+             else {
+                token = false
+            }
+        
+    }
+
     function cadastro() {
 
         const btnCad = document.getElementById('btnCadastro')
 
         if (nomeValido == true && sobrenome == true && email == true && senha == true && token == true) {
+            inputEmail = ""
+            inputNome = ""
+            inputSenha = ""
+            inputToken = ""
+            inputSobrenome = ""
             btnCad.onclick = function () { location.href = 'login.html' }
 
-        } else {
+        } else if(nomeValido == true && sobrenome == true && email == true && senha == true && token == false){
+            btnCad.onclick = function () { alert("Insira um Token Validado pela WineTech") }
+        }
+
+        else{
             btnCad.onclick = function () { alert("Complete o cadastro antes de seguir!") }
+            console.log(nomeValido, sobrenome, email, senha, token);
+            
         }
 
 
