@@ -38,30 +38,30 @@ function simular() {
     } else {
         // Variável para o cálculo de temperatura
         var perdaTemp = 0;
-        if (temperatura < 0) {
+        if (temperatura < -5) {
             perdaTemp = 0.1;
-        } else if (temperatura > 0 && temperatura < 5) {
+        } else if (temperatura >= -5 && temperatura < 7) {
             perdaTemp = 0.06;
-        } else if (temperatura >= 5 && temperatura <= 15) {
+        } else if (temperatura >= 7 && temperatura <= 18) {
             perdaTemp = 0.015;
-        } else if (temperatura > 15 && temperatura <= 20) {
+        } else if (temperatura > 19 && temperatura <= 21) {
             perdaTemp = 0.06;
-        } else if (temperatura > 20) {
+        } else if (temperatura > 21) {
             perdaTemp = 0.1;
         }
 
         // Variável para o cálculo de umidade
         var perdaUmid = 0;
         if (umidade < 50) {
-            perdaUmid = 0.05;
-        } else if (umidade >= 50 && umidade <= 60) {
-            perdaUmid = 0.02;
+            perdaUmid = 0.1;
+        } else if (umidade >= 50 && umidade <= 64) {
+            perdaUmid = 0.06;
         } else if (umidade >= 65 && umidade <= 75) {
             perdaUmid = 0;
-        } else if (umidade > 75 && umidade <= 85) {
-            perdaUmid = 0.02;
-        } else if (umidade > 85) {
-            perdaUmid = 0.05;
+        } else if (umidade > 75 && umidade <= 80) {
+            perdaUmid = 0.06;
+        } else if (umidade > 80) {
+            perdaUmid = 0.1;
         }
 
         /* Nessa parte ele vai atribuir a variavel perda, qual for a perda maior, 
@@ -138,5 +138,15 @@ function simular() {
         colunaPercentualFinal.innerHTML = `<b>${porcentagemFinal}%</b>`;
         colunaValorFinal.innerHTML = `<b>${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>`;
 
+        new Chart("graficoPrejuizo", {
+            type: "pie",
+            data: {
+            labels: ["Prejuízo" + ` ${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`, "Valor recuperado" + ` ${valorRecuperado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`],
+            datasets: [{
+                data: [valorFinal, valorRecuperado],
+                backgroundColor: ["#70160E", "green"]
+            }]
+            }
+        });
     }
 }

@@ -170,6 +170,14 @@ body {
   background-color: #fff;
 }
 
+#button-cadastre {
+  display: none;
+}
+
+#grafico {
+  display: none;
+}
+
 /* ================= FOOTER ================= */
 
 footer {

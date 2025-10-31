@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Simulador Financeiro - Winetech</title>
 </head>
 
@@ -85,7 +86,6 @@
         <div id="estiloResultado"></div>
 
         <div class="tabela">
-
             <div class="cenario">
                 <div id="colunaCenario"></div>
             </div>
@@ -102,26 +102,32 @@
                 <div id="colunaValorPerdido"></div>
             </div>
 
-            <div class="linha recovery">
+            <div class="linha fundo">
                 <div id="colunaFatorRecuperado"></div>
                 <div id="colunaPercentualRecuperado"></div>
                 <div id="colunaValorRecuperado"></div>
             </div>
 
-            <div class="linha after-monitoring">
+            <div class="linha depois-monitoramento">
                 <div id="colunaFatorFinal"></div>
                 <div id="colunaPercentualFinal"></div>
                 <div id="colunaValorFinal"></div>
             </div>
+
+            <div class="divBotao">
+                <a href="cadastro.html">
+                    <button id="button-cadastre">Cadastre Já</button>
+                </a>
+            </div>
         </div>
 
-        <div class="saidasWinetech">
-            <!-- 3 SAIDA: Sem Winetech  -->
-            <div id="semWinetech"></div>    
-            <!-- 4 SAIDA: Com Winetech -->
-            <div id="comWinetech"></div>
+        <div id="grafico">
+            <b>Gráfico de Recuperação</b>
+            <canvas id="graficoPrejuizo"></canvas>
         </div>
     </div>
+
+    
 
     <footer>
         <div class="footer-container">
