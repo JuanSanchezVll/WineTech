@@ -51,7 +51,11 @@
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
+<<<<<<< HEAD
                     <input type="text" oninput="verarroba(), cadastro() ,validarEmail()" id="inputEmail" placeholder="Email de Contato" >
+=======
+                    <input type="email" oninput="verarroba(),cadastro()" id="inputEmail" placeholder="Email de Contato" >
+>>>>>>> refs/remotes/origin/main
 
                 </div>
 
@@ -120,9 +124,18 @@
 
             for (let index = 0; index < inputEmail.value.length; index++) {
                 if (inputEmail.value[index] === '@') {
+<<<<<<< HEAD
                     tem = true        
+=======
+                    errEmail.innerHTML = ``
+                    email = true
+                    break
+                
+                    
+>>>>>>> refs/remotes/origin/main
                 } else {
-                    tem = false
+                    errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@")</b> <br>`
+                    email = false
                     
                 
                 }
@@ -131,6 +144,7 @@
             
         }
 
+<<<<<<< HEAD
     function validarEmail() {
             
         
@@ -146,12 +160,15 @@
 
     }
 
+=======
+>>>>>>> refs/remotes/origin/main
 
     function cadastro() {
 
         const btnCad = document.getElementById('btnCadastro')
         
-        if (cnpjValido == true && razaoSocial == true && nomeFantasia == true && email == true) {
+        if (cnpjValido == true && razaoSocial == true && nomeFantasia == true && email) {
+            console.log(cnpjValido, razaoSocial,nomeFantasia, email);
             btnCad.onclick = function () { location.href='cadastro-funcionario.html' }
 
         } else{
