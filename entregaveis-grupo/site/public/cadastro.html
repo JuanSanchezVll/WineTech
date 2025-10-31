@@ -51,7 +51,7 @@
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" oninput="verarroba(),validarEmail()" id="inputEmail" placeholder="Email de Contato" >
+                    <input type="email" oninput="verarroba(),cadastro()" id="inputEmail" placeholder="Email de Contato" >
 
                 </div>
 
@@ -121,32 +121,25 @@
             for (let index = 0; index < inputEmail.value.length; index++) {
                 if (inputEmail.value[index] === '@') {
                     tem = true
+                    email = true
+                    errEmail.innerHTML = ``
                     break
                     
                 } else {
-                    tem = false
-                    
+                    errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@" e ".")</b> <br>`
+                    email = false
+                    break
                 
+                }
+
+                if (tem) 
+                {
+                    email = true
                 }
                 
             }
             
         }
-
-    function validarEmail() {
-            
-        
-            if (tem) {
-                errEmail.innerHTML = ``
-                email = true
-
-                
-            } else {
-                errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@" e ".")</b> <br>`
-                email = false
-            }
-
-    }
 
 
     function cadastro() {
