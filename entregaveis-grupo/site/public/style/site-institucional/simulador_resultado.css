@@ -34,11 +34,11 @@
   color: black;
 }
 
-.linha.recovery {
+.linha.fundo {
   background-color: #fafafa;
 }
 
-.linha.after-monitoring {
+.linha.depois-monitoramento {
   border-top: 2px;
   border-bottom: none;
 }
@@ -142,4 +142,25 @@
 #button-cadastre:hover {
   color: #70160E;
   background-color: #fff;
+}
+
+#grafico {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #dfdddd;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+  width: 400px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 10px;
+  padding: 25px;
+}
+
+#grafico b {
+  margin-bottom: 8px;
 }
