@@ -174,10 +174,13 @@ body {
   display: none;
 }
 
-#grafico {
+.conteudo h1 {
   display: none;
 }
 
+.card-header h3 {
+  display: none;
+}
 /* ================= FOOTER ================= */
 
 footer {

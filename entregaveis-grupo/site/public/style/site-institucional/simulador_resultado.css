@@ -124,7 +124,7 @@
 
 #button-cadastre {
   display: flex;
-  width: 140px;
+  width: 163px;
   height: 40px;
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -152,7 +152,7 @@
   border-radius: 4px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background-color: #fafafa;
-  width: 400px;
+  width: 600px;
   overflow: hidden;
   font-family: Arial, sans-serif;
   font-weight: bold;
@@ -163,4 +163,29 @@
 
 #grafico b {
   margin-bottom: 8px;
+}
+
+.chart-card .card-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0 0 0;
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    height: 340px !important;
+}
+
+.conteudo h1{
+  display: flex;
+  margin: 0;
+  margin-top: 40px;
+}
+
+.card-header h3 {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
 }

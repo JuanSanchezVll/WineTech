@@ -122,7 +122,7 @@ function simular() {
 
         colunaCenario.innerHTML = `${cenario}`;
 
-        colunaSituacao.innerHTML = `Situação`;
+        colunaSituacao.innerHTML = `Situação`;  
         colunaPerda.innerHTML = `Perda (%)`;
         colunaValor.innerHTML = `Valor (R$)`;
 
@@ -138,15 +138,110 @@ function simular() {
         colunaPercentualFinal.innerHTML = `<b>${porcentagemFinal}%</b>`;
         colunaValorFinal.innerHTML = `<b>${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>`;
 
-        new Chart("graficoPrejuizo", {
-            type: "pie",
+        // Seleciona o canvas do gráfico
+        const ctx = document.getElementById('chartBarril').getContext('2d');
+
+        // Dados fictícios de exemplo para as últimas 24 horas
+        const mes = [
+            '1° mês', '2° mês', '3° mês', '4° mês', '5° mês', '6° mês', 
+            '7° mês', '8° mês', '9° mês', '10° mês', '11° mês', '12° mês'
+        ];
+
+        const semControle = [];
+
+        const comControle = [];
+
+        var contador_mes = 0;
+        var mes_repeticao = 12;
+        var prejuizo_calculo = 0;
+        var valorFinal_calculo = 0;
+        while (contador_mes < mes_repeticao ) {
+            contador_mes++
+            prejuizo_calculo += prejuizo;
+            valorFinal_calculo += valorFinal;
+
+            semControle.push(prejuizo_calculo);
+            comControle.push(valorFinal_calculo);
+        }
+
+        const barrilChart = new Chart(ctx, {
+            type: 'line',
             data: {
-            labels: ["Prejuízo" + ` ${valorFinal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`, "Valor recuperado" + ` ${valorRecuperado.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`],
-            datasets: [{
-                data: [valorFinal, valorRecuperado],
-                backgroundColor: ["#70160E", "green"]
-            }]
+                labels: mes,
+                datasets: [
+                    {
+                        label: 'Perda sem o controle (R$)',
+                        data: semControle,
+                        borderColor: 'rgb(189, 0, 0)',
+                        backgroundColor: 'rgba(158, 0, 0, 0.14)',
+                        tension: 0.3,
+                        fill: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Perda com a Winetech (R$)',
+                        data: comControle,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(3, 216, 10, 0.09)',
+                        tension: 0.3,
+                        fill: true,
+                        yAxisID: 'y'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { family: 'Poppins', size: 14 }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Acompanhe a estimativa anual sobre seu negócio',
+                        font: { size: 18, family: 'Poppins', weight: '600' },
+                        color: '#70160E'
+                    }
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#4b0e1a' }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        ticks: { color: 'black' },
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Valor (R$)',
+                            color: '#70160E',
+                            font: { weight: '600' }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        ticks: { color: '#fafafa' },
+                        beginAtZero: false,
+                        grid: { drawOnChartArea: true},
+                        title: {
+                            display: true,
+                            text: 'Umidade (%)',
+                            color: '#fafafa',
+                            font: { weight: '600' }
+                        }
+                    }
+                }
             }
         });
+
     }
 }
