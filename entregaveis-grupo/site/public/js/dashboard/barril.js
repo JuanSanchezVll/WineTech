@@ -1,7 +1,6 @@
-// Seleciona o canvas do gráfico
 const ctx = document.getElementById('chartBarril').getContext('2d');
 
-// Dados fictícios de exemplo para as últimas 24 horas
+// Dados
 const horas = [
     '00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',
     '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'
@@ -17,7 +16,6 @@ const umidade = [
     67, 67, 66, 66, 65, 65, 64, 64, 65, 65, 64, 64
 ];
 
-// Cria o gráfico
 const barrilChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -44,7 +42,6 @@ const barrilChart = new Chart(ctx, {
         ]
     },
     options: {
-        responsive: true,
         maintainAspectRatio: false,
         plugins: {
             legend: {

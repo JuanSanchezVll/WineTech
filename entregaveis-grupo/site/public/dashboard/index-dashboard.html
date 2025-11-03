@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WineTech - Caves</title>
 
-  <!-- Fonts / Icons -->
+  <!-- Icones -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
@@ -27,7 +27,7 @@
 
         <nav class="nav">
           <a href="index-dashboard.html" class="nav-link active">
-            <i class="fa-solid fa-wine-bottle"></i><span>Caves</span>
+            <i class="fa-solid fa-wine-bottle"></i><span>Cave</span>
           </a>
 
           <a href="barril.html" class="nav-link">
@@ -54,8 +54,8 @@
     <main class="main">
       <header class="page-header">
         <div>
-          <h1>Dashboard de Monitoramento</h1>
-          <p>Controle em tempo real da temperatura e umidade dos barris de vinho tinto.</p>
+          <h1>Cave #1</h1>
+          <p>Dashboard de Monitoramento</p>
         </div>
       </header>
 
@@ -67,7 +67,7 @@
             <div class="kpi-value">12 / 12</div>
           </div>
           <div class="kpi-meta">
-            <span class="kpi-dot green" title="Normal"></span>
+            <span class="kpi-dot" title="Normal"></span>
             <i class="fa-solid fa-signal"></i>
           </div>
         </div>
@@ -75,18 +75,22 @@
         <div class="kpi">
           <div class="kpi-left">
             <div class="kpi-title">Alertas Hoje</div>
-            <div class="kpi-value">1</div>
+            <div class="kpi-value temperatura">1</div>
           </div>
           <div class="kpi-meta">
-            <span class="kpi-dot yellow" title="Atenção"></span>
+            <span class="kpi-dot green" title="Atenção"></span>
             <i class="fa-solid fa-triangle-exclamation"></i>
           </div>
         </div>
 
+        <!-- KPI temperatura -->
         <div class="kpi">
           <div class="kpi-left">
-            <div class="kpi-title">Temperatura Média</div>
-            <div class="kpi-value">21.6°C</div>
+            <div class="kpi-title">
+              Temperatura mais alta
+              <span class="info-icon" data-tooltip="temp">❓</span>
+            </div>
+            <div class="kpi-value temperatura">25°C</div>
           </div>
           <div class="kpi-meta">
             <span class="kpi-dot green" title="OK"></span>
@@ -94,17 +98,30 @@
           </div>
         </div>
 
+        <!-- KPI umidade -->
         <div class="kpi">
           <div class="kpi-left">
-            <div class="kpi-title">Umidade Média</div>
-            <div class="kpi-value">82%</div>
+            <div class="kpi-title">
+              Umidade mais alta
+              <span class="info-icon" data-tooltip="umi">❓</span>
+            </div>
+            <div class="kpi-value temperatura">85%</div>
           </div>
           <div class="kpi-meta">
-            <span class="kpi-dot red" title="Atenção Crítica"></span>
+            <span class="kpi-dot green" title="Atenção Crítica"></span>
             <i class="fa-solid fa-droplet"></i>
           </div>
         </div>
       </section>
+
+      <div id="tooltip-info" class="tooltip-info">
+        <div class="tooltip-content">
+          <button id="btn-close-tooltip" class="close-tooltip">✖</button>
+          <h3 id="tooltip-title">Título</h3>
+          <p id="tooltip-desc">Descrição</p>
+          <button id="btn-ver" class="btn-primary">Ver Detalhes</button>
+        </div>
+      </div>
 
       <!-- Área principal: gráfico 15 dias à esquerda / tabela histórico à direita -->
       <section class="main-grid">
@@ -164,71 +181,51 @@
         </div>
       </section>
 
-      <!-- Seção de Barris (cards) -->
+      <!-- Seção de Barris -->
       <section class="barris-section">
         <h2>Monitoramento de Barris</h2>
         <div class="barris-grid">
-          <div class="barril-card normal">
+
+          <!-- Barril Crítico -->
+          <div class="barril-card critico">
             <h4>Barril #1</h4>
-            <p>Temp: <strong>18.5°C</strong></p>
-            <p>Umid: <strong>65%</strong></p>
-            <p>há 5 min</p><button class="btn-primary">Ver Detalhes</button>
+            <p>Temperatura: <strong style="color:#c0392b;">25°C</strong></p>
+            <p>Umidade: <strong>70%</strong></p>
+            <p>Atualizado há <strong>3 min</strong></p>
+            <button class="btn-primary" onclick="window.location.href='./barril.html'">Ver Detalhes</button>
           </div>
 
-          <div class="barril-card alerta">
+          <!-- Barril Ideal -->
+          <div class="barril-card ideal">
             <h4>Barril #2</h4>
-            <p>Temp: <strong>22.1°C</strong></p>
-            <p>Umid: <strong>58%</strong></p>
-            <p>há 3 min</p><button class="btn-primary">Ver Detalhes</button>
+            <p>Temperatura: <strong style="color:#27ae60;">15°C</strong></p>
+            <p>Umidade: <strong>85%</strong></p>
+            <p>Atualizado há <strong>5 min</strong></p>
+            <button class="btn-primary">Ver Detalhes</button>
           </div>
 
-          <div class="barril-card normal">
-            <h4>Barril #3</h4>
-            <p>Temp: <strong>17.9°C</strong></p>
-            <p>Umid: <strong>70%</strong></p>
-            <p>há 6 min</p><button class="btn-primary">Ver Detalhes</button>
-          </div>
-
-          <!-- <div class="barril-card alerta">
-            <h4>Barril #4</h4>
-            <p>Temp: <strong>23.3°C</strong></p>
-            <p>Umid: <strong>55%</strong></p>
-            <p>há 2 min</p><button class="btn-primary">Ver Detalhes</button>
-          </div>
-
-          <div class="barril-card normal">
-            <h4>Barril #5</h4>
-            <p>Temp: <strong>19.1°C</strong></p>
-            <p>Umid: <strong>67%</strong></p>
-            <p>há 4 min</p><button class="btn-primary">Ver Detalhes</button>
-          </div>
-
+          <!-- Barril em Atenção -->
           <div class="barril-card atencao">
-            <h4>Barril #6</h4>
-            <p>Temp: <strong>24.8°C</strong></p>
-            <p>Umid: <strong>52%</strong></p>
-            <p>há 1 min</p><button class="btn-primary">Ver Detalhes</button>
+            <h4>Barril #3</h4>
+            <p>Temperatura: <strong style="color:#f39c12;">22.0°C</strong></p>
+            <p>Umidade: <strong>58%</strong></p>
+            <p>Atualizado há <strong>7 min</strong></p>
+            <button class="btn-primary">Ver Detalhes</button>
           </div>
 
-          <div class="barril-card alerta">
-            <h4>Barril #7</h4>
-            <p>Temp: <strong>26.3°C</strong></p>
-            <p>Umid: <strong>49%</strong></p>
-            <p>há 2 min</p><button class="btn-primary">Ver Detalhes</button>
-          </div>
-
-          <div class="barril-card normal">
-            <h4>Barril #8</h4>
-            <p>Temp: <strong>18.9°C</strong></p>
-            <p>Umid: <strong>69%</strong></p>
-            <p>há 7 min</p><button class="btn-primary">Ver Detalhes</button>
-          </div> -->
         </div>
       </section>
-    </main>
-  </div>
 
-  <script src="./../js/dashboard/index-dashboard.js"></script>
+
+      <div id="tooltip-info" class="tooltip-info">
+        <div class="tooltip-content">
+          <h3 id="tooltip-title">Título</h3>
+          <p id="tooltip-desc">Descrição</p>
+          <button id="btn-ver" class="btn-primary">Ver Detalhes</button>
+        </div>
+      </div>
+
+      <script src="./../js/dashboard/index-dashboard.js"></script>
 </body>
 
 </html>
