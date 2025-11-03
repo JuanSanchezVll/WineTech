@@ -226,19 +226,6 @@ function simular() {
                             font: { weight: '600' }
                         }
                     },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        ticks: { color: '#fafafa' },
-                        beginAtZero: false,
-                        grid: { drawOnChartArea: true},
-                        title: {
-                            display: true,
-                            text: 'Umidade (%)',
-                            color: '#fafafa',
-                            font: { weight: '600' }
-                        }
-                    }
                 }
             }
         });
