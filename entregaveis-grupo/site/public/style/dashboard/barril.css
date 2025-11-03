@@ -43,7 +43,7 @@ body {
 }
 
 .logo {
-    width: 100px;
+    width: 115px;
     height: 100px;
     padding: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -183,6 +183,11 @@ body {
     margin-top: 6px;
 }
 
+.kpi-value.temperatura {
+   color: #ff0000;
+
+}
+
 .kpi-meta {
     display: flex;
     flex-direction: column;
@@ -197,10 +202,15 @@ body {
     border-radius: 999px;
     display: inline-block;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: #11ff00;
 }
 
-.kpi-dot.green {
-    background: #3fb871;
+.kpi-dot.red {
+    background: #ff0000;
+}
+
+.kpi-dot.yellow {
+    background: #eee300;
 }
 
 /* Gráfico */
