@@ -163,6 +163,7 @@ body {
   font-weight: 600;
   transition: 0.3s ease;
   margin-top: 25px;
+  cursor: pointer;
 }
 
 #button-simular:hover {
