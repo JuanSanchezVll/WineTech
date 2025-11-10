@@ -16,11 +16,14 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
+var empresaRouter = require("./src/routes/empresas");
+var enderecoRouter = require("./src/routes/enderecos");
 var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
-var aquariosRouter = require("./src/routes/aquarios");
-var empresasRouter = require("./src/routes/empresas");
+var caveRouter = require("./src/routes/caves");
+var uvaRouter = require("./src/routes/uvas");
+var barrilRouter = require("./src/routes/barris");
+var leituraRouter = require("./src/routes/leituras");
+var alertaRouter = require("./src/routes/alertas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,11 +32,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
+app.use("/empresas", empresaRouter);
+app.use("/enderecos", enderecoRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter);
-app.use("/aquarios", aquariosRouter);
-app.use("/empresas", empresasRouter);
+app.use("/caves", caveRouter);
+app.use("/uvas", uvaRouter);
+app.use("/barris", barrilRouter);
+app.use("/leituras", leituraRouter);
+app.use("/alertas", alertaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
