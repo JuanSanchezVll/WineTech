@@ -10,7 +10,7 @@ CREATE TABLE empresa (
   email_contato VARCHAR(150) UNIQUE NOT NULL,
   codigo_seguranca VARCHAR(255) UNIQUE NOT NULL,
   situacao_contrato BOOLEAN DEFAULT FALSE,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+  data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE endereco (
@@ -43,7 +43,7 @@ CREATE TABLE usuario (
   senha VARCHAR(255) NOT NULL,
   nivel_acesso TINYINT NOT NULL DEFAULT 3,
   ativo BOOLEAN DEFAULT TRUE,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+  data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_empresa INT NOT NULL,
   id_nivel_acesso TINYINT NOT NULL,
   CONSTRAINT fk_funcionario_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa),
@@ -58,8 +58,8 @@ CREATE TABLE cave (
   CONSTRAINT fk_cave_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa)
 );
 
-CREATE TABLE tipo_uva (
-  id_tipo_uva INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE uva (
+  id_uva INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   temperatura_minima DECIMAL(5,2) NOT NULL,
   temperatura_maxima DECIMAL(5,2) NOT NULL,
@@ -71,9 +71,9 @@ CREATE TABLE barril (
   id_barril INT PRIMARY KEY AUTO_INCREMENT,
   identificacao VARCHAR(45) NOT NULL,
   id_cave INT NOT NULL,
-  id_tipo_uva INT NOT NULL,
+  id_uva INT NOT NULL,
  CONSTRAINT fk_barril_cave FOREIGN KEY (id_cave) REFERENCES cave (id_cave),
- CONSTRAINT fk_barril_tipo_uva FOREIGN KEY (id_tipo_uva) REFERENCES tipo_uva (id_tipo_uva)
+ CONSTRAINT fk_barril_uva FOREIGN KEY (id_uva) REFERENCES uva (id_uva)
 );
 
 CREATE TABLE sensor (
@@ -83,31 +83,31 @@ CREATE TABLE sensor (
   CONSTRAINT fk_sensor_barril FOREIGN KEY (id_barril) REFERENCES barril (id_barril)
 );
 
-CREATE TABLE leitura_sensor (
-  id_leitura_sensor INT AUTO_INCREMENT,
+CREATE TABLE leitura (
+  id_leitura INT AUTO_INCREMENT,
   temperatura DECIMAL(5,2) NOT NULL,
   umidade DECIMAL(5,2) NOT NULL,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+  data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_sensor INT NOT NULL,
 
-  CONSTRAINT pk_leitura_sensor PRIMARY KEY (id_leitura_sensor, id_sensor),
-  CONSTRAINT fk_leitura_sensor_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
+  CONSTRAINT pk_leitura PRIMARY KEY (id_leitura, id_sensor),
+  CONSTRAINT fk_leitura_sensor FOREIGN KEY (id_sensor) REFERENCES sensor (id_sensor)
 );
 
 CREATE TABLE alerta (
   id_alerta INT AUTO_INCREMENT,
   gravidade VARCHAR(45) NOT NULL,
   status VARCHAR(45) NOT NULL,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  id_leitura_sensor INT NOT NULL UNIQUE,
+  data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+  id_leitura INT NOT NULL UNIQUE,
 
-  CONSTRAINT pk_alerta PRIMARY KEY (id_alerta, id_leitura_sensor),
-  CONSTRAINT fk_alerta_leitura_sensor FOREIGN KEY (id_leitura_sensor) REFERENCES leitura_sensor (id_leitura_sensor),
+  CONSTRAINT pk_alerta PRIMARY KEY (id_alerta, id_leitura),
+  CONSTRAINT fk_alerta_leitura FOREIGN KEY (id_leitura) REFERENCES leitura (id_leitura),
   CONSTRAINT chk_gravidade CHECK (gravidade IN ('baixa', 'media', 'alta')),
   CONSTRAINT chk_status CHECK (status IN ('nao resolvido', 'em manutencao', 'resolvido'))
 );
 
-INSERT INTO empresa (cnpj, razao_social, nome_fantasia, email_contato, codigo_seguranca, data_registro) VALUES
+INSERT INTO empresa (cnpj, razao_social, nome_fantasia, email_contato, codigo_seguranca, data_hora_registro) VALUES
 ('00000000000001', 'Vinícola Nova Era S.A.', 'Nova Era Vinhos', 'contato@novaera.com', 'SEGRT54321', '2024-01-01 10:00:00'),
 ('00000000000002', 'Adega Superior Ltda.', 'Adega Master', 'suporte@masteradega.com', 'XCVBN09876', '2024-01-02 11:00:00'),
 ('00000000000003', 'Vinhos Finos do Sul', 'Vino Sul', 'financeiro@vinosul.com.br', 'QWERT67890', '2024-01-03 12:00:00');
@@ -123,7 +123,7 @@ INSERT INTO nivel_acesso (id_nivel_acesso, nome, descricao) VALUES
   (3, 'Enólogo', 'Tem permissão total nas entidades da empresa exceto em funcionários'),
   (4, 'Operador', 'Tem acesso apenas a dashboard');
 
-INSERT INTO usuario (nome, sobrenome, email, senha, data_registro, id_empresa, id_nivel_acesso) VALUES
+INSERT INTO usuario (nome, sobrenome, email, senha, data_hora_registro, id_empresa, id_nivel_acesso) VALUES
 ('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', '2024-01-04 13:00:00', 1, 2),
 ('Pedro', 'Santos', 'pedro.s@novaera.com', 'senha002', '2024-01-05 14:00:00', 1, 3),
 ('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', '2024-01-06 15:00:00',1, 4);
@@ -133,12 +133,12 @@ INSERT INTO cave (identificacao, id_empresa) VALUES
 ('CAVE-JDI-B', 1),
 ('CAVE-CSUL-A', 2);
 
-INSERT INTO tipo_uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima) VALUES
+INSERT INTO uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima) VALUES
 ('Merlot', 14.00, 16.00, 60.00, 75.00),
 ('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00),
 ('Malbec', 14.00, 16.00, 60.00, 75.00);
 
-INSERT INTO barril (identificacao, id_cave, id_tipo_uva) VALUES
+INSERT INTO barril (identificacao, id_cave, id_uva) VALUES
 ('BARRIL-001A', 1, 1),
 ('BARRIL-002B', 1, 2),
 ('BARRIL-003C', 2, 3);
@@ -148,12 +148,12 @@ INSERT INTO sensor (identificacao, id_barril) VALUES
 ('SEN-T-002', 2),
 ('SEN-H-003', 3);
 
-INSERT INTO leitura_sensor (temperatura, umidade, data_registro, id_sensor) VALUES
+INSERT INTO leitura (temperatura, umidade, data_hora_registro, id_sensor) VALUES
 (15.50, 68.00, '2024-09-25 16:00:00', 1),
 (18.20, 81.00, '2024-09-25 16:05:00', 2),
 (10.00, 72.00, '2024-09-25 16:10:00', 3);
  
-INSERT INTO alerta (gravidade, status, id_leitura_sensor) VALUES
+INSERT INTO alerta (gravidade, status, id_leitura) VALUES
   ('media', 'nao resolvido', 2),
   ('baixa', 'nao resolvido', 3);
 
@@ -174,19 +174,19 @@ SELECT
       WHEN ls.umidade < tu.umidade_minima THEN 'Umidade BAIXA'
       ELSE 'OK'
     END AS 'Status Umidade',
-    ls.data_registro AS 'Data e Hora Leitura'
+    ls.data_hora_registro AS 'Data e Hora Leitura'
   FROM barril AS b
-    JOIN tipo_uva AS tu
-        ON b.id_tipo_uva = tu.id_tipo_uva
+    JOIN uva AS tu
+        ON b.id_uva = tu.id_uva
     JOIN sensor AS s
         ON b.id_barril = s.id_barril
-    JOIN leitura_sensor AS ls
+    JOIN leitura AS ls
         ON s.id_sensor = ls.id_sensor;
 
 -- CRIAR USUÁRIO E DAR AS PERMISSÕES
 CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
-GRANT INSERT ON winetech.leitura_sensor TO 'winetech-sensor'@'%';
+GRANT INSERT ON winetech.leitura TO 'winetech-sensor'@'%';
 
 CREATE USER 'winetech'@'%' IDENTIFIED BY 'Winetech.2026';
 
