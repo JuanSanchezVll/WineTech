@@ -3,3 +3,4 @@ package-lock.json
 **/.env.dev
 validacoes
 tasks
+node_modules
