@@ -1,5 +1,5 @@
 // var ambiente_processo = 'producao';
-var ambiente_processo = 'desenvolvimento';
+var ambiente_processo = 'dev';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 // Acima, temos o uso do operador ternário para definir o caminho do arquivo .env
@@ -17,13 +17,13 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var empresaRouter = require("./src/routes/empresas");
-var enderecoRouter = require("./src/routes/enderecos");
-var usuarioRouter = require("./src/routes/usuarios");
-var caveRouter = require("./src/routes/caves");
-var uvaRouter = require("./src/routes/uvas");
-var barrilRouter = require("./src/routes/barris");
-var leituraRouter = require("./src/routes/leituras");
-var alertaRouter = require("./src/routes/alertas");
+// var enderecoRouter = require("./src/routes/enderecos");
+// var usuarioRouter = require("./src/routes/usuarios");
+// var caveRouter = require("./src/routes/caves");
+// var uvaRouter = require("./src/routes/uvas");
+// var barrilRouter = require("./src/routes/barris");
+// var leituraRouter = require("./src/routes/leituras");
+// var alertaRouter = require("./src/routes/alertas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,13 +33,13 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/empresas", empresaRouter);
-app.use("/enderecos", enderecoRouter);
-app.use("/usuarios", usuarioRouter);
-app.use("/caves", caveRouter);
-app.use("/uvas", uvaRouter);
-app.use("/barris", barrilRouter);
-app.use("/leituras", leituraRouter);
-app.use("/alertas", alertaRouter);
+// app.use("/enderecos", enderecoRouter);
+// app.use("/usuarios", usuarioRouter);
+// app.use("/caves", caveRouter);
+// app.use("/uvas", uvaRouter);
+// app.use("/barris", barrilRouter);
+// app.use("/leituras", leituraRouter);
+// app.use("/alertas", alertaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

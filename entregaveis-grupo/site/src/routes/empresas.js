@@ -3,6 +3,8 @@ var router = express.Router();
 
 var empresaController = require("../controllers/empresaController");
 
-// dps colocar as funções do controller
+router.post("/cadastrar", function(req, res) {
+    empresaController.cadastrar(req, res);
+});
 
 module.exports = router;
