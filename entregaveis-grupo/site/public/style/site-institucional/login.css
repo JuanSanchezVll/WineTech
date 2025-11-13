@@ -27,7 +27,7 @@ body {
     background-color: #fff6f3;
 }
 .image-side img {
-    width: 630px; /* AUMENTADO (antes 530px) */
+    width: 630px;
     margin-left: -620px;
     margin-top: 30px;
 }
@@ -42,7 +42,7 @@ body {
     font-weight: 900;
     color: #1b1b1b;
     margin-bottom: 12px;
-    white-space: nowrap; /* impede quebra de linha */
+    white-space: nowrap;
 }
 
 .login-side h1 span {

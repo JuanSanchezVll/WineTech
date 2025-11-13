@@ -2,7 +2,7 @@
 #define TIPO_SENSOR DHT11  // tipo do sensor: DHT11
 
 // Pino onde o sensor está ligado.
-const int PINO_SENSOR_DHT11 = A1;
+const int PINO_SENSOR_DHT11 = A0;
 
 DHT sensorDHT(PINO_SENSOR_DHT11, TIPO_SENSOR);  // cria objeto do sensor
 

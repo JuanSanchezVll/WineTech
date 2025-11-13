@@ -1,4 +1,4 @@
-CREATE DATABASE winetech;
+create DATABASE winetech;
 
 USE winetech;
 
@@ -187,13 +187,15 @@ SELECT
 CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
 GRANT INSERT ON winetech.leitura TO 'winetech-sensor'@'%';
+CREATE USER 'winetech'@'localhost' IDENTIFIED BY 'Winetech.2026';
 
-CREATE USER 'winetech'@'%' IDENTIFIED BY 'Winetech.2026';
 
-GRANT ALL PRIVILEGES ON winetech.* TO 'winetech'@'%';
+GRANT ALL PRIVILEGES ON winetech.* TO 'winetech'@'localhost';
 
 flush privileges;
 
 SELECT user, host FROM mysql.user;
 
 SELECT @@PORT, @@VERSION, @@hostname;
+
+select * from empresa;
