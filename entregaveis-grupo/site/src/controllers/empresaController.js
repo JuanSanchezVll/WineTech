@@ -22,7 +22,7 @@ function cadastrar(req, res) {
 }
 
 function gerarCodigoSeguranca() {
-    return 12346;
+    return cod = (Math.random() * 1000000).toFixed(0)
 }
 
 module.exports = {
