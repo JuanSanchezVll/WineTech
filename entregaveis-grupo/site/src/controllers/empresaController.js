@@ -1,16 +1,10 @@
-var empresaModel = require("./../models/empresaModel");
+var empresaModel = require("./../models/usuarioModel");
 
-function gerarCodigoSeguranca() {
-    return cod = (Math.random() * 1000000).toFixed(0)
-}
 
 function cadastrar(req, res) {
-    const { cnpj, razaoSocial, nomeFantasia, emailContato } = req.body;
+    const { nome,sobrenome, email, senha } = req.body;
 
-    let codigoSeguranca = gerarCodigoSeguranca();
-
-
-    empresaModel.cadastrar(cnpj, razaoSocial, nomeFantasia, emailContato, codigoSeguranca)
+    usuarioModel.cadastrar(nome, sobrenome, email, senha)
         .then(
             function (resultado) {
                 console.log('foi bb')
@@ -27,8 +21,6 @@ function cadastrar(req, res) {
             }
         );
 }
-
-
 
 module.exports = {
     cadastrar
