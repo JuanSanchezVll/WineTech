@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,9 @@
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/site-institucional/cadastro.css">
+
+    <script src="./js/site-institucional/validacoes.js"></script>
+    <script src="./js/site-institucional/cadastrar-funcionario.js"></script>
 </head>
 
 <body>
@@ -32,179 +35,42 @@
                 <div id="errNome"></div>
                 <div style="display: flex; flex-direction: column;" class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input oninput="validarNome(), cadastro()" id="inputNome" type="text" placeholder="Nome">
+                    <input id="inputNome" type="text" placeholder="Nome" oninput="validarNome(inputNome.value)">
                 </div>
 
                 <div id="errSobrenome"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input oninput="validarSobrenome(), cadastro()" id="inputSobrenome" type="text"
-                        placeholder="Sobrenome">
+                    <input id="inputSobrenome" type="text" placeholder="Sobrenome" oninput="validarSobrenome(inputSobrenome.value)">
                 </div>
 
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input oninput="verarroba(), cadastro()" id="inputEmail" type="email" placeholder="Email">
+                    <input id="inputEmail" type="email" placeholder="Email" oninput="validarEmail(inputEmail.value)">
 
                 </div>
                 
                 <div id="errSenha"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input oninput="validarSenha(), cadastro()" id="inputSenha" type="password" placeholder="Senha">
+                    <input id="inputSenha" type="password" placeholder="Senha" oninput="validarSenha(inputSenha.value)">
 
                 </div>
+
                 <div class="input-group">
                     <i class="fa-solid fa-key"></i>
-                    <input oninput="validarToken(), cadastro()" id="inputToken" type="text" placeholder="Token">
+                    <input id="inputToken" type="text" placeholder="Token">
 
                 </div>
 
 
-                <button type="button" id="btnCadastro" onclick="cadastro()">Cadastrar Usuario</button>
+                <button type="button" id="btnCadastro" onclick="cadastrar(inputNome.value, inputSobrenome.value, inputEmail.value, inputSenha.value, inputToken.value)">Cadastrar Usuario</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
         </section>
     </main>
 </body>
-
-<script>
-
-    nomeValido = false
-    sobrenome = false
-    senha = false
-    email = false
-    token = false
-    tem = false
-
-
-    function validarNome() {
-
-        if (inputNome.value.length < 3) {
-            errNome.innerHTML = `<b style="font-size: 9px; color: red;" ">NOME DEVE CONTER MAIS DE 3 CARACTERES!</b> <br>`
-            nomeValido = false
-
-        } else {
-
-            errNome.innerHTML = ``
-            nomeValido = true
-        }
-    }
-
-    function validarSobrenome() {
-
-        if (inputSobrenome.value.length < 3) {
-            errSobrenome.innerHTML = `<b style="font-size: 9px; color: red;" ">SOBRENOME DEVE CONTER MAIS DE 3 CARACTERES!</b> <br>`
-            sobrenome = false
-
-        } else {
-
-            errSobrenome.innerHTML = ``
-            sobrenome = true
-        }
-
-    }
-
-    function validarSenha() {
-
-        if (inputSenha.value.length < 8) {
-            errSenha.innerHTML = `<b style="font-size: 9px; color: red;" ">A SENHA DEVE CONTER NO MINIMO 8 CARACTERES!</b> <br>`
-            senha = false
-
-        } else {
-
-            errSenha.innerHTML = ``
-            senha = true
-        }
-
-    }
-
-
-         function verarroba() {
-
-            for (let index = 0; index < inputEmail.value.length; index++) {
-                if (inputEmail.value[index] === '@') {
-                    errEmail.innerHTML = ``
-                    email = true
-                    break
-                
-                    
-                } else {
-                    errEmail.innerHTML = `<b style="font-size: 9px; color: red;" ">Insira um Email valido (que inclua "@")</b> <br>`
-                    email = false
-                    
-                
-                }
-                
-            }
-            
-        }
-
-    function validarToken() {
-        if (inputToken.value == "12341234") {
-            token = true
-        }
-
-             else {
-                token = false
-            }
-        
-    }
-
-    function cadastro() {
-
-        const btnCad = document.getElementById('btnCadastro')
-
-        if (nomeValido == true && sobrenome == true && email == true && senha == true && token == true) {
-            console.log(nomeValido, sobrenome, email, senha, token);
-            btnCad.onclick = function () { location.href = 'login.html' }
-
-        } else if(nomeValido == true && sobrenome == true && email == true && senha == true && token == false){
-            console.log(nomeValido, sobrenome, email, senha, token);
-            btnCad.onclick = function () { alert("Insira um Token Validado pela WineTech") }
-        }
-
-        else{
-            btnCad.onclick = function () { alert("Complete o cadastro antes de seguir!") }
-            console.log(nomeValido, sobrenome, email, senha, token);
-            
-        }
-
-        fetch('/empresas/cadastrar', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    cnpj: inputNome.value,
-                    razaoSocial: inputSo.value,
-                    nomeFantasia: inputNF.value,
-                    emailContato: inputEmail.value
-                })
-            })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-
-                    if (resposta.ok) {
-                        alert("Cadastro realizado!")
-                        window.location = "login.html";
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-                    alert("erro ao realizar cadastro")
-                });
-
-    }
-
-
-
-
-</script>
 
 </html>
