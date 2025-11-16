@@ -1,19 +1,11 @@
-var empresaModel = require("./../models/empresaModel");
-
-function gerarCodigoSeguranca() {
-    return cod = (Math.random() * 1000000).toFixed(0)
-}
+var usuarioModel = require("./../models/usuarioModel");
 
 function cadastrar(req, res) {
-    const { cnpj, razaoSocial, nomeFantasia, emailContato } = req.body;
+    const { nome,sobrenome, email, senha, idEmpresa } = req.body;
 
-    let codigoSeguranca = gerarCodigoSeguranca();
-
-
-    empresaModel.cadastrar(cnpj, razaoSocial, nomeFantasia, emailContato, codigoSeguranca)
+    usuarioModel.cadastrar(nome, sobrenome, email, senha, idEmpresa)
         .then(
             function (resultado) {
-                console.log('foi bb')
                 res.json(resultado);
 
             }
@@ -27,8 +19,6 @@ function cadastrar(req, res) {
             }
         );
 }
-
-
 
 module.exports = {
     cadastrar

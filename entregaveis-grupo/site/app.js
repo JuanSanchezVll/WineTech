@@ -17,8 +17,8 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var empresaRouter = require("./src/routes/empresas");
+var usuarioRouter = require("./src/routes/usuarios");
 // var enderecoRouter = require("./src/routes/enderecos");
-// var usuarioRouter = require("./src/routes/usuarios");
 // var caveRouter = require("./src/routes/caves");
 // var uvaRouter = require("./src/routes/uvas");
 // var barrilRouter = require("./src/routes/barris");
@@ -33,8 +33,8 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/empresas", empresaRouter);
+app.use("/usuarios", usuarioRouter);
 // app.use("/enderecos", enderecoRouter);
-// app.use("/usuarios", usuarioRouter);
 // app.use("/caves", caveRouter);
 // app.use("/uvas", uvaRouter);
 // app.use("/barris", barrilRouter);
