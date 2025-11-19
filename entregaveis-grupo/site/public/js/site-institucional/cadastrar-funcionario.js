@@ -17,7 +17,7 @@ function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
         codigoSeguranca: codigoSeguranca
     };
 
-    fetch("/usuarios/cadastrar-com-codigo", {
+    fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

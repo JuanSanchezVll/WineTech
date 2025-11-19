@@ -199,3 +199,4 @@ SELECT user, host FROM mysql.user;
 SELECT @@PORT, @@VERSION, @@hostname;
 
 select * from empresa;
+select * from usuario;
