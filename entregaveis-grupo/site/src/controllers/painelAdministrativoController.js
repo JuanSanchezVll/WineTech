@@ -1,6 +1,9 @@
 var painelAdministrativoModel = require("./../models/painelAdministrativoModel");
 
 function cadastrarUsuario(req, res) {
+    idEmpresa = 1;
+    idNivelAcesso = 2;
+
     const { nome, sobrenome, email, senha, idEmpresa, idNivelAcesso } = req.body;
 
     painelAdministrativoModel.cadastrarUsuario(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso)
