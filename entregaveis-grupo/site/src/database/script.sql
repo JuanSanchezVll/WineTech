@@ -187,10 +187,10 @@ SELECT
 CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
 GRANT INSERT ON winetech.leitura TO 'winetech-sensor'@'%';
+
 CREATE USER 'winetech'@'%' IDENTIFIED BY 'Winetech.2026';
 
-
-GRANT SELECT, INSERT, UPDATE, DELETE PRIVILEGES ON winetech.* TO 'winetech'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON winetech.* TO 'winetech'@'%';
 
 flush privileges;
 
