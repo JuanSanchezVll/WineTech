@@ -23,18 +23,19 @@ function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(dados)
-    }) 
-    .then (function (resposta) {
-        if (!resposta.ok) {
-            throw "Erro ao cadastrar funcionário.";
-        }
-
-        resposta.json().then(json => {
-            alert("Cadastro realizado com sucesso!");
-        })
     })
-    .catch (function (erro) {
-        console.error("Erro: ", erro);
-        alert("Ocorreu um erro ao cadastrar. Tente novamente.");
-    });
+        .then(function (resposta) {
+            if (!resposta.ok) {
+                throw "Erro ao cadastrar funcionário.";
+            }
+
+            resposta.json().then(json => {
+                alert("Cadastro realizado com sucesso!");
+            })
+        })
+        .catch(function (erro) {
+            console.error("Erro: ", erro);
+            alert("Ocorreu um erro ao cadastrar. Tente novamente.");
+        });
+
 }

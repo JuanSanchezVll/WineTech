@@ -33,7 +33,23 @@ async function autenticar(email, senha)
     
 }
 
+async function listar() {
+    const instrucaoSql = `
+        SELECT 
+            id, 
+            nome, 
+            sobrenome, 
+            email, 
+            id_empresa,
+            id_nivel_acesso
+        FROM usuario;
+    `;
+
+    return database.execute(instrucaoSql);
+}
+
 module.exports = {
     cadastrar,
-    autenticar
+    autenticar,
+    listar
 }

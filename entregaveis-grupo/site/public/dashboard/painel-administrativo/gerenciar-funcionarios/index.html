@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/index-painel-administrativo.css">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/sidebar.css">
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-funcionarios/index.js">
+    <script src="./../../../js/dashboard/painel-administrativo/js-funcionarios/index.js"> </script>
 
 
     <title>Gerenciar Funcionários</title>
 </head>
-<body>
+<body  onload="listarUsuarios()">
     <main class="content">
         <aside class="sidebar">
             <div class="sidebar-top">
@@ -66,63 +66,12 @@
                 </div>
                 
                 <table class="table">
-                    <tr class="table-title">
-                        <th>ID</th>
-                        <th>Nome Completo</th>
-                        <th>Email</th>
-                        <th>Data de Registro</th>
-                        <th>Nível de acesso</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Marlon Silva</td>
-                        <td>marlon@winetech.com</td>
-                        <td>01/01/2025</td>
-                        <td>0</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Juan Sanchez</td>
-                        <td>juan@winetech.com</td>
-                        <td>01/01/2025</td>
-                        <td>0</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Rafael Souza</td>
-                        <td>rafael@winetech.com</td>
-                        <td>01/01/2025</td>
-                        <td>0</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Leonardo Scavazza</td>
-                        <td>juan@winetech.com</td>
-                        <td>01/01/2025</td>
-                        <td>0</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Otavio Augusto</td>
-                        <td>otavio@winetech.com</td>
-                        <td>01/01/2025</td>
-                        <td>0</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
+                    <div id="tabela"></div>
+                       
                 </table>
             </div>
         </section>
     </main>
 </body>
+
 </html>
