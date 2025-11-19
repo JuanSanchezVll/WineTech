@@ -23,6 +23,17 @@ async function validarCodigoSeguranca(codigo) {
     return resultado;
 }
 
+async function autenticar(email, senha) 
+{
+    const instrucaoSql = `
+        SELECT nome, sobrenome, email, senha, nivel_acesso FROM usuario WHERE email = '${email}' AND senha = '${senha}'
+    `
+     const resultado = await database.execute(instrucaoSql);
+     return resultado;
+    
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    autenticar
 }

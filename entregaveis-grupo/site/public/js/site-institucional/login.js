@@ -1,51 +1,51 @@
-    senha = false
-    email = false
-    
-    function validarSenha() {
-        
-        
-        if(inputSenha.value == "123abc"){
-            senha = true
-            
-        }else{
-            senha = false
 
-        }
-        
-        
+
+function autenticar() {
+    emailVar = inputEmail.value
+    senhaVar = inputSenha.value
+
+    if (emailVar == "" || senhaVar == "") {
+        alert(`Preencha todos os campos de Login`)
+        return false;
     }
 
+    fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
+        })
+    }).then(function (res) {
+        console.log("ESTOU NO THEN DO entrar()!")
 
-    function validarEmail() {
+        if (res.ok) {
+            console.log(res);
 
-            if (inputEmail.value == "123@123.com") {
-                email = true
-                
-            
-        }else
-        {
-            email = false
+            res.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                sessionStorage.NICK_USUARIO = json.nome;
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.NOME_NIVEL = json.nivel_acesso;
+                sessionStorage.ID_FUNCIONARIO = json.id_funcionario;
+                window.location = "../dashboard/index-dashboard.html";
+            });
 
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o login!");
+            res.text().then(texto => {
+                console.error(texto);
+            });
         }
 
-    }
+    }).catch(function (erro) {
+        console.log(erro);
+    })
 
-    function login() {
+    return false;
+}
 
-        const btnCad = document.getElementById('btnLogin')
-
-        if(email == true && senha == true)
-        {
-            btnCad.onclick = function () { location.href = './dashboard/index-dashboard.html' }
-        
-        }else{
-
-            btnCad.onclick = function () {
-                errLogin.innerHTML = `<b style="font-size: 9px; color: red;" "> Senha ou email incorretos!</b> <br>`
-                console.log(email,senha, inputEmail.value, inputSenha.value);
-                
-            }
-            
-        }
-
-    }
