@@ -26,8 +26,9 @@ async function validarCodigoSeguranca(codigo) {
 async function autenticar(email, senha) 
 {
     const instrucaoSql = `
-        SELECT nome, sobrenome, email, senha, nivel_acesso FROM usuario WHERE email = '${email}' AND senha = '${senha}'
-    `
+        SELECT id_funcionario, nome, sobrenome, email, senha, nivel_acesso, id_empresa FROM usuario WHERE email = '${email}' AND senha = '${senha}'
+    `;
+
      const resultado = await database.execute(instrucaoSql);
      return resultado;
     

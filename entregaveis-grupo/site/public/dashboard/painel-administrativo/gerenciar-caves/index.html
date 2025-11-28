@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
 
     <title>Gerenciar Caves</title>
 </head>
+
 <body>
     <main class="content">
         <aside class="sidebar">
@@ -16,18 +18,19 @@
                 <div class="logo-wrap">
                     <img src="./../../../assets/imgs/logo-branca.png" alt="Logo WineTech" class="logo">
                 </div>
-            
+
                 <nav class="nav">
                     <a href="./../gerenciar-funcionarios/index.html" class="nav-link">
-                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg" alt="Ícone Funcionário">
+                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg"
+                            alt="Ícone Funcionário">
                         <span>Gerenciar Funcionários</span>
                     </a>
-            
+
                     <a href="./../gerenciar-caves/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/cave-icon.svg" alt="Ícone Cave">
                         <span>Gerenciar Caves</span>
                     </a>
-            
+
                     <a href="./../gerenciar-uvas/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/vinho-icon.svg" alt="Ícone Vinho">
                         <span>Gerenciar Uvas</span>
@@ -37,14 +40,14 @@
                         <img src="./../../../assets/icones/painel-administrativo/barril-icon.svg" alt="Ícone Barril">
                         <span>Gerenciar Barris</span>
                     </a>
-            
+
                     <a href="./../gerenciar-sensores/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/sensor-icon.svg" alt="Ícone Sensor">
                         <span>Gerenciar Sensores</span>
                     </a>
                 </nav>
             </div>
-            
+
             <div class="sidebar-bottom">
                 <a href="./../../index-dashboard.html" class="btn-sidebar">
                     <img src="./../../../assets/icones/painel-administrativo/voltar-icon.svg" alt="Ícone Voltar">
@@ -57,13 +60,13 @@
             <header class="main-content-header">
                 <h2 class="title">Gerenciar Caves</h2>
             </header>
-            
+
             <div class="table-container">
                 <div class="actions">
                     <input type="search" placeholder="Busque por uma cave...">
                     <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Cave</button>
                 </div>
-                
+
                 <table class="table">
                     <tr class="table-title">
                         <th>ID</th>
@@ -74,12 +77,20 @@
                     <tr class="table-content">
                         <td>1</td>
                         <td>Cave ABC</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
+                        <td><a href="./atualizar.html"><img
+                                    src="./../../../assets/icones/painel-administrativo/editar-icon.svg"
+                                    class="action-icon" alt="Ícone de editar"></a></td>
+                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg"
+                                class="action-icon" alt="Ícone de deletar"></td>
                     </tr>
                 </table>
             </div>
         </section>
     </main>
 </body>
+<script>
+    async function listar() {
+        
+    }
+</script>
 </html>

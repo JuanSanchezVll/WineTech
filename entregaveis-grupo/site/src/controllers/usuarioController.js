@@ -8,6 +8,7 @@ function cadastrar(req, res) {
     usuarioModel.cadastrar(nome, sobrenome, email, senha, codigoSeguranca)
         .then(
             function (resultado) {
+                console.log("Res: " + resultado);
                 res.json(resultado);
             }
         ).catch(
@@ -39,11 +40,13 @@ function autenticar(req, res) {
 
                 if (resultadoAutenticar.length == 1) {
                     res.json({
+                        id_usuario: resultadoAutenticar[0].id_funcionario,
                         nome: resultadoAutenticar[0].nome,
                         sobrenome: resultadoAutenticar[0].sobrenome,
                         email: resultadoAutenticar[0].email,
                         nivel_acesso: resultadoAutenticar[0].nivel_acesso,
-                        senha: resultadoAutenticar[0].senha
+                        senha: resultadoAutenticar[0].senha,
+                        id_empresa: resultadoAutenticar[0].id_empresa
                     });
                 } else if (resultadoAutenticar.length == 0) {
                     res.status(403).send("Email e/ou senha inválido(s)");
