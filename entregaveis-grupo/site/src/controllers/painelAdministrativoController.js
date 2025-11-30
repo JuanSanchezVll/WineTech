@@ -1,5 +1,31 @@
 var painelAdministrativoModel = require("./../models/painelAdministrativoModel");
 
+function atualizarUsuario(req, res) {   
+    
+    painelAdministrativoModel.atualizarUsuario(nome, sobrenome, email, senha, idFuncionario).then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch( )
+
+}
+
+    fetch("/painelAdministrativo/usuarios/atualizar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idFuncionario: sessionStorage.idFuncionarioMudar,
+                nome: nomeNovo,
+                sobrenome: sobrenomeNovo,
+                email: emailNovo,
+                senha: senhaNova
+
+            }).then(res => res.json())
+
+        }).catch(err => console.log("Erro no UPDATE:", err));
+
 function cadastrarUsuario(req, res) {
     idEmpresa = 1;
     idNivelAcesso = 2;
@@ -29,5 +55,6 @@ function cadastrarUsuario(req, res) {
 }
 
 module.exports = {
-    cadastrarUsuario
+    cadastrarUsuario,
+    atualizarUsuario
 }

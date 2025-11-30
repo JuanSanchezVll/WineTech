@@ -7,7 +7,6 @@
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-funcionarios/atualizar.js">
 
     <title>Atualizar Funcionário</title>
 </head>
@@ -20,7 +19,7 @@
         <form class="input-group" action="#" method="post">
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Funcionário">
-                <input type="text" name="nome" id="nome" placeholder="Nome" required>
+                <input type="text" name="nome" id="nome" value="teste" placeholder="Nome" required>
             </div>
 
             <div class="input-box">
@@ -45,10 +44,11 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Atualizar</button>
+                <button type="button" class="btn btn-principal" onclick="atualizar(),location.href='./index.html'">Atualizar</button>
             </div>
         </form>
     
     </main>
 </body>
+    <script src="./../../../js/dashboard/painel-administrativo/js-funcionarios/atualizar.js"></script>
 </html>

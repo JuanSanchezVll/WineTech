@@ -7,4 +7,7 @@ router.post("/usuarios/cadastrar", function(req, res) {
     painelAdministrativoController.cadastrarUsuario(req, res);
 })
 
+router.post("/usuarios/atualizar", function(req, res) {
+    painelAdministrativoController.cadastrarUsuario(req, res);
+})
 module.exports = router;

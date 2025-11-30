@@ -37,7 +37,7 @@ async function autenticar(email, senha)
 async function listar() {
     const instrucaoSql = `
         SELECT 
-            id, 
+            id_funcionario, 
             nome, 
             sobrenome, 
             email, 

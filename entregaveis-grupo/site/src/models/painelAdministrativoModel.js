@@ -13,6 +13,22 @@ function cadastrarUsuario(nome, sobrenome, email, senha, idEmpresa, idNivelAcess
     return database.execute(instrucaoSql);
 }
 
+function atualizarUsuario(nome, sobrenome, email, senha, idFuncionario) {
+    if (nome == "" || sobrenome == "" || email == "" || senha == "") {
+        throw "DADOS_NAO_PREENCHIDOS";
+    }else{
+
+    const instrucaoSql = `
+        UPDATE usuario SET nome = ${nome}, sobrenome = ${sobrenome}, email = ${email}, senha= ${senha} WHERE
+            id_funcionario = ${idFuncionario}
+    `;
+
+    return database.execute(instrucaoSql);
+}
+}
+
+
 module.exports = {
-    cadastrarUsuario
+    cadastrarUsuario,
+    atualizarUsuario
 }
