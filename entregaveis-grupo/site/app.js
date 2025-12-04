@@ -38,7 +38,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/empresas", empresaRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/painel-administrativo", painelAdministrativoRouter);
+app.use("/painelAdministrativo", painelAdministrativoRouter);
 app.use("/caves", caveRouter);
 app.use("/uvas", uvaRouter);
 app.use("/barris", barrilRouter);

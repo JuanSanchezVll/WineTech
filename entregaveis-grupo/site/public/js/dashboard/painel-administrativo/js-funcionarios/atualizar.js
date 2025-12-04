@@ -9,7 +9,10 @@
     var senhaNova = senha.value
 
     function atualizar() {
-        fetch("/painelAdministrativo/usuarios/atualizar", {
+        console.log("tentei");
+
+        try {
+                   fetch("/painelAdministrativo/usuarios/atualizar", {
              method: "POST",
              headers: {
                  "Content-Type": "application/json"
@@ -21,7 +24,16 @@
                  email: emailNovo,
                  senha: senhaNova 
              })
-         }).catch(err => console.log("Erro no UPDATE:", err));
+         })
+
+         window.location = 'index.html'
+            
+        } catch (error) {
+            console.log("errei");
+            
+        }
+        
+ 
     }
 
      
