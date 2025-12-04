@@ -64,7 +64,9 @@ CREATE TABLE uva (
   temperatura_minima DECIMAL(5,2) NOT NULL,
   temperatura_maxima DECIMAL(5,2) NOT NULL,
   umidade_minima DECIMAL(5,2) NOT NULL,
-  umidade_maxima DECIMAL(5,2) NOT NULL
+  umidade_maxima DECIMAL(5,2) NOT NULL,
+  id_empresa INT NOT NULL,
+  CONSTRAINT fk_uva_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa)
 );
 
 CREATE TABLE barril (
@@ -133,10 +135,10 @@ INSERT INTO cave (identificacao, id_empresa) VALUES
 ('CAVE-JDI-B', 1),
 ('CAVE-CSUL-A', 2);
 
-INSERT INTO uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima) VALUES
-('Merlot', 14.00, 16.00, 60.00, 75.00),
-('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00),
-('Malbec', 14.00, 16.00, 60.00, 75.00);
+INSERT INTO uva (nome, temperatura_minima, temperatura_maxima, umidade_minima, umidade_maxima, id_empresa) VALUES
+('Merlot', 14.00, 16.00, 60.00, 75.00, 1),
+('Cabernet Sauvignon', 14.00, 16.00, 60.00, 75.00, 1),
+('Malbec', 14.00, 16.00, 60.00, 75.00, 1);
 
 INSERT INTO barril (identificacao, id_cave, id_uva) VALUES
 ('BARRIL-001A', 1, 1),
@@ -160,30 +162,29 @@ INSERT INTO alerta (gravidade, status, id_leitura) VALUES
 SELECT
     b.identificacao AS Barril,
     tu.nome AS 'Vinho armazenado',
-    ls.temperatura as Temperatura,
+    l.temperatura as Temperatura,
     CONCAT(tu.temperatura_minima, 'C - ', tu.temperatura_maxima, 'C') AS 'Faixa de Temperatura Ideal',
     CASE
-      WHEN ls.temperatura > tu.temperatura_maxima THEN 'Temperatura ALTA'
-      WHEN ls.temperatura < tu.temperatura_minima THEN 'Temperatura BAIXA'
+      WHEN l.temperatura > tu.temperatura_maxima THEN 'Temperatura ALTA'
+      WHEN l.temperatura < tu.temperatura_minima THEN 'Temperatura BAIXA'
       ELSE 'OK'
     END AS 'Status Temperatura',
-    ls.umidade as Umidade,
+    l.umidade as Umidade,
     CONCAT(tu.umidade_minima, '% - ', tu.umidade_maxima, '%') AS 'Faixa de Umidade Ideal',
     CASE
-      WHEN ls.umidade > tu.umidade_maxima THEN 'Umidade ALTA'
-      WHEN ls.umidade < tu.umidade_minima THEN 'Umidade BAIXA'
+      WHEN l.umidade > tu.umidade_maxima THEN 'Umidade ALTA'
+      WHEN l.umidade < tu.umidade_minima THEN 'Umidade BAIXA'
       ELSE 'OK'
     END AS 'Status Umidade',
-    ls.data_hora_registro AS 'Data e Hora Leitura'
+    l.data_hora_registro AS 'Data e Hora Leitura'
   FROM barril AS b
     JOIN uva AS tu
         ON b.id_uva = tu.id_uva
     JOIN sensor AS s
         ON b.id_barril = s.id_barril
-    JOIN leitura AS ls
-        ON s.id_sensor = ls.id_sensor;
+    JOIN leitura AS l
+        ON s.id_sensor = l.id_sensor;
 
--- CRIAR USUÁRIO E DAR AS PERMISSÕES
 CREATE USER 'winetech-sensor'@'%' IDENTIFIED BY 'Winetech.2025';
 
 GRANT INSERT ON winetech.leitura TO 'winetech-sensor'@'%';
@@ -200,5 +201,4 @@ SELECT @@PORT, @@VERSION, @@hostname;
 
 select * from empresa;
 select * from usuario;
-USE winetech;
 
