@@ -2,10 +2,15 @@ var caveModel = require("../models/caveModel");
 
 async function listar(req, res) {
     try {
-        const { idEmpresa } = req.query;
+        const { idEmpresa, idCave } = req.query;
+
+        if (idEmpresa && idCave) {
+            const resultado = await caveModel.buscarPorId(idEmpresa, idCave);
+            return res.status(200).json(resultado);
+        }
+
 
         const resultado = await caveModel.listar(idEmpresa);
-
         return res.status(200).json(resultado);
     } catch (erro) {
         console.error("Não foi possível listar caves: " + erro);
