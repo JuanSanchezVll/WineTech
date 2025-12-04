@@ -11,4 +11,8 @@ router.post("/cadastrar", function(req, res) {
     barrilController.cadastrar(req, res);
 })
 
+router.post("/atualizar", function(req, res) {
+    barrilController.atualizar(req, res);
+})
+
 module.exports = router;

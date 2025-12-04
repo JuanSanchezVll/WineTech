@@ -48,8 +48,21 @@ async function cadastrar(identificacao, idCave, idUva) {
     return await database.execute(instrucaoSql);
 }
 
+async function atualizar(identificacao, idCave, idUva, idBarril) {
+    const instrucao = `
+        UPDATE barril
+        SET
+            identificacao = '${identificacao}',
+            id_cave = ${idCave},
+            id_uva = ${idUva}
+        WHERE id_barril = ${idBarril}
+    `
+    return await database.execute(instrucao)
+}
+
 module.exports = {
     listar,
     cadastrar,
-    buscarPorId
+    buscarPorId,
+    atualizar
 }
