@@ -9,11 +9,20 @@ async function listar(req, res) {
             return res.status(200).json(resultado);
         }
 
+        if (!idEmpresa) {
+            throw new Error("ID_EMPRESA_INDEFINIDO");
+        }
 
         const resultado = await caveModel.listar(idEmpresa);
         return res.status(200).json(resultado);
-    } catch (erro) {
-        console.error("Não foi possível listar caves: " + erro);
+    } catch (err) {
+        if (err === "ID_EMPRESA_INDEFINIDO") {
+            console.error("Não foi possível listar caves: " + err);
+            return res.status(400).json({ mensagem: "Erro ID da empresa não foi informado", erro: err});
+        }
+
+        console.error("Não foi possível listar caves: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err});
     }
 }
 
@@ -24,8 +33,9 @@ async function cadastrar(req, res) {
         const resultado = await caveModel.cadastrar(identificacao, idEmpresa);
 
         return res.status(201).json(resultado);
-    } catch (erro) {
-        console.error("Não foi possível cadastrar cave: " + erro);
+    } catch (err) {
+        console.error("Não foi possível cadastrar cave: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
     }
 }
 
@@ -36,8 +46,9 @@ async function atualizar(req, res) {
         const resultado = await caveModel.atualizar(idCave, identificacao);
 
         return res.status(201).json(resultado);
-    } catch (erro) {
-        console.log("erro: " + erro)
+    } catch (err) {
+        console.log("Erro ao atualizar cave: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err});
     }
 }
 
@@ -45,28 +56,43 @@ async function deletar(req, res) {
     try {
         const { idCave } = req.query;
 
-        console.log("estou no try")
+        if (!idCave) {
+            throw new Error("ID_CAVE_INDEFINIDO");
+        }
 
         const resultado = await caveModel.deletar(idCave);
 
         return res.status(201).json(resultado);
-    } catch (erro) {
-        console.log("erro: " + erro)
+    } catch (err) {
+        if (err === "ID_CAVE_INDEFINIDO") {
+            console.error("Não foi possível deletar cave: " + err);
+            return res.status(400).json({ mensagem: "Erro ID da cave não foi informado", erro: err});
+        }
+
+        console.log("Erro ao deletar cave: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err});
     }
 
 }
 
 async function pesquisar(req, res) {
     try {
-        const { idEmpresa, buscar } = req.query;
+        const { idEmpresa, pesquisa } = req.query;
 
-        console.log("estou no try")
+        if (!idEmpresa) {
+            throw new Error("ID_EMPRESA_INDEFINIDO");
+        }
 
-        const resultado = await caveModel.pesquisar(idEmpresa, buscar);
+        const resultado = await caveModel.pesquisar(idEmpresa, pesquisa);
+        return res.status(200).json(resultado);
+    } catch (err) {
+        if (err === "ID_EMPRESA_INDEFINIDO") {
+            console.error("Não foi possível pesquisar por caves: " + err);
+            return res.status(400).json({ mensagem: "Erro ID da empresa não foi informado", erro: err});
+        }
 
-        return res.status(201).json(resultado);
-    } catch (erro) {
-        console.log("erro: " + erro)
+        console.log("Erro ao pesquisar por cave: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
     }
 }
 

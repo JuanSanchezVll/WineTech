@@ -4,8 +4,6 @@ async function listar(req, res) {
     try {
         const { idEmpresa, idUva } = req.query;
 
-        console.log(req.query);
-
         if (idEmpresa && idUva) {
             const resultado = await uvaModel.buscarPorId(idEmpresa, idUva);
             return res.status(200).json(resultado);
@@ -30,10 +28,7 @@ async function cadastrar(req, res) {
                 umidadeMaxima 
         } = req.body;
 
-        console.log(req.body);
-
         const resultado = await uvaModel.cadastrar(idEmpresa, nome, temperaturaMinima, temperaturaMaxima, umidadeMinima, umidadeMaxima);
-
         return res.status(200).json(resultado);
     } catch(err) {
         console.error("Erro ao cadastrar uva: " + err);

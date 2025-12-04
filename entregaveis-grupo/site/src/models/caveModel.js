@@ -12,6 +12,20 @@ async function listar(idEmpresa) {
     return await database.execute(instrucao);
 }
 
+async function buscarPorId(idEmpresa, idCave) {
+    const instrucao = `
+        SELECT 
+            id_cave AS id,
+            identificacao
+        FROM cave
+        WHERE 
+            id_empresa = ${idEmpresa}
+            AND id_cave = ${idCave};
+    `;
+
+    return await database.execute(instrucao);
+}
+
 async function cadastrar(identificacao, idEmpresa) {
     const instrucao = `
         INSERT INTO cave (identificacao, id_empresa) VALUES
@@ -36,12 +50,12 @@ async function deletar(idCave) {
     return await database.execute(instrucao)
 }
 
-async function pesquisar(idEmpresa, buscar) {
+async function pesquisar(idEmpresa, pesquisa) {
     const instrucao = `
     select id_cave, identificacao from cave
     where id_empresa = ${idEmpresa} and
-    identificacao like '%${buscar}%' or
-    id_cave like '%${buscar}%';
+    identificacao like '%${pesquisa}%' or
+    id_cave like '%${pesquisa}%';
     `
     return await database.execute(instrucao)
 }
@@ -51,5 +65,6 @@ module.exports = {
     cadastrar,
     atualizar,
     deletar,
-    pesquisar
+    pesquisar,
+    buscarPorId
 }
