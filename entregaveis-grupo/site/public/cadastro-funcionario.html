@@ -16,6 +16,12 @@
 
 <body>
 
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
     <header>
         <a href="index.html">
             <img src="assets/imgs/logo-preta.svg" alt="WineTech Logo" class="logo">
@@ -41,7 +47,8 @@
                 <div id="errSobrenome"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input id="inputSobrenome" type="text" placeholder="Sobrenome" oninput="validarSobrenome(inputSobrenome.value)">
+                    <input id="inputSobrenome" type="text" placeholder="Sobrenome"
+                        oninput="validarSobrenome(inputSobrenome.value)">
                 </div>
 
                 <div id="errEmail"></div>
@@ -50,7 +57,7 @@
                     <input id="inputEmail" type="email" placeholder="Email" oninput="validarEmail(inputEmail.value)">
 
                 </div>
-                
+
                 <div id="errSenha"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
@@ -65,8 +72,12 @@
                 </div>
 
 
-                <button type="button" id="btnCadastro" onclick="cadastrar(inputNome.value, inputSobrenome.value, inputEmail.value, inputSenha.value, inputToken.value)">Cadastrar Usuario</button>
+                <button type="button" id="btnCadastro"
+                    onclick="cadastrar(inputNome.value, inputSobrenome.value, inputEmail.value, inputSenha.value, inputToken.value)">Cadastrar
+                    Usuario</button>
             </form>
+
+
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
         </section>

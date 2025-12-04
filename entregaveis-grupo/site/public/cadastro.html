@@ -15,6 +15,13 @@
 </head>
 
 <body>
+    
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
     <header>
         <a href="index.html">
             <img src="assets/imgs/logo-preta.svg" alt="WineTech Logo" class="logo">
@@ -33,34 +40,43 @@
                 <div id="errCNPJ"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-id-card"></i>
-                    <input id="inputCNPJ" type="text" placeholder="CNPJ" oninput="validarCNPJ(inputCNPJ.value)" maxlength="14">
+                    <input id="inputCNPJ" type="text" placeholder="CNPJ" oninput="validarCNPJ(inputCNPJ.value)"
+                        maxlength="14">
                 </div>
 
 
                 <div id="errRS"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-building"></i>
-                    <input id="inputRazaoSocial" type="text" placeholder="Razão Social" oninput="validarRazaoSocial(inputRazaoSocial.value)">
+                    <input id="inputRazaoSocial" type="text" placeholder="Razão Social"
+                        oninput="validarRazaoSocial(inputRazaoSocial.value)">
                 </div>
 
                 <div id="errNF"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-store"></i>
-                    <input type="text" id="inputNomeFantasia" placeholder="Nome Fantasia" oninput="validarNomeFantasia(inputNomeFantasia.value)">
+                    <input type="text" id="inputNomeFantasia" placeholder="Nome Fantasia"
+                        oninput="validarNomeFantasia(inputNomeFantasia.value)">
                 </div>
 
                 <div id="errEmail"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="inputEmail" placeholder="Email de Contato" oninput="validarEmail(inputEmail.value)">
+                    <input type="email" id="inputEmail" placeholder="Email de Contato"
+                        oninput="validarEmail(inputEmail.value)">
 
                 </div>
 
-                <button type="button" id="btnCadastro" onclick="cadastrar(inputCNPJ.value, inputRazaoSocial.value, inputNomeFantasia.value, inputEmail.value)">Cadastrar</button>
+                <button type="button" id="btnCadastro"
+                    onclick="cadastrar(inputCNPJ.value, inputRazaoSocial.value, inputNomeFantasia.value, inputEmail.value)">Cadastrar</button>
             </form>
 
             <p class="login">Já tem uma conta? <a href="login.html">Entrar</a></p>
         </section>
     </main>
+    <div id="erro_msg" style="display: none; color: red; margin-top: 10px;">
+        Preencha os campos corretamente!
+    </div>
 </body>
+
 </html>

@@ -1,12 +1,15 @@
-
+function mostrarErro(msg) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = msg;
+    return false;
+}
 
 function autenticar() {
     emailVar = inputEmail.value
     senhaVar = inputSenha.value
 
     if (emailVar == "" || senhaVar == "") {
-        alert(`Preencha todos os campos de Login`)
-        return false;
+        return mostrarErro(`Preencha todos os campos de Login`);
     }
 
     fetch("/usuarios/autenticar", {

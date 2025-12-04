@@ -11,6 +11,13 @@
 </head>
 
 <body>
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+    
     <header>
         <a href="index.html">
             <img src="assets/imgs/logo-preta.svg" alt="WineTech Logo" class="logo">
@@ -32,8 +39,7 @@
 
                 <div class="input-group">
                     <i class="fa-solid fa-lock"></i>
-                    <input oninput="" id="inputSenha" type="password" placeholder="Senha"
-                        required>
+                    <input oninput="" id="inputSenha" type="password" placeholder="Senha" required>
                 </div>
 
                 <button type="button" id="btnLogin" onclick="autenticar()">Entrar</button>

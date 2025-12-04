@@ -1,3 +1,9 @@
+function mostrarErro(msg) {
+  cardErro.style.display = "block";
+  mensagem_erro.innerHTML = msg;
+  return false;
+}
+
 function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
     const nomeValido = validarNome(nome);
     const sobrenomeValido = validarSobrenome(sobrenome);
@@ -5,8 +11,7 @@ function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
     const senhaValida = validarSenha(senha);
 
     if (!nomeValido || !sobrenomeValido || !emailValido || !senhaValida) {
-        alert("Formulário com erros, corrija antes de enviar.");
-        return;
+        return mostrarErro("Formulário com erros, corrija antes de enviar.");;
     }
 
     const dados = {

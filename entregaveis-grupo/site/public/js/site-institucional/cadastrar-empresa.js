@@ -1,3 +1,9 @@
+function mostrarErro(msg) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = msg;
+    return false;
+  }
+
 function cadastrar(cnpj, razaoSocial, nomeFantasia, emailContato) {
     const cnpjValido = validarCNPJ(cnpj);
     const razaoSocialValida = validarRazaoSocial(razaoSocial);
@@ -5,8 +11,7 @@ function cadastrar(cnpj, razaoSocial, nomeFantasia, emailContato) {
     const emailContatoValido = validarEmail(emailContato);
 
     if (!cnpjValido || !razaoSocialValida || !nomeFantasiaValido || !emailContatoValido) {
-        alert("Formulário com erros, corrija antes de enviar.");
-        return;
+        return mostrarErro("Formulário com erros, corrija antes de enviar.");
     }
 
     const dados = {
