@@ -3,6 +3,7 @@ var database = require("../database/config");
 async function listar(idEmpresa) {
     const instrucaoSql = `
         SELECT 
+            id_uva,
             nome, 
             temperatura_minima, 
             temperatura_maxima, 
@@ -50,6 +51,7 @@ async function deletar(idUva) {
 async function pesquisar(idEmpresa, pesquisa) {
     const instrucaoSql = `
         SELECT
+            id_uva,
             nome, 
             temperatura_minima, 
             temperatura_maxima, 
@@ -70,10 +72,29 @@ async function pesquisar(idEmpresa, pesquisa) {
     return await database.execute(instrucaoSql);
 }
 
+async function buscarPorId(idEmpresa, idUva) {
+    const instrucaoSql = `
+        SELECT 
+            id_uva,
+            nome, 
+            temperatura_minima, 
+            temperatura_maxima, 
+            umidade_minima, 
+            umidade_maxima
+        FROM uva 
+        WHERE 
+            id_empresa = ${idEmpresa}
+            AND id_uva = ${idUva};
+    `;
+
+    return await database.execute(instrucaoSql);
+}
+
 module.exports = {
     listar,
     cadastrar,
     atualizar,
     deletar,
-    pesquisar
+    pesquisar,
+    buscarPorId
 }

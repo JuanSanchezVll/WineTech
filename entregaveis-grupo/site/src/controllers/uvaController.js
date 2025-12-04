@@ -2,13 +2,19 @@ var uvaModel = require("../models/uvaModel");
 
 async function listar(req, res) {
     try {
-        const { idEmpresa } = req.query;
+        const { idEmpresa, idUva } = req.query;
+
+        console.log(req.query);
+
+        if (idEmpresa && idUva) {
+            const resultado = await uvaModel.buscarPorId(idEmpresa, idUva);
+            return res.status(200).json(resultado);
+        }
 
         const resultado = await uvaModel.listar(idEmpresa);
-
         return res.status(200).json(resultado);
     } catch(err) {
-        console.error("Erro ao listar tipos de uva" + erro);
+        console.error("Erro ao listar tipos de uva" + err);
         return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
     }
 }
@@ -71,8 +77,6 @@ async function deletar(req,res) {
 async function pesquisar(req, res) {
     try {
         const { idEmpresa, pesquisa } = req.query;
-
-        console.log(req.query);
 
         const resultado = await uvaModel.pesquisar(idEmpresa, pesquisa);
 

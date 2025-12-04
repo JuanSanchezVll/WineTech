@@ -5,7 +5,7 @@ var uvaController = require("../controllers/uvaController");
 
 router.get("/listar", function(req, res) {
     uvaController.listar(req, res);
-});
+})
 
 router.post("/cadastrar", function(req, res) {
     uvaController.cadastrar(req, res);
