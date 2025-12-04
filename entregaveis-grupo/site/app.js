@@ -16,8 +16,6 @@ var HOST_APP = process.env.APP_HOST;
 const chatIA = new GoogleGenAI({ apiKey: process.env.MINHA_CHAVE });
 console.log(process.env.MINHA_CHAVE);
 
-
-
 var app = express();
 
 var indexRouter = require("./src/routes/index");
@@ -26,8 +24,8 @@ var usuarioRouter = require("./src/routes/usuarios");
 var painelAdministrativoRouter = require("./src/routes/painelAdministrativo");
 var caveRouter = require("./src/routes/caves");
 var uvaRouter = require("./src/routes/uvas");
+var barrilRouter = require("./src/routes/barris");
 // var enderecoRouter = require("./src/routes/enderecos");
-// var barrilRouter = require("./src/routes/barris");
 // var leituraRouter = require("./src/routes/leituras");
 // var alertaRouter = require("./src/routes/alertas");
 
@@ -43,8 +41,8 @@ app.use("/usuarios", usuarioRouter);
 app.use("/painel-administrativo", painelAdministrativoRouter);
 app.use("/caves", caveRouter);
 app.use("/uvas", uvaRouter);
+app.use("/barris", barrilRouter);
 // app.use("/enderecos", enderecoRouter);
-// app.use("/barris", barrilRouter);
 // app.use("/leituras", leituraRouter);
 // app.use("/alertas", alertaRouter);
 
