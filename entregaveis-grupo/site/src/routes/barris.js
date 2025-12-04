@@ -15,4 +15,8 @@ router.post("/atualizar", function(req, res) {
     barrilController.atualizar(req, res);
 })
 
+router.get("/pesquisar", function(req, res) {
+    barrilController.pesquisar(req, res);
+})
+
 module.exports = router;

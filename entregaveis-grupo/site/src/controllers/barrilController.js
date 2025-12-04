@@ -104,8 +104,23 @@ async function atualizar(req, res) {
     }
 }
 
+
+async function pesquisar(req, res) {
+    try {
+        const { idCave, pesquisa } = req.query;
+
+        const resultado = await barrilModel.pesquisar(idCave, pesquisa);
+
+        return res.status(200).json(resultado);
+    } catch(err) {
+        console.error("Erro ao pesquisar uva: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
+    }
+}
+
 module.exports = {
     listar,
     cadastrar,
-    atualizar
+    atualizar,
+    pesquisar
 }

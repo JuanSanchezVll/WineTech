@@ -60,9 +60,34 @@ async function atualizar(identificacao, idCave, idUva, idBarril) {
     return await database.execute(instrucao)
 }
 
+async function pesquisar(idCave, pesquisa) {
+    const instrucao = `
+        SELECT 
+            b.id_barril as id,
+            b.identificacao,
+            c.identificacao AS cave_associada,
+            u.nome AS uva_armazenada
+        FROM barril b
+        JOIN cave c ON b.id_cave = c.id_cave
+        JOIN uva u ON b.id_uva = u.id_uva
+        WHERE 
+            (
+                b.id_barril LIKE '%${pesquisa}%' OR
+                b.identificacao LIKE '%${pesquisa}%' OR
+                c.identificacao LIKE '%${pesquisa}%' OR
+                u.nome LIKE '%${pesquisa}%'
+            ) 
+            AND b.id_cave = ${idCave}
+        ORDER BY
+            b.id_barril ASC
+    `
+    return await database.execute(instrucao)
+}
+
 module.exports = {
     listar,
     cadastrar,
     buscarPorId,
-    atualizar
+    atualizar,
+    pesquisar
 }
