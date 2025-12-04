@@ -20,6 +20,16 @@ async function listar(idEmpresa, idCave) {
     return await database.execute(instrucaoSql);
 }
 
+async function cadastrar(identificacao, idCave, idUva) {
+    const instrucaoSql = `
+        INSERT INTO barril (identificacao, id_cave, id_uva) VALUES
+            ('${identificacao}', ${idCave}, ${idUva});
+    `;
+
+    return await database.execute(instrucaoSql);
+}
+
 module.exports = {
-    listar
+    listar,
+    cadastrar
 }

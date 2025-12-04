@@ -30,6 +30,37 @@ async function listar(req, res) {
     }
 }
 
+async function cadastrar(req, res) {
+    try {
+        const { identificacao, idCave, idUva } = req.body;
+
+        if (!idCave) {
+            throw new Error("ID_CAVE_INDEFINIDO");
+        }
+
+        if (!idUva) {
+            throw new Error("ID_UVA_INDEFINIDO");
+        }
+
+        const resultado = await barrilModel.cadastrar(identificacao, idCave, idUva);
+        return res.status(200).json(resultado);
+    } catch(err) {
+        if (err === "ID_CAVE_INDEFINIDO") {
+            console.error("Erro ao cadastrar barril" + err);
+            return res.status(400).json({ erro: "Erro interno no servidor. " + err });
+        }
+
+        if (err === "ID_UVA_INDEFINIDO") {
+            console.error("Erro ao listar barril" + err);
+            return res.status(400).json({ erro: "Erro interno no servidor. " + err });
+        }
+
+        console.error("Erro ao cadastrar barril" + err);
+        return res.status(500).json({ erro: "Erro interno no servidor. " + err });
+    }
+}
+
 module.exports = {
-    listar
+    listar,
+    cadastrar
 }
