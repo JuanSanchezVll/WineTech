@@ -104,6 +104,18 @@ async function atualizar(req, res) {
     }
 }
 
+async function deletar(req,res) {
+    try {
+        const { idBarril } = req.query;
+
+        const resultado = await barrilModel.deletar(idBarril);
+
+        return res.status(200).json(resultado);
+    } catch(err) {
+        console.error("Erro ao deletar barril: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
+    }
+}
 
 async function pesquisar(req, res) {
     try {
@@ -122,5 +134,6 @@ module.exports = {
     listar,
     cadastrar,
     atualizar,
+    deletar,
     pesquisar
 }

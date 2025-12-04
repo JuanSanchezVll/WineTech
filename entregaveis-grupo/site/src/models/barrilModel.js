@@ -60,6 +60,13 @@ async function atualizar(identificacao, idCave, idUva, idBarril) {
     return await database.execute(instrucao)
 }
 
+async function deletar(idBarril) {
+    const instrucao = `
+        DELETE FROM barril WHERE id_barril = ${idBarril}
+    `
+    return await database.execute(instrucao)
+}
+
 async function pesquisar(idCave, pesquisa) {
     const instrucao = `
         SELECT 
@@ -89,5 +96,6 @@ module.exports = {
     cadastrar,
     buscarPorId,
     atualizar,
+    deletar,
     pesquisar
 }

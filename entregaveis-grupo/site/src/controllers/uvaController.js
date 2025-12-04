@@ -64,7 +64,7 @@ async function deletar(req,res) {
 
         return res.status(200).json(resultado);
     } catch(err) {
-        console.error("Erro ao deketar uva: " + err);
+        console.error("Erro ao deletar uva: " + err);
         return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
     }
 }
