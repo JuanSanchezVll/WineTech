@@ -7,11 +7,10 @@
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-uvas/atualizar.js">
-
+    <script src="../../../js/dashboard/painel-administrativo/js-uvas/atualizar.js"></script>
     <title>Atualizar Uva</title>
 </head>
-<body>
+<body onload="buscarUva()">
     <main class="content">
         <header class="header">
             <h2 class="titulo">Atualizar Uva</h2>
@@ -45,7 +44,7 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Atualizar</button>
+                <button type="button" class="btn btn-principal" onclick="atualizar(nome.value, temperaturaMinima.value, temperaturaMaxima.value, umidadeMinima.value, umidadeMaxima.value)">Atualizar</button>
             </div>
         </form>
     </main>

@@ -34,7 +34,7 @@ async function exibirTabela(dados) {
                 <td>${dados[i].temperatura_maxima}</td>
                 <td>${dados[i].umidade_minima}</td>
                 <td>${dados[i].umidade_maxima}</td>
-                <td><a href="./atualizar.html">
+                <td><a href="./atualizar.html?id=${dados[i].id_uva}">
                     <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon"></a>
                 </td>
                 <td>

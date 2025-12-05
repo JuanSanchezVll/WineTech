@@ -8,7 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-uvas/cadastrar.js">
-
+    <script src="../../../js/dashboard/painel-administrativo/js-uvas/cadastrar.js"></script>
     <title>Cadastrar Uva</title>
 </head>
 <body>
@@ -45,7 +45,7 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Cadastrar</button>
+                <button type="button" class="btn btn-principal" onclick="cadastrar(nome.value, temperaturaMinima.value, temperaturaMaxima.value, umidadeMinima.value, umidadeMaxima.value)">Cadastrar</button>
             </div>
         </form>
     </main>
