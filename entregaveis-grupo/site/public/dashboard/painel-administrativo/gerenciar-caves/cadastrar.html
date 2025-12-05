@@ -25,9 +25,50 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Cadastrar</button>
+                <button type="button" class="btn btn-principal" onclick="cadastrar()">Cadastrar</button>
             </div>
         </form>
     </main>
 </body>
+<script>
+    async function cadastrar() {
+        const identificacaoVar = document.getElementById("identificacao").value;
+        const idEmpresaVar = sessionStorage.ID_EMPRESA; // Pega da sessão
+
+        if (identificacaoVar == "") {
+            alert("Por favor, preencha a identificação da Cave.");
+            return;
+        }
+
+        if (!idEmpresaVar) {
+            alert("Erro: Empresa não identificada. Faça login novamente.");
+            return;
+        }
+
+        try {
+            const resposta = await fetch("/caves/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    identificacao: identificacaoVar,
+                    idEmpresa: idEmpresaVar
+                }),
+            });
+
+            if (resposta.ok) {
+                alert("Cave cadastrada com sucesso!");
+                window.location.href = "./index.html";
+            } else {
+                const erro = await resposta.json();
+                alert("Erro ao cadastrar: " + erro.mensagem);
+                console.error(erro);
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+            alert("Erro interno. Verifique o console.");
+        }
+    }
+</script>
 </html>

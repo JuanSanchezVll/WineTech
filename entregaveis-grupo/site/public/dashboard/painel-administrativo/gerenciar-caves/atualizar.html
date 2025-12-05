@@ -27,9 +27,52 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Atualizar</button>
+                <button type="button" class="btn btn-principal" onclick="atualizar()">Atualizar</button>
             </div>
         </form>
     </main>
 </body>
+<script>
+    async function atualizar() {
+        const params = new URLSearchParams(window.location.search);
+        const idCaveVar = params.get('id');
+
+        const identificacaoVar = document.getElementById("identificacao").value;
+
+        // Validações
+        if (!idCaveVar) {
+            alert("Erro: ID da cave não encontrado. Volte para a lista e tente novamente.");
+            return;
+        }
+
+        if (identificacaoVar == "") {
+            alert("Por favor, preencha a identificação da Cave.");
+            return;
+        }
+
+        try {
+            const resposta = await fetch("/caves/atualizar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idCave: idCaveVar,
+                    identificacao: identificacaoVar
+                }),
+            });
+
+            if (resposta.ok) {
+                alert("Cave atualizada com sucesso!");
+                window.location.href = "./index.html"; 
+            } else {
+                const erro = await resposta.json();
+                alert("Erro ao atualizar: " + erro.mensagem);
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+            alert("Erro interno. Verifique o console.");
+        }
+    }
+</script>
 </html>

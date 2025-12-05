@@ -37,10 +37,11 @@ async function cadastrar(identificacao, idEmpresa) {
 
 async function atualizar(idCave, identificacao) {
     const instrucao = `
-    update cave set identificacao = '${identificacao}'
-    where id_cave = ${idCave};
-    `
-    return await database.execute(instrucao)
+        UPDATE cave 
+        SET identificacao = '${identificacao}'
+        WHERE id_cave = ${idCave};
+    `;
+    return await database.execute(instrucao);
 }
 
 async function deletar(idCave) {
