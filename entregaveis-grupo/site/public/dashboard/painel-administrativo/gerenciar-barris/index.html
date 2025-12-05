@@ -73,33 +73,144 @@
                         <th>Editar</th>
                         <th>Excluir</th>
                     </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Barril ABC1A</td>
-                        <td>Cave ABC</td>
-                        <td>Merlot</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>2</td>
-                        <td>Barril ABC1B</td>
-                        <td>Cave ABC</td>
-                        <td>Merlot</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>3</td>
-                        <td>Barril ABC1C</td>
-                        <td>Cave ABC</td>
-                        <td>Merlot</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
                 </table>
             </div>
         </section>
     </main>
 </body>
+<script>
+
+    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+
+    async function listar() {
+        if (!ID_EMPRESA) {
+            console.error("ID da empresa não encontrado!");
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/barris/listar?idEmpresa=${ID_EMPRESA}`, {
+                method: "GET",
+            });
+
+            if (resposta.ok) {
+                const listaDeCaves = await resposta.json();
+
+                const tabela = document.querySelector(".table");
+
+                const linhasAntigas = document.querySelectorAll(".table-content");
+                linhasAntigas.forEach(linha => linha.remove());
+
+                listaDeCaves.forEach(cave => {
+                    const novaLinha = document.createElement("tr");
+                    novaLinha.classList.add("table-content");
+
+                    novaLinha.innerHTML = `
+                        <td>${barril.id}</td>
+                        <td>${barril.identificacao}</td>
+                        <td>${barril.identificacao}</td>
+                        <td>
+                            <a href="./atualizar.html?id=${cave.id}">
+                                <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
+                            </a>
+                        </td>
+                        <td>
+                            <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
+                                 class="action-icon" 
+                                 alt="Ícone de deletar"
+                                 onclick="deletar(${cave.id})" 
+                                 style="cursor: pointer;">
+                        </td>
+                    `;
+
+                    tabela.appendChild(novaLinha);
+                });
+            } else {
+                console.error("Status do erro:", resposta.status);
+
+                const erroTexto = await resposta.text();
+                console.error("Mensagem do servidor:", erroTexto);
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        }
+    }
+
+    async function deletar(id) {
+        const confirmacao = confirm("Tem certeza que deseja excluir esta cave?");
+
+        if (confirmacao) {
+            try {
+                const resposta = await fetch(`/barris/deletar?idCave=${id}`, {
+                    method: "GET"
+                });
+
+                if (resposta.ok) {
+                    alert("Cave deletada com sucesso!");
+                    listar();
+                } else {
+                    const erro = await resposta.json();
+                    alert("Erro ao deletar: " + erro.mensagem);
+                }
+            } catch (erro) {
+                console.error("Erro na requisição de delete:", erro);
+            }
+        }
+    }
+
+    async function pesquisar() {
+        if (!ID_EMPRESA) {
+            console.error("ID da empresa não encontrado!");
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/barris/pesquisar?idEmpresa=${ID_EMPRESA}`, {
+                method: "GET",
+            });
+
+            if (resposta.ok) {
+                const listaDeCaves = await resposta.json();
+
+                const tabela = document.querySelector(".table");
+
+                const linhasAntigas = document.querySelectorAll(".table-content");
+                linhasAntigas.forEach(linha => linha.remove());
+
+                listaDeCaves.forEach(cave => {
+                    const novaLinha = document.createElement("tr");
+                    novaLinha.classList.add("table-content");
+
+                    novaLinha.innerHTML = `
+                        <td>${cave.id}</td>
+                        <td>${cave.identificacao}</td>
+                        <td>
+                            <a href="./atualizar.html?id=${cave.id}">
+                                <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
+                            </a>
+                        </td>
+                        <td>
+                            <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
+                                 class="action-icon" 
+                                 alt="Ícone de deletar"
+                                 onclick="deletar(${cave.id})" 
+                                 style="cursor: pointer;">
+                        </td>
+                    `;
+                    tabela.appendChild(novaLinha);
+                });
+            } else {
+                console.error("Status do erro:", resposta.status);
+
+                const erroTexto = await resposta.text();
+                console.error("Mensagem do servidor:", erroTexto);
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        }
+    }
+
+    // window.onload = pesquisar;
+    window.onload = listar;
+</script>
 </html>

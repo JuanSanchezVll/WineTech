@@ -2,7 +2,7 @@ var barrilModel = require("../models/barrilModel");
 
 async function listar(req, res) {
     try {
-        const { idEmpresa, idCave, idBarril } = req.query;
+        const {idBarril, identificacao, idCave, idUva} = req.query;
 
         if (!idEmpresa) {
             throw new Error("ID_EMPRESA_INDEFINIDO");
@@ -13,7 +13,7 @@ async function listar(req, res) {
         }
 
         if (idBarril) {
-            const resultado = await barrilModel.buscarPorId(idEmpresa, idCave, idBarril);
+            const resultado = await barrilModel.buscarPorId(idBarril, identificacao, idCave, idUva);
             return res.status(200).json(resultado);
         }
 

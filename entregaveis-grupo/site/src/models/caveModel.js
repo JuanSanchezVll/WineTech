@@ -53,7 +53,7 @@ async function deletar(idCave) {
 
 async function pesquisar(idEmpresa, pesquisa) {
     const instrucao = `
-    select id_cave, identificacao from cave
+    select id_cave AS id, identificacao from cave
     where id_empresa = ${idEmpresa} and
     identificacao like '%${pesquisa}%' or
     id_cave like '%${pesquisa}%';
