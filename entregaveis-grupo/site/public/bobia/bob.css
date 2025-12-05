@@ -1,8 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4ede4;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4ede4;
+  margin: 0;
+  padding: 0;
 }
 
 .app {
@@ -24,7 +24,7 @@ body {
   top: 20px;
   left: 20px;
   border-radius: 20px;
-  height: 95vh;
+  height: 89vh;
 }
 
 .logo-wrap {
@@ -95,52 +95,56 @@ body {
 }
 
 #container {
-    width: 80%;
-    margin: 50px auto;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0% 0% 0% 19%;
+  text-align: center;
 }
 
 h1 {
-    font-size: 80px;
-    font-weight: 800;
-    color: #4b0e1a;
-    margin-bottom: 20px ;
+  font-size: 80px;
+  font-weight: 800;
+  color: #4b0e1a;
+  margin-bottom: 20px;
 }
 
 textarea[type="text"] {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 15px;
-    width: 600px;
-    border: 2px solid #4b0e1a;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 15px;
+  width: 600px;
+  border: 2px solid #4b0e1a;
 }
 
 select,
 button {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button {
-    background-color: #4b0e1a;
-    color: #FFFFFF;
-    border: 2px solid #4b0e1a;
-    transition: 0.3s ease;
+  background-color: #4b0e1a;
+  color: #FFFFFF;
+  border: 2px solid #4b0e1a;
+  transition: 0.3s ease;
 }
 
 button:hover {
-    background-color: #f4ede4;
-    color: #4b0e1a;
+  background-color: #f4ede4;
+  color: #4b0e1a;
 }
 
 #resposta {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #D0D3D4;
-    border: 1px solid #63666A;
-    text-align: left;
-    display: none;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #D0D3D4;
+  border: 1px solid #63666A;
+  text-align: left;
+  display: none;
 }
