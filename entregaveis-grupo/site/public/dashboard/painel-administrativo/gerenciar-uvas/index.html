@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/index-painel-administrativo.css ">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/sidebar.css">
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-uvas/index.js">
-
+    <script src="../../../js/dashboard/painel-administrativo/js-uvas/index.js"></script>
     <title>Gerenciar Uvas</title>
 </head>
-<body>
+<body onload="carregarUvas()">
     <main class="content">
        <aside class="sidebar">
             <div class="sidebar-top">
@@ -60,51 +59,27 @@
             
             <div class="table-container">
                 <div class="actions">
-                    <input type="search" placeholder="Busque por uma uva...">
+                    <input type="search" placeholder="Busque por uma uva..." id="pesquisa" oninput="pesquisarUvas(pesquisa.value)">
                     <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Uvas</button>
                 </div>
                 
                 <table class="table">
-                    <tr class="table-title">
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Temperatura Mínima</th>
-                        <th>Temperatura Máxima</th>
-                        <th>Umidade Mínima</th>
-                        <th>Umidade Máxima</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Merlot</td>
-                        <td>14ºC</td>
-                        <td>16ºC</td>
-                        <td>60%</td>
-                        <td>75%</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>2</td>
-                        <td>Cabernet Sauvignon</td>
-                        <td>14ºC</td>
-                        <td>16ºC</td>
-                        <td>60%</td>
-                        <td>75%</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>3</td>
-                        <td>Malbec</td>
-                        <td>14ºC</td>
-                        <td>16ºC</td>
-                        <td>60%</td>
-                        <td>75%</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
+                    <thead id="titulo-tabela-uva">
+                        <tr class="table-title">
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Temperatura Mínima</th>
+                            <th>Temperatura Máxima</th>
+                            <th>Umidade Mínima</th>
+                            <th>Umidade Máxima</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="conteudo-tabela-uva">
+                        <tr class="table-content">
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </section>
