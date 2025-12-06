@@ -36,15 +36,14 @@ CREATE TABLE nivel_acesso (
 );
 
 CREATE TABLE usuario (
-  id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
+  id_usuario INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   sobrenome VARCHAR(100) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL,
   senha VARCHAR(255) NOT NULL,
-  nivel_acesso TINYINT NOT NULL DEFAULT 3,
   ativo BOOLEAN DEFAULT TRUE,
   data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  id_empresa INT NOT NULL,
+  id_empresa INT,
   id_nivel_acesso TINYINT NOT NULL,
   CONSTRAINT fk_funcionario_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id_empresa),
   CONSTRAINT fk_funcionario_nivel_acesso FOREIGN KEY (id_nivel_acesso) REFERENCES nivel_acesso (id_nivel_acesso),
@@ -128,7 +127,12 @@ INSERT INTO nivel_acesso (id_nivel_acesso, nome, descricao) VALUES
 INSERT INTO usuario (nome, sobrenome, email, senha, data_hora_registro, id_empresa, id_nivel_acesso) VALUES
 ('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', '2024-01-04 13:00:00', 1, 2),
 ('Pedro', 'Santos', 'pedro.s@novaera.com', 'senha002', '2024-01-05 14:00:00', 1, 3),
-('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', '2024-01-06 15:00:00',1, 4);
+('Alice', 'Rocha', 'alice.r@masteradega.com', 'senha003', '2024-01-06 15:00:00',1, 4),
+('Marlon', 'Souza', 'marlon@winetech.com', 'senha123', '2024-01-01 10:00:00', null, 1),
+('Juan', 'Sanchez', 'juan@winetech.com', 'senha123', '2024-01-01 10:00:00', null, 1),
+('Rafael', 'Souza', 'rafael@winetech.com', 'senha123', '2024-01-01 10:00:00', null, 1),
+('Leonardo', 'Scavazza', 'leonardo@winetech.com', 'senha123', '2024-01-01 10:00:00', null, 1),
+('Otavio', 'Augusto', 'otavio@winetech.com', 'senha123', '2024-01-01 10:00:00', null, 1);
 
 INSERT INTO cave (identificacao, id_empresa) VALUES
 ('CAVE-JDI-A', 1),

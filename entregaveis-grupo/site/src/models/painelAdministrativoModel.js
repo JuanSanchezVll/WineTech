@@ -13,14 +13,14 @@ function cadastrar(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso) {
     return database.execute(instrucaoSql);
 }
 
-function atualizarFuncionario(nome, sobrenome, email, senha, idFuncionario) {
+function atualizarFuncionario(nome, sobrenome, email, senha, idUsuario) {
     if (nome == "" || sobrenome == "" || email == "" || senha == "") {
         throw "DADOS_NAO_PREENCHIDOS";
     }else{
 
     const instrucaoSql = `
         UPDATE usuario SET nome = '${nome}', sobrenome = '${sobrenome}', email = '${email}', senha= '${senha}' WHERE
-            id_funcionario = ${idFuncionario}        
+            id_usuario = ${idUsuario}        
     `;
     console.log(instrucaoSql);
 
