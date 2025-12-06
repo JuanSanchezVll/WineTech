@@ -1,0 +1,2 @@
+curl -X POST -H "Content-Type: application/json" -d '{"nome":"Marlon", "sobrenome": "Souza", "email": "marlon@email.com", "senha": "senha123", "idEmpresa": 1, "idNivelAcesso": 3 }' http://localhost:3030/painelAdministrativo/cadastrarUsuario
+

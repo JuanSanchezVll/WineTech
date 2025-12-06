@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function cadastrarUsuario(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso) {
+function cadastrar(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso) {
     if (idNivelAcesso != 2 && idNivelAcesso != 3) {
         throw "ID_NIVEL_ACESSO_INVALIDO";
     }
@@ -13,15 +13,17 @@ function cadastrarUsuario(nome, sobrenome, email, senha, idEmpresa, idNivelAcess
     return database.execute(instrucaoSql);
 }
 
-function atualizarUsuario(nome, sobrenome, email, senha, idFuncionario) {
+function atualizarFuncionario(nome, sobrenome, email, senha, idFuncionario) {
     if (nome == "" || sobrenome == "" || email == "" || senha == "") {
         throw "DADOS_NAO_PREENCHIDOS";
     }else{
 
     const instrucaoSql = `
-        UPDATE usuario SET nome = ${nome}, sobrenome = ${sobrenome}, email = ${email}, senha= ${senha} WHERE
-            id_funcionario = ${idFuncionario}
+        UPDATE usuario SET nome = '${nome}', sobrenome = '${sobrenome}', email = '${email}', senha= '${senha}' WHERE
+            id_funcionario = ${idFuncionario}        
     `;
+    console.log(instrucaoSql);
+
 
     return database.execute(instrucaoSql);
 }
@@ -29,6 +31,6 @@ function atualizarUsuario(nome, sobrenome, email, senha, idFuncionario) {
 
 
 module.exports = {
-    cadastrarUsuario,
-    atualizarUsuario
+    cadastrar,
+    atualizarFuncionario
 }

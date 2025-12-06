@@ -3,11 +3,16 @@ var router = express.Router();
 
 var painelAdministrativoController = require("../controllers/painelAdministrativoController");
 
-router.post("/usuarios/cadastrar", function(req, res) {
-    painelAdministrativoController.cadastrarUsuario(req, res);
+router.post("/cadastrar", function(req, res) {
+    painelAdministrativoController.cadastrar(req, res);
 })
 
-router.post("/usuarios/atualizar", function(req, res) {
-    painelAdministrativoController.atualizarUsuario(req, res);
+router.post("/atualizar", function(req, res) {
+    painelAdministrativoController.atualizarFuncionario(req, res);
 })
+
+router.get("/deletar", function(req, res) {
+    painelAdministrativoController.deletar(req, res);
+})
+
 module.exports = router;

@@ -7,7 +7,8 @@
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-funcionarios/cadastrar.js">
+
+    <script src="../../../js/dashboard/painel-administrativo/js-funcionarios/cadastrar.js"></script>
 
     <title>Cadastrar Funcionário</title>
 </head>
@@ -45,8 +46,7 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="Cadastrar(nome.value, sobrenome.value,
-                    email.value, password.value)">Cadastrar</button>
+                <button type="button" class="btn btn-principal" onclick="cadastrar(nome.value, sobrenome.value, email.value, senha.value)">Cadastrar</button>
             </div>
         </form>
     
