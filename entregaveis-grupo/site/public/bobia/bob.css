@@ -13,17 +13,18 @@ body {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background: linear-gradient(180deg, #4b0e1a, #3b0b10 70%);
+  background: linear-gradient(180deg, #6b0f0a, #3b0b10 70%);
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 16px;
   box-shadow: 6px 0 22px rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
   position: fixed;
   top: 20px;
   left: 20px;
-  border-radius: 20px;
   height: 89vh;
 }
 
@@ -31,18 +32,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 18px;
 }
 
 .logo {
-  width: 115px;
-  height: 100px;
+  width: 150px;
+  height: 120px;
   padding: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: 0.25s;
+  transition: all 0.25s ease;
 }
 
 .logo:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 .nav {
