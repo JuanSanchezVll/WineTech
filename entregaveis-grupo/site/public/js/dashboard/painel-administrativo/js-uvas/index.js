@@ -10,6 +10,24 @@ async function pesquisarUvas(pesquisa) {
     exibirTabela(uvas);
 }
 
+async function deletarUva(idUva) {
+    const confirmacao = confirm("Tem certeza que deseja excluir?");
+
+    if (confirmacao) {
+        try {
+            const resultado = await fetch(`/uvas/deletar?idUva=${idUva}`);
+
+            if (resultado.ok) {
+                alert("Uva deletada com sucesso");
+            }
+
+        } catch (erro) {
+            console.error("Erro ao deletar uva: " + erro);
+            alert("Erro ao deletar uva");
+        }
+    }
+}
+
 async function obterUvas() {
     const resultado = await fetch(`/uvas/listar?idEmpresa=${sessionStorage.ID_EMPRESA}`);
     return await resultado.json();
@@ -34,11 +52,13 @@ async function exibirTabela(dados) {
                 <td>${dados[i].temperatura_maxima}</td>
                 <td>${dados[i].umidade_minima}</td>
                 <td>${dados[i].umidade_maxima}</td>
-                <td><a href="./atualizar.html?id=${dados[i].id_uva}">
-                    <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon"></a>
+                <td>
+                    <a href="./atualizar.html?id=${dados[i].id_uva}">
+                        <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon">
+                    </a>
                 </td>
                 <td>
-                    <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon">
+                    <img onclick="deletarUva(${dados[i].id_uva})" src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon">
                 </td>
             </tr>
         `;

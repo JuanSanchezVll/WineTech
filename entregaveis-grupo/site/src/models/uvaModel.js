@@ -60,6 +60,7 @@ async function pesquisar(idEmpresa, pesquisa) {
         FROM uva
         WHERE
             (
+                id_uva LIKE '%${pesquisa}%' OR
                 nome LIKE '%${pesquisa}%' OR
                 temperatura_minima LIKE '%${pesquisa}%' OR
                 temperatura_maxima LIKE '%${pesquisa}%' OR

@@ -5,9 +5,12 @@ async function listar(req, res) {
         const { idEmpresa, idUva } = req.query;
 
         if (idEmpresa && idUva) {
+            console.log("Listando uvas da empresa por idUva");
             const resultado = await uvaModel.buscarPorId(idEmpresa, idUva);
             return res.status(200).json(resultado);
         }
+
+        console.log("Listando uvas da empresa");
 
         const resultado = await uvaModel.listar(idEmpresa);
         return res.status(200).json(resultado);
