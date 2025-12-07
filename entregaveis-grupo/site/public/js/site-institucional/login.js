@@ -32,7 +32,7 @@ function autenticar() {
                 console.log(JSON.stringify(json));
                 sessionStorage.NICK_USUARIO = json.nome;
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NIVEL_ACESSO = json.nivel_acesso;
+                sessionStorage.NIVEL_ACESSO = json.id_nivel_acesso;
                 sessionStorage.ID_FUNCIONARIO = json.id_usuario;
                 sessionStorage.ID_EMPRESA = json.id_empresa;
                 window.location = "../dashboard/index-dashboard.html";

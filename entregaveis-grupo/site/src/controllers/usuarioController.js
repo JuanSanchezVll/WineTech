@@ -3,8 +3,6 @@ var usuarioModel = require("./../models/usuarioModel");
 function cadastrar(req, res) {
     const { nome, sobrenome, email, senha, codigoSeguranca } = req.body;
 
-    console.log("oi");
-
     usuarioModel.cadastrar(nome, sobrenome, email, senha, codigoSeguranca)
         .then(
             function (resultado) {
@@ -44,7 +42,7 @@ function autenticar(req, res) {
                         nome: resultadoAutenticar[0].nome,
                         sobrenome: resultadoAutenticar[0].sobrenome,
                         email: resultadoAutenticar[0].email,
-                        nivel_acesso: resultadoAutenticar[0].nivel_acesso,
+                        nivel_acesso: resultadoAutenticar[0].id_nivel_acesso,
                         senha: resultadoAutenticar[0].senha,
                         id_empresa: resultadoAutenticar[0].id_empresa
                     });
