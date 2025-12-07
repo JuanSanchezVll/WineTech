@@ -101,15 +101,11 @@ CREATE TABLE leitura (
 
 CREATE TABLE alerta (
   id_alerta INT AUTO_INCREMENT,
-  gravidade VARCHAR(45) NOT NULL,
-  status VARCHAR(45) NOT NULL,
   data_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
   id_leitura INT NOT NULL UNIQUE,
 
   CONSTRAINT pk_alerta PRIMARY KEY (id_alerta, id_leitura),
-  CONSTRAINT fk_alerta_leitura FOREIGN KEY (id_leitura) REFERENCES leitura (id_leitura),
-  CONSTRAINT chk_gravidade CHECK (gravidade IN ('baixa', 'media', 'alta')),
-  CONSTRAINT chk_status CHECK (status IN ('nao resolvido', 'em manutencao', 'resolvido'))
+  CONSTRAINT fk_alerta_leitura FOREIGN KEY (id_leitura) REFERENCES leitura (id_leitura)
 );
 
 INSERT INTO empresa (cnpj, razao_social, nome_fantasia, email_contato, codigo_seguranca, data_hora_registro) VALUES
