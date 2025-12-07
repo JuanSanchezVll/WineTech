@@ -57,11 +57,7 @@
                 select.innerHTML = '<option value="" selected disabled>Selecione um barril...</option>';
 
                 listaBarris.forEach(barril => {
-                    const option = document.createElement("option");
-                    
-                    option.value = barril.idBarril; 
-                    option.textContent = barril.identificacao; 
-                    select.appendChild(option);
+                    select.innerHTML += `<option value="${barril.id}">${barril.identificacao}</option>`;
                 });
             } else {
                 alert("Erro ao carregar lista de barris.");

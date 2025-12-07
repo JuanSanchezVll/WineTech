@@ -12,22 +12,13 @@ async function carregarBarril() {
         const selectCave = document.getElementById("caveAssociada");
         const selectUva = document.getElementById("uvaArmazenada");
 
-        console.log("Caves adshjklfaslk");
-        console.log(caves);
-
-        selectCave.innerHTML = `<option value="#">Selecione...</option>`;
-        selectUva.innerHTML = `<option value="#">Selecione...</option>`;
+        selectCave.innerHTML = `<option value="#" disabled>Selecione...</option>`;
+        selectUva.innerHTML = `<option value="#" disabled>Selecione...</option>`;
         
-        console.log("Antes " + caves.length);
-
         for (let i = 0; i < caves.length; i++) {
             if (caves[i].identificacao === barril[0].cave_associada) {
-                console.log("Cave");
-                console.log(caves[i]);
                 selectCave.innerHTML += `<option value="${caves[i].id}" selected>${caves[i].identificacao}</option>`;
             } else {
-                console.log("Cave A");
-                console.log(caves[i]);
                 selectCave.innerHTML += `<option value="${caves[i].id}">${caves[i].identificacao}</option>`;
             }
             console.log("DEPOIS " + caves.length);
@@ -58,7 +49,7 @@ async function listarUvas() {
     return await resultado.json();
 }
 
-async function atualizar(nome, identificacao, caveAssociada, uvaArmazenada) {
+async function atualizar() {
     try {
         const resposta = await fetch("/barris/atualizar", {
             method: "POST",
@@ -66,10 +57,10 @@ async function atualizar(nome, identificacao, caveAssociada, uvaArmazenada) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nome: nome,
-                identificacao: identificacao,
-                caveAssociada: caveAssociada,
-                uvaArmazenada: uvaArmazenada
+                identificacao: identificacao.value,
+                idCave: caveAssociada.value,
+                idUva: uvaArmazenada.value,
+                idBarril: idBarrilGlobal
             })
         });
 

@@ -67,7 +67,12 @@ async function pesquisar(idEmpresa, pesquisa) {
         JOIN barril b ON s.id_barril = b.id_barril
         JOIN cave c ON b.id_cave = c.id_cave
         WHERE c.id_empresa = ${idEmpresa} 
-        AND (s.identificacao LIKE '%${pesquisa}%' OR s.id_sensor LIKE '%${pesquisa}%');
+        AND (
+            s.identificacao LIKE '%${pesquisa}%' 
+            OR s.id_sensor LIKE '%${pesquisa}%'
+            OR b.identificacao LIKE '%${pesquisa}%'
+            OR c.identificacao LIKE '%${pesquisa}%'
+        );
     `;
     return await database.execute(instrucao);
 }

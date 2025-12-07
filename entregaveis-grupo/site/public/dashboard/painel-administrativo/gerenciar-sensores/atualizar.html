@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/form-painel-administrativo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
+    <script src="../../../js/dashboard/painel-administrativo/js-sensores/atualizar.js"></script>
     <title>Atualizar Sensor</title>
 </head>
 
-<body>
+<body onload="carregarSensor()">
     <main class="content">
         <header class="header">
             <h2 class="titulo">Atualizar Sensor</h2>
@@ -31,74 +31,9 @@
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="atualizar()">Atualizar</button>
+                <button type="button" class="btn btn-principal" onclick="atualizar(identificacao.value, select_barril.value)">Atualizar</button>
             </div>
         </form>
     </main>
 </body>
-
-<script>
-    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
-    
-    const params = new URLSearchParams(window.location.search);
-    const idSensorUrl = params.get('id');
-
-    async function iniciarPagina() {
-        await carregarBarris();
-        await carregarDadosDoSensor();
-    }
-
-    async function carregarBarris() {
-        const resposta = await fetch(`/barris/listar?idEmpresa=${ID_EMPRESA}`);
-        
-        if (resposta.ok) {
-            const listaBarris = await resposta.json();
-            const select = document.getElementById("select_barril");
-
-            select.innerHTML = '<option value="" disabled selected>Selecione um barril...</option>';
-
-            listaBarris.forEach(barril => {
-                select.innerHTML += `<option value="${barril.idBarril}">${barril.identificacao}</option>`;
-            });
-        }
-    }
-
-    async function carregarDadosDoSensor() {
-        const resposta = await fetch(`/sensores/listar?idEmpresa=${ID_EMPRESA}&idSensor=${idSensorUrl}`);
-
-        if (resposta.ok) {
-            const dados = await resposta.json();
-            const sensor = dados[0];
-
-            document.getElementById("identificacao").value = sensor.identificacao;
-            
-            document.getElementById("select_barril").value = sensor.idBarril;
-        }
-    }
-
-    async function atualizar() {
-        const identificacao = document.getElementById("identificacao").value;
-        const idBarril = document.getElementById("select_barril").value;
-
-        const resposta = await fetch("/sensores/atualizar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                idSensor: idSensorUrl,
-                identificacao: identificacao,
-                idBarril: idBarril
-            })
-        });
-
-        if (resposta.ok) {
-            alert("Atualizado com sucesso!");
-            window.location.href = "./index.html";
-        } else {
-            alert("Erro ao atualizar!");
-        }
-    }
-
-    window.onload = iniciarPagina;
-
-</script>
 </html>

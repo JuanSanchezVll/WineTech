@@ -48,7 +48,7 @@ async function deletar(idFuncionario) {
 async function pesquisar(idEmpresa, pesquisa) {
     const instrucaoSql = `
         SELECT 
-            u.id_usuario AS id_funcionario, 
+            u.id_usuario, 
             u.nome, 
             u.sobrenome, 
             u.email,
@@ -56,7 +56,13 @@ async function pesquisar(idEmpresa, pesquisa) {
         FROM usuario u
         JOIN nivel_acesso n ON u.id_nivel_acesso = n.id_nivel_acesso
         WHERE u.id_empresa = ${idEmpresa} 
-        AND (u.nome LIKE '%${pesquisa}%' OR u.email LIKE '%${pesquisa}%');
+        AND (
+            u.id_usuario LIKE '%${pesquisa}%'
+            OR u.nome LIKE '%${pesquisa}%' 
+            OR u.sobrenome LIKE '%${pesquisa}%'
+            OR u.email LIKE '%${pesquisa}%'
+            OR n.nome LIKE '%${pesquisa}%'
+        );
     `;
     return await database.execute(instrucaoSql);
 }

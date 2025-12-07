@@ -5,7 +5,6 @@ async function listar(req, res) {
         const { idEmpresa, idSensor } = req.query;
 
         if (idSensor) {
-            // O controller chama isso, então precisamos ter essa função no Model!
             const resultado = await sensorModel.buscarPorId(idSensor);
             return res.status(200).json(resultado);
         }
@@ -47,15 +46,12 @@ async function pesquisar(req, res) {
 
 async function cadastrar(req, res) {
     try {
-        // CORREÇÃO: O sensor liga no BARRIL, não na Cave direto.
-        // Removemos idCave e idEmpresa, pois o banco só pede idBarril
         const { identificacao, idBarril } = req.body;
 
         if (!identificacao || !idBarril) {
              return res.status(400).json({ mensagem: "Dados incompletos (Nome ou Barril faltando)" });
         }
 
-        // Chama o model passando os dados corretos
         const resultado = await sensorModel.cadastrar(identificacao, idBarril);
 
         return res.status(201).json(resultado);
@@ -67,7 +63,6 @@ async function cadastrar(req, res) {
 
 async function atualizar(req, res) {
     try {
-        // CORREÇÃO: Mesma coisa aqui, usamos idBarril
         const { idSensor, identificacao, idBarril } = req.body;
 
         const resultado = await sensorModel.atualizar(idSensor, identificacao, idBarril);
