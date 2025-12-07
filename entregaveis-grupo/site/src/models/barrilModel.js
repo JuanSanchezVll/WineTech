@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-async function listar(idEmpresa, idCave) {
+async function listar(idEmpresa) {
     const instrucaoSql = `
         SELECT 
             b.id_barril as id,
@@ -12,7 +12,6 @@ async function listar(idEmpresa, idCave) {
         JOIN uva u ON b.id_uva = u.id_uva
         WHERE 
             c.id_empresa = ${idEmpresa}
-            AND b.id_cave = ${idCave}
         ORDER BY
             b.id_barril ASC
     `;
@@ -20,7 +19,7 @@ async function listar(idEmpresa, idCave) {
     return await database.execute(instrucaoSql);
 }
 
-async function buscarPorId(idEmpresa, idCave, idBarril) {
+async function buscarPorId(idEmpresa, idBarril) {
     const instrucaoSql = `
         SELECT 
             b.id_barril as id,
@@ -32,7 +31,6 @@ async function buscarPorId(idEmpresa, idCave, idBarril) {
         JOIN uva u ON b.id_uva = u.id_uva
         WHERE 
             c.id_empresa = ${idEmpresa}
-            AND b.id_cave = ${idCave}
             AND b.id_barril = ${idBarril};
     `;
 
@@ -67,7 +65,7 @@ async function deletar(idBarril) {
     return await database.execute(instrucao)
 }
 
-async function pesquisar(idCave, pesquisa) {
+async function pesquisar(idEmpresa, pesquisa) {
     const instrucao = `
         SELECT 
             b.id_barril as id,
@@ -83,8 +81,8 @@ async function pesquisar(idCave, pesquisa) {
                 b.identificacao LIKE '%${pesquisa}%' OR
                 c.identificacao LIKE '%${pesquisa}%' OR
                 u.nome LIKE '%${pesquisa}%'
-            ) 
-            AND b.id_cave = ${idCave}
+            )
+            AND c.id_empresa = ${idEmpresa}
         ORDER BY
             b.id_barril ASC
     `

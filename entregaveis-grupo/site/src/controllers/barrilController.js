@@ -2,22 +2,20 @@ var barrilModel = require("../models/barrilModel");
 
 async function listar(req, res) {
     try {
-        const {idBarril, identificacao, idCave, idUva} = req.query;
+        const {idEmpresa, idBarril} = req.query;
+
+        console.log("Req: " + req.query);
 
         if (!idEmpresa) {
             throw new Error("ID_EMPRESA_INDEFINIDO");
         }
 
-        if (!idCave) {
-            throw new Error("ID_CAVE_INDEFINIDO");
-        }
-
         if (idBarril) {
-            const resultado = await barrilModel.buscarPorId(idBarril, identificacao, idCave, idUva);
+            const resultado = await barrilModel.buscarPorId(idEmpresa, idBarril);
             return res.status(200).json(resultado);
         }
 
-        const resultado = await barrilModel.listar(idEmpresa, idCave);
+        const resultado = await barrilModel.listar(idEmpresa);
         return res.status(200).json(resultado);
     } catch(err) {
         if (err === "ID_EMPRESA_INDEFINIDO") {
@@ -39,6 +37,8 @@ async function cadastrar(req, res) {
     try {
         const { identificacao, idCave, idUva } = req.body;
 
+        console.log("Req: " + req.body);
+
         if (!idCave) {
             throw new Error("ID_CAVE_INDEFINIDO");
         }
@@ -46,6 +46,8 @@ async function cadastrar(req, res) {
         if (!idUva) {
             throw new Error("ID_UVA_INDEFINIDO");
         }
+
+        console.log("IDS validos");
 
         const resultado = await barrilModel.cadastrar(identificacao, idCave, idUva);
         return res.status(200).json(resultado);
@@ -119,9 +121,9 @@ async function deletar(req,res) {
 
 async function pesquisar(req, res) {
     try {
-        const { idCave, pesquisa } = req.query;
+        const { idEmpresa, pesquisa } = req.query;
 
-        const resultado = await barrilModel.pesquisar(idCave, pesquisa);
+        const resultado = await barrilModel.pesquisar(idEmpresa, pesquisa);
 
         return res.status(200).json(resultado);
     } catch(err) {
