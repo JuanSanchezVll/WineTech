@@ -62,26 +62,10 @@ function autenticar(req, res) {
 
 }
 
-function listar(req, res) {
-    usuarioModel.listar()
-        .then(function (resultado) {
 
-            if (resultado.length == 0) {
-                res.status(204).send("Nenhum usuário encontrado!");
-            } else {
-                res.status(200).json(resultado);
-            }
-
-        })
-        .catch(function (erro) {
-            console.log("Erro ao listar usuários:", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
 
 
 module.exports = {
     cadastrar,
-    autenticar,
-    listar
+    autenticar
 }

@@ -1,36 +1,70 @@
 var database = require("../database/config");
 
-function cadastrar(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso) {
-    if (idNivelAcesso != 2 && idNivelAcesso != 3) {
-        throw "ID_NIVEL_ACESSO_INVALIDO";
-    }
-
+async function cadastrar(nome, sobrenome, email, senha, idEmpresa, idNivelAcesso) {
+    
     const instrucaoSql = `
         INSERT INTO usuario (nome, sobrenome, email, senha, id_empresa, id_nivel_acesso)
-            VALUES ('${nome}', '${sobrenome}', '${email}', '${senha}', '${idEmpresa}', '${idNivelAcesso}')
+        VALUES ('${nome}', '${sobrenome}', '${email}', '${senha}', ${idEmpresa}, ${idNivelAcesso});
     `;
 
     return database.execute(instrucaoSql);
 }
 
-function atualizarFuncionario(nome, sobrenome, email, senha, idUsuario) {
-    if (nome == "" || sobrenome == "" || email == "" || senha == "") {
-        throw "DADOS_NAO_PREENCHIDOS";
-    }else{
-
+async function listar(idEmpresa) {
     const instrucaoSql = `
-        UPDATE usuario SET nome = '${nome}', sobrenome = '${sobrenome}', email = '${email}', senha= '${senha}' WHERE
-            id_usuario = ${idUsuario}        
+        SELECT 
+            u.id_usuario, 
+            u.nome, 
+            u.sobrenome, 
+            u.email,
+            u.id_nivel_acesso, -- PRECISAR TRAZER ISSO AGORA para o <select> saber qual selecionar
+            n.nome AS nomeNivel
+        FROM usuario u
+        JOIN nivel_acesso n ON u.id_nivel_acesso = n.id_nivel_acesso
+        WHERE u.id_empresa = ${idEmpresa};
     `;
-    console.log(instrucaoSql);
-
-
-    return database.execute(instrucaoSql);
-}
+    return await database.execute(instrucaoSql);
 }
 
+async function atualizar(idFuncionario, nome, sobrenome, email, idNivelAcesso) {
+    const instrucaoSql = `
+        UPDATE usuario 
+        SET nome = '${nome}', 
+            sobrenome = '${sobrenome}', 
+            email = '${email}',
+            id_nivel_acesso = ${idNivelAcesso}
+        WHERE id_usuario = ${idFuncionario};
+    `;
+    return await database.execute(instrucaoSql);
+}
+
+async function deletar(idFuncionario) {
+    const instrucaoSql = `
+        DELETE FROM usuario WHERE id_usuario = ${idFuncionario};
+    `;
+    return await database.execute(instrucaoSql);
+}
+
+async function pesquisar(idEmpresa, pesquisa) {
+    const instrucaoSql = `
+        SELECT 
+            u.id_usuario AS id_funcionario, 
+            u.nome, 
+            u.sobrenome, 
+            u.email,
+            n.nome AS nomeNivel
+        FROM usuario u
+        JOIN nivel_acesso n ON u.id_nivel_acesso = n.id_nivel_acesso
+        WHERE u.id_empresa = ${idEmpresa} 
+        AND (u.nome LIKE '%${pesquisa}%' OR u.email LIKE '%${pesquisa}%');
+    `;
+    return await database.execute(instrucaoSql);
+}
 
 module.exports = {
     cadastrar,
-    atualizarFuncionario
-}
+    atualizar,
+    listar,
+    deletar,
+    pesquisar
+};

@@ -1,43 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/form-painel-administrativo.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-sensores/cadastrar.js">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
+    
     <title>Cadastrar Sensor</title>
 </head>
+
 <body>
     <main class="content">
         <header class="header">
             <h2 class="titulo">Cadastrar Sensor</h2>
         </header>
 
-        <form action="#" method="post" class="input-group">
+        <form action="#" class="input-group">
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/sensor-icon-dark.svg" alt="Ícone Sensor">
-                <input type="text" name="identificacao" id="identificacao" placeholder="Identificação" required>
+                <input type="text" id="identificacao" placeholder="Identificação (Ex: Sensor A1)" required>
             </div>
 
             <div class="input-box">
-                <img src="./../../../assets/icones/painel-administrativo/barril-icon-dark.svg" alt="">
-                <select name="barrilAssociado" id="barrilAssociado" required>
-                    <option value="" disabled selected>Selecione...</option>
-                    <option value="1">Barril 1</option>
-                    <option value="2">Barril 2</option>
-                    <option value="3">Barril 3</option>
+                <img src="./../../../assets/icones/painel-administrativo/barril-icon-dark.svg" alt="Ícone Barril">
+                <select name="barrilAssociado" id="select_barril" required>
+                    <option value="" selected disabled>Carregando barris...</option>
                 </select>
             </div>
 
             <div class="buttons">
                 <button type="button" class="btn btn-voltar" onclick="location.href='./index.html'">Voltar</button>
-                <button type="button" class="btn btn-principal" onclick="location.href='./index.html'">Cadastrar</button>
+                <button type="button" class="btn btn-principal" onclick="cadastrar()">Cadastrar</button>
             </div>
         </form>
     </main>
 </body>
+
+<script>
+    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+
+    async function carregarBarris() {
+        if (!ID_EMPRESA) {
+            console.error("Sem ID Empresa na sessão");
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/barris/listar?idEmpresa=${ID_EMPRESA}`);
+
+            if (resposta.ok) {
+                const listaBarris = await resposta.json();
+                const select = document.getElementById("select_barril");
+
+                select.innerHTML = '<option value="" selected disabled>Selecione um barril...</option>';
+
+                listaBarris.forEach(barril => {
+                    const option = document.createElement("option");
+                    
+                    option.value = barril.idBarril; 
+                    option.textContent = barril.identificacao; 
+                    select.appendChild(option);
+                });
+            } else {
+                alert("Erro ao carregar lista de barris.");
+            }
+        } catch (erro) {
+            console.error("Erro ao buscar barris:", erro);
+        }
+    }
+
+    async function cadastrar() {
+        const identificacaoVar = document.getElementById("identificacao").value;
+        const idBarrilVar = document.getElementById("select_barril").value;
+
+        if (identificacaoVar == "") {
+            alert("Por favor, dê um nome ao sensor.");
+            return;
+        }
+        if (idBarrilVar == "") {
+            alert("Por favor, selecione um barril.");
+            return;
+        }
+
+        try {
+            const resposta = await fetch("/sensores/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    identificacao: identificacaoVar,
+                    idBarril: idBarrilVar 
+                }),
+            });
+
+            if (resposta.ok) {
+                alert("Sensor cadastrado com sucesso!");
+                window.location.href = "./index.html";
+            } else {
+                const erro = await resposta.json();
+                alert("Erro ao cadastrar: " + erro.mensagem);
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        }
+    }
+
+    window.onload = carregarBarris;
+
+</script>
 </html>

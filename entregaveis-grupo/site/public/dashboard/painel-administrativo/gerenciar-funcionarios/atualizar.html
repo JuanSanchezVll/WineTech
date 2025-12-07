@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/form-painel-administrativo.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <title>Atualizar Funcionário</title>
 </head>
@@ -16,30 +14,40 @@
             <h2 class="titulo">Atualizar Funcionário</h2>
         </header>
 
-        <form class="input-group" action="#" method="post">
+        <form class="input-group">
             <div class="input-box">
-                <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Funcionário">
-                <input type="text" name="nome" id="nome" value="teste" placeholder="Nome" required>
+                <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Nome">
+                <input type="text" id="nome" placeholder="Nome" required>
             </div>
 
             <div class="input-box">
-                <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Funcionário">
-                <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+                <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Sobrenome">
+                <input type="text" id="sobrenome" placeholder="Sobrenome" required>
             </div>
 
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/email-icon.svg" alt="Ícone Email">
-                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-box">
+                <img src="./../../../assets/icones/painel-administrativo/user2-icon.svg" alt="Ícone Cargo">
+                <select id="select_nivel" required>
+                    <option value="" disabled selected>Selecione o cargo...</option>
+                    <option value="2">Administrador</option>
+                    <option value="3">Enólogo</option>
+                    <option value="4">Operador</option>
+                </select>
             </div>
 
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/password-icon.svg" alt="Ícone Senha">
-                <input type="password" name="senha" id="senha" placeholder="Senha" minlength="8" autocomplete="off" required>
+                <input type="password" id="senha" placeholder="Nova Senha" minlength="8" autocomplete="off" required>
             </div>
 
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/password-icon.svg" alt="Ícone Senha">
-                <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirme sua senha" minlength="8" autocomplete="off" required>
+                <input type="password" id="confirmarSenha" placeholder="Confirme a Senha" minlength="8" autocomplete="off" required>
             </div>
 
             <div class="buttons">
@@ -47,8 +55,87 @@
                 <button type="button" class="btn btn-principal" onclick="atualizar()">Atualizar</button>
             </div>
         </form>
-    
     </main>
 </body>
-    <script src="./../../../js/dashboard/painel-administrativo/js-funcionarios/atualizar.js"></script>
+
+<script>
+    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+    const params = new URLSearchParams(window.location.search);
+    const idFuncionarioUrl = params.get('id');
+
+    async function carregarDadosAtuais() {
+        if (!idFuncionarioUrl) {
+            alert("Erro: Funcionário não identificado.");
+            window.location.href = "./index.html";
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/painelAdministrativo/listar?idEmpresa=${ID_EMPRESA}&idFuncionario=${idFuncionarioUrl}`);
+
+            if (resposta.ok) {
+                const dados = await resposta.json();
+                const usuario = dados[0];
+
+                document.getElementById("nome").value = usuario.nome;
+                document.getElementById("sobrenome").value = usuario.sobrenome;
+                document.getElementById("email").value = usuario.email;
+                
+                if (usuario.id_nivel_acesso) {
+                    document.getElementById("select_nivel").value = usuario.id_nivel_acesso;
+                }
+            }
+        } catch (erro) {
+            console.error("Erro ao carregar dados:", erro);
+        }
+    }
+
+    async function atualizar() {
+        const nomeVar = document.getElementById('nome').value;
+        const sobrenomeVar = document.getElementById('sobrenome').value;
+        const emailVar = document.getElementById('email').value;
+        const nivelVar = document.getElementById('select_nivel').value;
+        const senhaVar = document.getElementById('senha').value;
+        const confirmarSenhaVar = document.getElementById('confirmarSenha').value;
+
+        if (nomeVar == "" || emailVar == "" || nivelVar == "" || senhaVar == "") {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        
+        if (senhaVar !== confirmarSenhaVar) {
+            alert("As senhas não coincidem!");
+            return;
+        }
+
+        try {
+            const resposta = await fetch("/painelAdministrativo/atualizar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    idFuncionario: idFuncionarioUrl,
+                    nome: nomeVar,
+                    sobrenome: sobrenomeVar,
+                    email: emailVar,
+                    senha: senhaVar, 
+                    idNivelAcesso: nivelVar
+                })
+            });
+
+            if (resposta.ok) {
+                alert("Funcionário atualizado com sucesso!");
+                window.location = 'index.html';
+            } else {
+                const erro = await resposta.json();
+                alert("Erro ao atualizar: " + erro.mensagem);
+            }
+
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+        }
+    }
+
+    window.onload = carregarDadosAtuais;
+</script>
 </html>

@@ -20,6 +20,10 @@ var painelAdministrativoRouter = require("./src/routes/painelAdministrativo");
 var caveRouter = require("./src/routes/caves");
 var uvaRouter = require("./src/routes/uvas");
 var barrilRouter = require("./src/routes/barris");
+var sensorRoutes = require ("./src/routes/sensores")
+// var enderecoRouter = require("./src/routes/enderecos");
+// var leituraRouter = require("./src/routes/leituras");
+// var alertaRouter = require("./src/routes/alertas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +37,7 @@ app.use("/painelAdministrativo", painelAdministrativoRouter);
 app.use("/caves", caveRouter);
 app.use("/uvas", uvaRouter);
 app.use("/barris", barrilRouter);
+app.use("/sensores", sensorRoutes);
 
 app.post("/perguntar", async (req, res) => {
     const pergunta = req.body.pergunta;

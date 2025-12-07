@@ -1,9 +1,7 @@
 var database = require("../database/config");
 
-async function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
+async function cadastrar(nome, sobrenome, email, senha ,idEmpresa) {
     const idNivelAcesso = 3;
-    const resultado = await validarCodigoSeguranca(codigoSeguranca);
-    const idEmpresa = resultado[0].id_empresa;
 
     const instrucaoSql = `
         INSERT INTO usuario (nome, sobrenome, email, senha, id_empresa, id_nivel_acesso)
@@ -55,5 +53,6 @@ async function listar() {
 module.exports = {
     cadastrar,
     autenticar,
-    listar
+    listar,
+    validarCodigoSeguranca
 }

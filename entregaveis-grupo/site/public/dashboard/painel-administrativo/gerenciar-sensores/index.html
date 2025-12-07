@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
 
     <title>Gerenciar Sensores</title>
 </head>
+
 <body>
     <main class="content">
         <aside class="sidebar">
@@ -16,18 +18,19 @@
                 <div class="logo-wrap">
                     <img src="./../../../assets/imgs/logo-branca.png" alt="Logo WineTech" class="logo">
                 </div>
-            
-             <nav class="nav">
+
+                <nav class="nav">
                     <a href="./../gerenciar-funcionarios/index.html" class="nav-link">
-                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg" alt="Ícone Funcionário">
+                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg"
+                            alt="Ícone Funcionário">
                         <span>Gerenciar Funcionários</span>
                     </a>
-            
+
                     <a href="./../gerenciar-caves/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/cave-icon.svg" alt="Ícone Cave">
                         <span>Gerenciar Caves</span>
                     </a>
-            
+
                     <a href="./../gerenciar-uvas/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/vinho-icon.svg" alt="Ícone Vinho">
                         <span>Gerenciar Uvas</span>
@@ -37,14 +40,14 @@
                         <img src="./../../../assets/icones/painel-administrativo/barril-icon.svg" alt="Ícone Barril">
                         <span>Gerenciar Barris</span>
                     </a>
-            
+
                     <a href="./../gerenciar-sensores/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/sensor-icon.svg" alt="Ícone Sensor">
                         <span>Gerenciar Sensores</span>
                     </a>
                 </nav>
             </div>
-            
+
             <div class="sidebar-bottom">
                 <a href="./../../index-dashboard.html" class="btn-sidebar">
                     <img src="./../../../assets/icones/painel-administrativo/voltar-icon.svg" alt="Ícone Voltar">
@@ -57,13 +60,13 @@
             <header class="main-content-header">
                 <h2 class="title">Gerenciar Sensores</h2>
             </header>
-            
+
             <div class="table-container">
                 <div class="actions">
-                    <input type="search" placeholder="Busque por um sensor...">
+                    <input type="search" id="pesquisarVAR" oninput="pesquisar()" placeholder="Busque por um sensor...">
                     <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Sensor</button>
                 </div>
-                
+
                 <table class="table">
                     <tr class="table-title">
                         <th>ID</th>
@@ -72,30 +75,106 @@
                         <th>Editar</th>
                         <th>Excluir</th>
                     </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Sensor ABC1A</td>
-                        <td>Barril ABC1A</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Sensor ABC1B</td>
-                        <td>Barril ABC1B</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                    <tr class="table-content">
-                        <td>1</td>
-                        <td>Sensor ABC1C</td>
-                        <td>Barril ABC1C</td>
-                        <td><a href="./atualizar.html"><img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar"></a></td>
-                        <td><img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon" alt="Ícone de deletar"></td>
-                    </tr>
-                </table>
+                    </table>
             </div>
         </section>
     </main>
 </body>
+
+<script>
+    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+
+    function plotarTabela(listaDeSensores) {
+        const tabela = document.querySelector(".table");
+
+        const linhasAntigas = document.querySelectorAll(".table-content");
+        linhasAntigas.forEach(linha => linha.remove());
+
+        listaDeSensores.forEach(sensor => {
+            const novaLinha = document.createElement("tr");
+            novaLinha.classList.add("table-content");
+
+            novaLinha.innerHTML = `
+                <td>${sensor.idSensor}</td>
+                <td>${sensor.nomeSensor}</td>
+                <td>${sensor.nomeBarril}</td>
+                <td>
+                    <a href="./atualizar.html?id=${sensor.idSensor}">
+                        <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
+                    </a>
+                </td>
+                <td>
+                    <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
+                            class="action-icon" 
+                            alt="Ícone de deletar"
+                            onclick="deletar(${sensor.idSensor})" 
+                            style="cursor: pointer;">
+                </td>
+            `;
+
+            tabela.appendChild(novaLinha);
+        });
+    }
+
+    async function listar() {
+        if (!ID_EMPRESA) {
+            console.error("Sem ID Empresa na sessão");
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/sensores/listar?idEmpresa=${ID_EMPRESA}`);
+
+            if (resposta.ok) {
+                const lista = await resposta.json();
+                plotarTabela(lista);
+            } else {
+                console.error("Erro ao listar sensores");
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        }
+    }
+
+    async function pesquisar() {
+        const termo = document.getElementById("pesquisarVAR").value;
+
+        if (termo === "") {
+            listar();
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/sensores/pesquisar?idEmpresa=${ID_EMPRESA}&pesquisa=${termo}`);
+
+            if (resposta.ok) {
+                const lista = await resposta.json();
+                plotarTabela(lista);
+            }
+        } catch (erro) {
+            console.error("Erro na pesquisa:", erro);
+        }
+    }
+
+    async function deletar(idSensor) {
+        if (confirm("Tem certeza que deseja excluir este sensor?")) {
+            try {
+                const resposta = await fetch(`/sensores/deletar?idSensor=${idSensor}`, { method: "GET" });
+
+                if (resposta.ok) {
+                    alert("Sensor deletado com sucesso!");
+                    listar();
+                } else {
+                    const erro = await resposta.json();
+                    alert("Erro ao deletar: " + erro.mensagem);
+                }
+            } catch (erro) {
+                console.error("Erro:", erro);
+            }
+        }
+    }
+
+    window.onload = listar;
+</script>
+
 </html>

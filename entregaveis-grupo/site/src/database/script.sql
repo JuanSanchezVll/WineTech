@@ -84,6 +84,10 @@ CREATE TABLE sensor (
   CONSTRAINT fk_sensor_barril FOREIGN KEY (id_barril) REFERENCES barril (id_barril)
 );
 
+select s.identificacao as nome from sensor as s join barril as b on b.id_barril = s.id_barril
+join cave as c on c.id_cave = b.id_cave
+where c.id_empresa = 1;
+
 CREATE TABLE leitura (
   id_leitura INT AUTO_INCREMENT,
   temperatura DECIMAL(5,2) NOT NULL,

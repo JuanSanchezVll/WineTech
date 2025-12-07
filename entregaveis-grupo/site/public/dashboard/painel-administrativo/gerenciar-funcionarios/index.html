@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/index-painel-administrativo.css">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/sidebar.css">
-    <script src="./../../../js/dashboard/painel-administrativo/js-funcionarios/index.js"> </script>
-
-
+    
     <title>Gerenciar Funcionários</title>
 </head>
-<body  onload="listarUsuarios()">
+
+<body>
     <main class="content">
         <aside class="sidebar">
             <div class="sidebar-top">
                 <div class="logo-wrap">
                     <img src="./../../../assets/imgs/logo-branca.png" alt="Logo WineTech" class="logo">
                 </div>
-            
+
                 <nav class="nav">
                     <a href="./../gerenciar-funcionarios/index.html" class="nav-link">
-                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg" alt="Ícone Funcionário">
+                        <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg"
+                            alt="Ícone Funcionário">
                         <span>Gerenciar Funcionários</span>
                     </a>
-            
+
                     <a href="./../gerenciar-caves/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/cave-icon.svg" alt="Ícone Cave">
                         <span>Gerenciar Caves</span>
                     </a>
-            
+
                     <a href="./../gerenciar-uvas/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/vinho-icon.svg" alt="Ícone Vinho">
                         <span>Gerenciar Uvas</span>
@@ -38,14 +39,14 @@
                         <img src="./../../../assets/icones/painel-administrativo/barril-icon.svg" alt="Ícone Barril">
                         <span>Gerenciar Barris</span>
                     </a>
-            
+
                     <a href="./../gerenciar-sensores/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/sensor-icon.svg" alt="Ícone Sensor">
                         <span>Gerenciar Sensores</span>
                     </a>
                 </nav>
             </div>
-            
+
             <div class="sidebar-bottom">
                 <a href="./../../index-dashboard.html" class="btn-sidebar">
                     <img src="./../../../assets/icones/painel-administrativo/voltar-icon.svg" alt="Ícone Voltar">
@@ -58,20 +59,133 @@
             <header class="main-content-header">
                 <h2 class="title">Gerenciar Funcionários</h2>
             </header>
-            
+
             <div class="table-container">
                 <div class="actions">
-                    <input type="search" placeholder="Busque por um funcionário...">
+                    <input type="search" id="pesquisarVAR" oninput="pesquisar()" placeholder="Busque por nome ou email...">
+                    
                     <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Funcionário</button>
                 </div>
-                
+
                 <table class="table">
-                    <div id="tabela"></div>
-                       
+                    <thead>
+                        <tr class="table-title">
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>Email</th>
+                            <th>Nível Acesso</th> <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabela_corpo">
+                        </tbody>
                 </table>
             </div>
         </section>
     </main>
 </body>
 
+<script>
+    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+
+    function plotarTabela(listaUsuarios) {
+        const corpoTabela = document.getElementById("tabela_corpo");
+        
+        corpoTabela.innerHTML = ""; 
+
+        listaUsuarios.forEach(u => {
+            const novaLinha = document.createElement("tr");
+            novaLinha.classList.add("table-content");
+            
+            novaLinha.innerHTML = `
+                <td>${u.id_usuario}</td>
+                <td>${u.nome}</td>
+                <td>${u.sobrenome}</td>
+                <td>${u.email}</td>
+                <td>${u.nomeNivel}</td> 
+                <td>
+                    <a href="./atualizar.html?id=${u.id_usuario}">
+                        <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
+                    </a>
+                </td>
+                <td>
+                    <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
+                         class="action-icon" 
+                         alt="Ícone de deletar"
+                         onclick="deletar(${u.id_usuario})"
+                         style="cursor: pointer;">
+                </td>
+            `;
+            
+            corpoTabela.appendChild(novaLinha);
+        });
+    }
+
+    async function listarUsuarios() {
+        if (!ID_EMPRESA) {
+            console.error("Sem ID Empresa na sessão");
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/painelAdministrativo/listar?idEmpresa=${ID_EMPRESA}`);
+            
+            if (resposta.ok) {
+                if (resposta.status === 204) {
+                     document.getElementById("tabela_corpo").innerHTML = "<tr><td colspan='7'>Nenhum funcionário encontrado.</td></tr>";
+                     return;
+                }
+                const usuarios = await resposta.json();
+                plotarTabela(usuarios);
+            } else {
+                console.error("Erro ao buscar usuários.");
+            }
+        } catch (erro) {
+            console.error("Erro na requisição:", erro);
+        }
+    }
+
+    async function pesquisar() {
+        const termo = document.getElementById("pesquisarVAR").value;
+        
+        if(termo === "") {
+            listarUsuarios();
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/painelAdministrativo/pesquisar?idEmpresa=${ID_EMPRESA}&pesquisa=${termo}`);
+            
+            if (resposta.ok) {
+                const usuarios = await resposta.json();
+                plotarTabela(usuarios);
+            }
+        } catch (erro) {
+            console.error("Erro na pesquisa:", erro);
+        }
+    }
+
+    async function deletar(idFuncionario) {
+        const confirmacao = confirm("Tem certeza que deseja remover este funcionário?");
+        
+        if (confirmacao) {
+            try {
+                const resposta = await fetch(`/painelAdministrativo/deletar?idFuncionario=${idFuncionario}`, { method: "GET" });
+                
+                if (resposta.ok) {
+                    alert("Funcionário removido com sucesso!");
+                    listarUsuarios(); 
+                } else {
+                    const erro = await resposta.json();
+                    alert("Erro ao remover: " + erro.mensagem);
+                }
+            } catch (erro) {
+                console.error("Erro ao deletar:", erro);
+            }
+        }
+    }
+    window.onload = listarUsuarios;
+</script>
 </html>
