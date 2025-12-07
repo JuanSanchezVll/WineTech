@@ -31,7 +31,7 @@ function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
     })
         .then(function (resposta) {
             if (!resposta.ok) {
-                throw "Erro ao cadastrar funcionário.";
+                return mostrarErro("Erro ao cadastrar funcionário.");
             }
 
             resposta.json().then(json => {
@@ -40,7 +40,7 @@ function cadastrar(nome, sobrenome, email, senha, codigoSeguranca) {
         })
         .catch(function (erro) {
             console.error("Erro: ", erro);
-            alert("Ocorreu um erro ao cadastrar. Tente novamente.");
+            return mostrarErro("Ocorreu um erro ao cadastrar. Tente novamente.");
         });
 
 }
