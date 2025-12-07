@@ -8,13 +8,13 @@ function validarNome(input) {
     const tamanhoMinimo = 3;
 
     if (input.length <= tamanhoMinimo) {
-        return mostrarErro("NOME DEVE CONTER NO MÍNIMO 3 LETRAS");
+        return mostrarErro("Nome deve conter no mínimo 3 letras.");
     } else {
         cardErro.style.display = "none";
         for (let i = 0; i < input.length; i++) {
             const codigo_ascii = input.charCodeAt(i);
             if (!((codigo_ascii >= 65 && codigo_ascii <= 90) || (codigo_ascii >= 97 && codigo_ascii <= 122) || (codigo_ascii === 32))) {
-                return mostrarErro(`NOME SÓ DEVE CONTER LETRAS`);
+                return mostrarErro(`Nome deve conter apenas letras.`);
             } else {
                 cardErro.style.display = "none";
             }
@@ -28,14 +28,14 @@ function validarSobrenome(input) {
     const tamanhoMinimo = 2;
 
     if (input.length < tamanhoMinimo) {
-        return mostrarErro(`SOBRENOME DEVE CONTER NO MÍNIMO 3 LETRAS`);
+        return mostrarErro(`Sobrenome deve conter no mínimo 3 letras.`);
     } else {
         cardErro.style.display = "none";
         for (let i = 0; i < input.length; i++) {
             const codigo_ascii = input.charCodeAt(i);
 
             if (!((codigo_ascii >= 65 && codigo_ascii <= 90) || (codigo_ascii >= 97 && codigo_ascii <= 122) || (codigo_ascii === 32))) {
-                return mostrarErro('SOBRENOME SÓ DEVE CONTER LETRAS');
+                return mostrarErro('Sobrenome deve conter apenas letras.');
             } else {
                 cardErro.style.display = "none";
             }
@@ -75,11 +75,11 @@ function validarSenha(input) {
 
     let msg = "";
 
-    msg += (!tamanhoMinimo) ? `MÍNIMO 8 CARACTERES.<br>` : "";
-    msg += (!contemMinuscula) ? `LETRA MINÚSCULA.<br>` : "";
-    msg += (!contemMaiuscula) ? `LETRA MAIÚSCULA.<br>` : "";
-    msg += (!contemNumero) ? `NÚMERO.<br>` : "";
-    msg += (!contemEspecial) ? `CARACTERE ESPECIAL.<br>` : "";
+    msg += (!tamanhoMinimo) ? `Mínimo de 8 caracteres.<br>` : "";
+    msg += (!contemMinuscula) ? `Letra minúscula.<br>` : "";
+    msg += (!contemMaiuscula) ? `Letra maiúscula.<br>` : "";
+    msg += (!contemNumero) ? `Número.<br>` : "";
+    msg += (!contemEspecial) ? `Caractere especial.<br>` : "";
 
     if (msg != "") {
         return mostrarErro(`A senha deve ter: <br> ${msg}`);
@@ -91,14 +91,14 @@ function validarCNPJ(input) {
     const tamanhoMinimo = input.length == 14;
 
     if (!tamanhoMinimo) {
-        return mostrarErro(`CNPJ DEVE CONTER 14 NUMEROS`);
+        return mostrarErro(`CNPJ deve conter 14 números.`);
     } else {
         cardErro.style.display = "none";
         for (let i = 0; i < input.length; i++) {
             const codigo_ascii = input.charCodeAt(i);
 
             if (codigo_ascii < 48 || codigo_ascii > 57) {
-                return mostrarErro(`CNPJ DEVE CONTER APENAS NÚMEROS`);
+                return mostrarErro(`CNPJ deve conter apenas números`);
             } else {
                 cardErro.style.display = "none";
             }
@@ -111,14 +111,14 @@ function validarRazaoSocial(input) {
     const tamanhoMinimo = 3;
 
     if (input.length < tamanhoMinimo) {
-        return mostrarErro(`A RAZÃO SOCIAL DEVE CONTER NO MÍNIMO 3 CARACTERES.`);
+        return mostrarErro(`A razão social deve conter no mínimo 3 caracteres.`);
     } else {
         cardErro.style.display = "none";
         for (let i = 0; i < input.length; i++) {
             const codigo_ascii = input.charCodeAt(i);
 
             if (!((codigo_ascii >= 32 && codigo_ascii <= 57) || (codigo_ascii >= 65 && codigo_ascii <= 90) || (codigo_ascii >= 97 && codigo_ascii <= 122))) {
-                return mostrarErro(`RAZÃO SOCIAL NÃO PODE CONTER CERTOS CARACTERES ESPECIAIS COMO ${input[i].toUpperCase()}!`)
+                return mostrarErro(`Razão social não pode conter certos caracteres como: ${input[i].toUpperCase()}!`)
             } else {
                 cardErro.style.display = "none";
             }
@@ -131,7 +131,7 @@ function validarNomeFantasia(input) {
     const tamanhoMinimo = 3;
 
     if (input.length < tamanhoMinimo) {
-        return mostrarErro(`O NOME FANTASIA DEVE TER NO MÍNIMO 3 CARACTERES`);
+        return mostrarErro(`O nome fantasia deve ter no mínimo 3 caracteres.`);
     } else {
         cardErro.style.display = "none";
         for (let i = 0; i < input.length; i++) {
@@ -143,7 +143,7 @@ function validarNomeFantasia(input) {
                     (codigo_ascii >= 97 && codigo_ascii <= 122)
                 )
             ) {
-                return mostrarErro(`RAZÃO SOCIAL NÃO PODE CONTER CERTOS CARACTERES ESPECIAIS COMO ${input[i].toUpperCase()}!`)
+                return mostrarErro(`Nome fantasia não pode conter certos caracteres como: ${input[i].toUpperCase()}!`)
             } else {
                 cardErro.style.display = "none";
             }
