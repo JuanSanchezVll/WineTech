@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/index-painel-administrativo.css">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/sidebar.css">
-    <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-barril/index.js">
-
+    <script src="../../../js/dashboard/painel-administrativo/js-barril/index.js"></script>
     <title>Gerenciar Barris</title>
 </head>
-<body>
+<body onload="carregarBarris()">
     <main class="content">
         <aside class="sidebar">
             <div class="sidebar-top">
                 <div class="logo-wrap">
                     <img src="./../../../assets/imgs/logo-branca.png" alt="Logo WineTech" class="logo">
                 </div>
-            
+                
                 <nav class="nav">
                     <a href="./../gerenciar-funcionarios/index.html" class="nav-link">
                         <img src="./../../../assets/icones/painel-administrativo/funcionario-icon.svg" alt="Ícone Funcionário">
@@ -60,157 +59,28 @@
             
             <div class="table-container">
                 <div class="actions">
-                    <input type="search" placeholder="Busque por um barril...">
+                    <input type="search" placeholder="Busque por um barril..." id="pesquisa" oninput="pesquisarBarris(pesquisa.value)">
                     <button type="button" onclick="location.href='./cadastrar.html'">Cadastrar Barril</button>
                 </div>
                 
                 <table class="table">
-                    <tr class="table-title">
-                        <th>ID</th>
-                        <th>Identificação</th>
-                        <th>Cave associada</th>
-                        <th>Vinho armazenado</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
-                    </tr>
+                    <thead id="titulo-tabela-barril">
+                        <tr class="table-title">
+                            <th>ID</th>
+                            <th>Identificação</th>
+                            <th>Cave associada</th>
+                            <th>Vinho armazenado</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="conteudo-tabela-barril">
+                        <tr class="table-content">
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </section>
     </main>
 </body>
-<script>
-
-    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
-
-    async function listar() {
-        if (!ID_EMPRESA) {
-            console.error("ID da empresa não encontrado!");
-            return;
-        }
-
-        try {
-            const resposta = await fetch(`/barris/listar?idEmpresa=${ID_EMPRESA}`, {
-                method: "GET",
-            });
-
-            if (resposta.ok) {
-                const listaDeCaves = await resposta.json();
-
-                const tabela = document.querySelector(".table");
-
-                const linhasAntigas = document.querySelectorAll(".table-content");
-                linhasAntigas.forEach(linha => linha.remove());
-
-                listaDeCaves.forEach(cave => {
-                    const novaLinha = document.createElement("tr");
-                    novaLinha.classList.add("table-content");
-
-                    novaLinha.innerHTML = `
-                        <td>${barril.id}</td>
-                        <td>${barril.identificacao}</td>
-                        <td>${barril.identificacao}</td>
-                        <td>
-                            <a href="./atualizar.html?id=${cave.id}">
-                                <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
-                            </a>
-                        </td>
-                        <td>
-                            <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
-                                 class="action-icon" 
-                                 alt="Ícone de deletar"
-                                 onclick="deletar(${cave.id})" 
-                                 style="cursor: pointer;">
-                        </td>
-                    `;
-
-                    tabela.appendChild(novaLinha);
-                });
-            } else {
-                console.error("Status do erro:", resposta.status);
-
-                const erroTexto = await resposta.text();
-                console.error("Mensagem do servidor:", erroTexto);
-            }
-        } catch (erro) {
-            console.error("Erro na requisição:", erro);
-        }
-    }
-
-    async function deletar(id) {
-        const confirmacao = confirm("Tem certeza que deseja excluir esta cave?");
-
-        if (confirmacao) {
-            try {
-                const resposta = await fetch(`/barris/deletar?idCave=${id}`, {
-                    method: "GET"
-                });
-
-                if (resposta.ok) {
-                    alert("Cave deletada com sucesso!");
-                    listar();
-                } else {
-                    const erro = await resposta.json();
-                    alert("Erro ao deletar: " + erro.mensagem);
-                }
-            } catch (erro) {
-                console.error("Erro na requisição de delete:", erro);
-            }
-        }
-    }
-
-    async function pesquisar() {
-        if (!ID_EMPRESA) {
-            console.error("ID da empresa não encontrado!");
-            return;
-        }
-
-        try {
-            const resposta = await fetch(`/barris/pesquisar?idEmpresa=${ID_EMPRESA}`, {
-                method: "GET",
-            });
-
-            if (resposta.ok) {
-                const listaDeCaves = await resposta.json();
-
-                const tabela = document.querySelector(".table");
-
-                const linhasAntigas = document.querySelectorAll(".table-content");
-                linhasAntigas.forEach(linha => linha.remove());
-
-                listaDeCaves.forEach(cave => {
-                    const novaLinha = document.createElement("tr");
-                    novaLinha.classList.add("table-content");
-
-                    novaLinha.innerHTML = `
-                        <td>${cave.id}</td>
-                        <td>${cave.identificacao}</td>
-                        <td>
-                            <a href="./atualizar.html?id=${cave.id}">
-                                <img src="./../../../assets/icones/painel-administrativo/editar-icon.svg" class="action-icon" alt="Ícone de editar">
-                            </a>
-                        </td>
-                        <td>
-                            <img src="./../../../assets/icones/painel-administrativo/delete-icon.svg" 
-                                 class="action-icon" 
-                                 alt="Ícone de deletar"
-                                 onclick="deletar(${cave.id})" 
-                                 style="cursor: pointer;">
-                        </td>
-                    `;
-                    tabela.appendChild(novaLinha);
-                });
-            } else {
-                console.error("Status do erro:", resposta.status);
-
-                const erroTexto = await resposta.text();
-                console.error("Mensagem do servidor:", erroTexto);
-            }
-        } catch (erro) {
-            console.error("Erro na requisição:", erro);
-        }
-    }
-
-    // window.onload = pesquisar;
-    window.onload = listar;
-</script>
 </html>

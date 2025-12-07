@@ -5,12 +5,8 @@ async function buscarUva() {
         const params = new URLSearchParams(window.location.search);
         idUvaGlobal = params.get('id'); 
 
-        console.log("ID UVA: " + idUvaGlobal);
-
         const resposta = await fetch(`/uvas/listar?idEmpresa=${sessionStorage.ID_EMPRESA}&idUva=${idUvaGlobal}`);
         const uva = await resposta.json();
-
-        console.log(uva);
 
         const nome = document.getElementById("nome");
         const temperaturaMinima = document.getElementById("temperaturaMinima");
@@ -24,7 +20,7 @@ async function buscarUva() {
         umidadeMinima.value = uva[0].umidade_minima;
         umidadeMaxima.value = uva[0].umidade_maxima;
     } catch (erro) {
-        console.error("Erro ao cadastrar uva" + erro);
+        console.error("Erro ao  uva" + erro);
     }
 }
 

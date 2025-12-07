@@ -14,17 +14,8 @@ async function deletarUva(idUva) {
     const confirmacao = confirm("Tem certeza que deseja excluir?");
 
     if (confirmacao) {
-        try {
-            const resultado = await fetch(`/uvas/deletar?idUva=${idUva}`);
-
-            if (resultado.ok) {
-                alert("Uva deletada com sucesso");
-            }
-
-        } catch (erro) {
-            console.error("Erro ao deletar uva: " + erro);
-            alert("Erro ao deletar uva");
-        }
+        const resultado = await fetch(`/uvas/deletar?idUva=${idUva}`);
+        alert("Uva deletada com sucesso");
     }
 }
 
@@ -58,9 +49,13 @@ async function exibirTabela(dados) {
                     </a>
                 </td>
                 <td>
-                    <img onclick="deletarUva(${dados[i].id_uva})" src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon">
+                    <img onclick="deletarUva(${dados[i].id_uva}), recarregar()" src="./../../../assets/icones/painel-administrativo/delete-icon.svg" class="action-icon">
                 </td>
             </tr>
         `;
     }
+}
+
+function recarregar() {
+    window.location.reload();
 }
