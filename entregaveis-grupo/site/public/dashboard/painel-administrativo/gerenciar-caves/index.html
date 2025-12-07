@@ -49,7 +49,7 @@
             </div>
 
             <div class="sidebar-bottom">
-                <a href="./../../index-dashboard.html" class="btn-sidebar">
+                <a href="./../../index.html" class="btn-sidebar">
                     <img src="./../../../assets/icones/painel-administrativo/voltar-icon.svg" alt="Ícone Voltar">
                     <span>Voltar</span>
                 </a>
@@ -84,12 +84,9 @@
 
     const ID_EMPRESA = sessionStorage.ID_EMPRESA;
 
-    // --- FUNÇÃO AUXILIAR PARA DESENHAR A TABELA ---
-    // Criamos isso para não repetir o mesmo código dentro do listar() e do pesquisar()
     function plotarTabela(listaDeCaves) {
         const tabela = document.querySelector(".table");
 
-        // Remove as linhas antigas para não duplicar
         const linhasAntigas = document.querySelectorAll(".table-content");
         linhasAntigas.forEach(linha => linha.remove());
 
@@ -97,8 +94,6 @@
             const novaLinha = document.createElement("tr");
             novaLinha.classList.add("table-content");
 
-            // ATENÇÃO: Estou usando cave.idCave conforme arrumamos no seu Model.
-            // Se você não alterou o Model, troque por cave.id aqui.
             novaLinha.innerHTML = `
                 <td>${cave.id}</td>
                 <td>${cave.identificacao}</td>
@@ -120,7 +115,6 @@
         });
     }
 
-    // --- FUNÇÃO LISTAR (Busca todas) ---
     async function listar() {
         if (!ID_EMPRESA) {
             console.error("ID da empresa não encontrado!");
@@ -134,7 +128,7 @@
 
             if (resposta.ok) {
                 const listaDeCaves = await resposta.json();
-                plotarTabela(listaDeCaves); // Chama a função que desenha a tabela
+                plotarTabela(listaDeCaves);
             } else {
                 console.error("Erro ao listar:", resposta.status);
             }
@@ -143,7 +137,6 @@
         }
     }
 
-    // --- FUNÇÃO PESQUISAR (Busca por termo) ---
     async function pesquisar() {
         const inputPesquisa = document.getElementById("pesquisarVAR");
         const termoPesquisa = inputPesquisa.value;
@@ -153,14 +146,12 @@
             return;
         }
 
-        // Se o campo estiver vazio, listamos tudo para "limpar" a pesquisa
         if (termoPesquisa === "") {
             listar();
             return;
         }
 
         try {
-            // Aqui adicionamos o &pesquisa=VALOR na URL para o Back-end receber
             const resposta = await fetch(`/caves/pesquisar?idEmpresa=${ID_EMPRESA}&pesquisa=${termoPesquisa}`, {
                 method: "GET",
             });
@@ -169,12 +160,10 @@
                 const listaDeCaves = await resposta.json();
                 console.log(resposta.json)
                 
-                // Se a pesquisa não retornar nada, podemos limpar a tabela ou mostrar aviso
                 if (listaDeCaves.length === 0) {
-                     // Opcional: Avisar que não achou nada, ou só limpar a tabela
                 }
                 
-                plotarTabela(listaDeCaves); // Reusa a mesma lógica de desenho
+                plotarTabela(listaDeCaves);
             } else {
                 console.error("Erro ao pesquisar:", resposta.status);
             }
@@ -183,19 +172,18 @@
         }
     }
 
-    // --- FUNÇÃO DELETAR ---
     async function deletar(id) {
         const confirmacao = confirm("Tem certeza que deseja excluir esta cave?");
 
         if (confirmacao) {
             try {
                 const resposta = await fetch(`/caves/deletar?idCave=${id}`, {
-                    method: "GET" // Lembrando que no seu router você usou GET para deletar
+                    method: "GET" 
                 });
 
                 if (resposta.ok) {
                     alert("Cave deletada com sucesso!");
-                    listar(); // Atualiza a lista
+                    listar(); 
                 } else {
                     const erro = await resposta.json();
                     alert("Erro ao deletar: " + erro.mensagem);

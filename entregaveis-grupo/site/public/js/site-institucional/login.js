@@ -35,7 +35,7 @@ function autenticar() {
                 sessionStorage.NIVEL_ACESSO = json.id_nivel_acesso;
                 sessionStorage.ID_FUNCIONARIO = json.id_usuario;
                 sessionStorage.ID_EMPRESA = json.id_empresa;
-                window.location = "../dashboard/index-dashboard.html";
+                window.location = "../dashboard/index.html";
             });
 
         } else {
