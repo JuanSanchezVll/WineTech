@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -10,12 +9,13 @@ body {
     background: #f4ede4;
     color: #2b2b2b;
     overflow: hidden;
+
 }
+
 
 .container {
     display: flex;
-    height: 100vh;
-    width: 100%;
+    min-height: 100vh;
 }
 
 
@@ -136,6 +136,7 @@ body {
 }
 
 
+
 .nav-link i.fa-circle-question {
     width: 26px;
     text-align: center;
@@ -150,31 +151,20 @@ body {
     width: 100%;
     padding: 26px 30px;
     margin-left: 260px;
-}
-
-
-
-.page-header {
-    margin-bottom: 25px;
+    /* sidebar fixa */
 }
 
 .page-header h1 {
-    font-size: 32px;
+    font-size: 28px;
+    margin-bottom: 4px;
     font-weight: 700;
 }
 
-#select-cave {
-    font-size: 20px;
-    padding: 6px 12px;
-    border-radius: 10px;
-    border: 4 solid #ddd;
-    cursor: pointer;
+.page-header .muted {
+    color: #777;
+    font-size: 17px;
 }
 
-.page-header p {
-    margin-top: 5px;
-    color: #444;
-}
 
 
 
@@ -183,8 +173,8 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
-    margin-bottom: 10px;
-    margin-top: -10px;
+    margin-bottom: 15px;
+    margin-top: 22px;
 }
 
 .kpi {
@@ -239,98 +229,48 @@ body {
 
 
 
-.monitoramento-row {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    margin-top: 20px;
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+    margin-bottom: 25px;
 }
 
 
 
 
-.chart-card {
-    flex: 1.2;
-    background: #fff;
+.card {
+    background: #ffffff;
+    padding: 11px;
     border-radius: 16px;
-    padding: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-    max-height: 380px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
 }
 
-.chart-card h2 {
+.card-header h3 {
     font-size: 18px;
-    color: #4b0e1a;
-    margin-bottom: 12px;
-    text-align: center;
+    margin-bottom: 6px;
+    font-weight: 700;
 }
 
-
-
-.chart-card .chart-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card-header .small {
+    font-size: 13px;
+    color: #777;
 }
 
-.chart-card canvas {
+/* Gráfico */
+.chart-card .card-body {
+    height: 300px;
+    width: 100%;
+}
+
+.chart-card .card-body canvas {
     width: 100% !important;
     height: 100% !important;
 }
 
 
 
-
-.history-card {
-    flex: 0.8;
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    min-width: 250px;
-    max-height: 380px;
-}
-
-.history-card h2 {
-    font-size: 18px;
-    color: #4b0e1a;
-    margin-bottom: 12px;
-    text-align: center;
-}
-
-.table-wrap {
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height: 300px;
-}
-
-.history-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 6px;
-}
-
-.history-table thead th {
-    text-align: left;
-    padding: 10px;
-    color: #e2b214;
-    font-weight: 800;
-    font-size: 0.9rem;
-}
-
-.history-table tbody td {
-    padding: 10px;
-    background: #fffaf7;
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
 
 
 
@@ -367,4 +307,88 @@ body {
 
 .faixa.critico {
     background: #c0392b;
+}
+
+
+
+
+
+
+
+.history-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.history-top {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-top label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.history-top select {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Barril Info */
+.barril-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.barril-row {
+    display: flex;
+    gap: 12px;
+}
+
+.barril-metric {
+    flex: 1;
+    background: #fff9f5;
+    padding: 12px 16px;
+    border-radius: 12px;
+}
+
+.barril-metric .label {
+    color: #7a5a4f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.barril-metric .value {
+    color: #4b0e1a;
+    font-size: 22px;
+    font-weight: 900;
+    margin-top: 6px;
+}
+
+
+
+.btn-primary {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background: #6b0f0a;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #8b2230;
+    transform: translateY(-2px);
 }

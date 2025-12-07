@@ -1,6 +1,5 @@
 const ctx = document.getElementById('chartBarril').getContext('2d');
 
-// Dados
 const horas = [
     '00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',
     '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'
@@ -24,8 +23,8 @@ const barrilChart = new Chart(ctx, {
             {
                 label: 'Temperatura (°C)',
                 data: temperatura,
-                borderColor: '#e14b4b',
-                backgroundColor: 'rgba(225, 75, 75, 0.2)',
+                borderColor: '#fff700ff',
+                backgroundColor: 'rgba(239, 194, 32, 0.41)',
                 tension: 0.3,
                 fill: true,
                 yAxisID: 'y'
@@ -33,7 +32,7 @@ const barrilChart = new Chart(ctx, {
             {
                 label: 'Umidade (%)',
                 data: umidade,
-                borderColor: '#f0b22a',
+                borderColor: '#f97407ff',
                 backgroundColor: 'rgba(240, 178, 42, 0.2)',
                 tension: 0.3,
                 fill: true,

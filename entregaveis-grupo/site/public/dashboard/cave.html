@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WineTech - Cave</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./../style/dashboard/cave.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <aside class="sidebar">
+      <div class="sidebar-top">
+
+       
+        <div class="profile-wrap">
+          <div class="profile-title">Enólogo</div>
+          <div class="profile-img">
+            <img src="./../assets/imgs/usuario.png" alt="Usuário">
+          </div>
+          <div class="profile-name">Juan David</div>
+        </div>
+
+      
+        <nav class="nav">
+          <a href="./index.html" class="nav-link">
+            <i class="fa-solid fa-house"></i><span>Home</span>
+          </a>
+
+          <a href="./cave.html" class="nav-link active">
+            <i class="fa-solid fa-wine-bottle"></i><span>Cave</span>
+          </a>
+
+          <a href="./barril.html" class="nav-link">
+            <i class="fa-solid fa-box"></i><span>Barril</span>
+          </a>
+
+          <a href="./painel-administrativo/gerenciar-funcionarios/index.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i><span>Painel Administrativo</span>
+          </a>
+
+         
+          <a href="https://jira.atlassian.com/" target="_blank" class="nav-link">
+            <i class="fa-solid fa-circle-question"></i><span>Ajuda</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="btn-logout" onclick="location.href='../index.html'">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sair</span>
+        </button>
+      </div>
+    </aside>
+
+
+    <main class="main">
+
+      <header class="page-header">
+        <h1>
+          <select id="select-cave">
+            <option>Cave #1</option>
+            <option>Cave #2</option>
+            <option>Cave #3</option>
+            <option>Cave #4</option>
+            <option>Cave #5</option>
+          </select>
+        </h1>
+        <p>Dashboard de Monitoramento</p>
+      </header>
+
+
+      <section class="kpi-row">
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Sensores Ativos</div>
+            <div class="kpi-value">12 / 12</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot green"></span>
+            <i class="fa-solid fa-signal"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Cave com mais alertas</div>
+            <div class="kpi-value">Cave #3</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot yellow"></span>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Temp. mais alta</div>
+            <div class="kpi-value">27°C</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot red"></span>
+            <i class="fa-solid fa-thermometer-half"></i>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-left">
+            <div class="kpi-title">Umidade mais alta</div>
+            <div class="kpi-value">88%</div>
+          </div>
+          <div class="kpi-meta">
+            <span class="kpi-dot blue"></span>
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+        </div>
+
+      </section>
+
+
+      <h2 class="sec-title">Monitoramento em tempo real</h2>
+
+      <section class="charts-row">
+
+
+        <div class="chart-card">
+          <div class="card-header">
+            <h3>Temperatura por Barril</h3>
+          </div>
+          <div class="card-body">
+            <canvas id="chartTemperatura"></canvas>
+          </div>
+        </div>
+
+
+        <div class="chart-card">
+          <div class="card-header">
+            <h3>Umidade por Barril</h3>
+          </div>
+          <div class="card-body">
+            <canvas id="chartUmidade"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+
+      <div class="chart-card">
+        <div class="legenda">
+          <h3>Legenda de Alertas</h3>
+        </div>
+
+        <div class="legenda-faixas">
+          <div class="faixa normal">Normal</div>
+          <div class="faixa atencao">Atenção</div>
+          <div class="faixa critico">Crítico</div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="./../js/dashboard/cave.js"></script>
+
+</body>
+
+</html>
