@@ -63,6 +63,39 @@ const umidadeConfig = {
     }
 };
 
+async function carregarInfosCave() {
+    const idEmpresa = sessionStorage.ID_EMPRESA;
+
+    try {
+        const resposta = await fetch(`/dashboardCave/infos/${idEmpresa}`);
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao buscar dados da view");
+        }
+
+        const dados = await resposta.json();
+        console.log("Dados recebidos:", dados);
+
+        preencherKPIs(dados);
+
+    } catch (erro) {
+        console.error("Erro no fetch da dashboardCave:", erro);
+    }
+}
+
+function preencherKPIs(lista) {
+    if (!lista || lista.length === 0) return;
+
+    const ultimo = lista[lista.length - 1];
+
+    document.getElementById("kpiTemperatura").innerText = ultimo.temperatura;
+    document.getElementById("kpiUmidade").innerText = ultimo.umidade;
+    document.getElementById("kpiCave").innerText = ultimo.cave;
+    document.getElementById("kpiBarril").innerText = ultimo.barril;
+}
+
+window.onload = carregarInfosCave;
+
 
 const ctxTemp = document.getElementById('chartTemperatura').getContext('2d');
 const chartTemperatura = new Chart(ctxTemp, temperaturaConfig);
