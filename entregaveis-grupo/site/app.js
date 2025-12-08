@@ -1,7 +1,7 @@
-var ambiente_processo = 'producao';
+var ambiente_processo = 'prod';
 const { GoogleGenAI } = require("@google/genai");
 
-var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
+var caminho_env = ambiente_processo === 'prod' ? '.env' : '.env.dev';
 require("dotenv").config({ path: caminho_env });
 
 var express = require("express");
