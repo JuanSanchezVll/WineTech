@@ -2,6 +2,13 @@
 let chartTemperatura = null;
 let chartUmidade = null;
 
+    function mudarTexto() {
+    const nomeUsuario = document.getElementById('profile-name')
+    const html = sessionStorage.getItem('NICK_USUARIO');    
+    nomeUsuario.innerHTML = html
+}
+
+mudarTexto()
 
 async function carregarCaves() {
     const idEmpresa = sessionStorage.ID_EMPRESA;

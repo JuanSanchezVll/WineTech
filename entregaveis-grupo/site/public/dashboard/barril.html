@@ -26,7 +26,7 @@
                     <div class="profile-img">
                         <img src="./../assets/imgs/usuario.png" alt="Usuário">
                     </div>
-                    <div class="profile-name">Juan David</div>
+                    <div class="profile-name" id="profile-name"></div>
                 </div>
 
                 <nav class="nav">
@@ -160,9 +160,17 @@
 </body>
 
 <script>
+
+    function mudarTexto() {
+    const nomeUsuario = document.getElementById('profile-name')
+    const html = sessionStorage.getItem('NICK_USUARIO');    
+    nomeUsuario.innerHTML = html
+}
+
     let chartInstance = null;
 
     window.onload = async function () {
+        mudarTexto()
         const idEmpresa = sessionStorage.ID_EMPRESA;
 
         if (!idEmpresa) {

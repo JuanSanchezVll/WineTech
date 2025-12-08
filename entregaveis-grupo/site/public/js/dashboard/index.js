@@ -1,15 +1,21 @@
+function mudarTexto() {
+    nomeUsuario = document.getElementById('profile-name')
+    texto = sessionStorage.getItem('NICK_USUARIO');    
+    nomeUsuario.innerHTML = texto
+    console.log("dfsa");
+    console.log(texto);
+
+    
+}
+
+
+
+
 async function plotarKPIs() {
     await plotarSensoresAtivos();
     await plotarQuantidadeAlertasNoMes();
 }
 
-function mudarNome() {    
-    // Recupera e atualiza no HTML
-    const texto = sessionStorage.getItem('NICK_FUNCIONARIO');
-    document.getElementById('profile-name').innerHTML = texto;
-}
-
-mudarNome()
 
 async function plotarSensoresAtivos() {
     const kpi = document.getElementById("kpi-sensores-ativos");

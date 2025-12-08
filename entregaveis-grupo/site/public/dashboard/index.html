@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="plotarKPIs(), plotarGraficoAlertas(), listarCaves()">
+<body onload="plotarKPIs(), plotarGraficoAlertas(), listarCaves(), mudarTexto()">
 
     <div class="container">
 
@@ -28,7 +28,7 @@
                     <div class="profile-img">
                         <img src="./../assets/imgs/usuario.png" alt="Usuário">
                     </div>
-                    <div class="profile-name"></div>
+                    <div class="profile-name" id="profile-name" ></div>
                 </div>
 
 
@@ -187,6 +187,7 @@
     </div>
 
     <script src="./../js/dashboard/index.js"></script>
+    
 
 </body>
 

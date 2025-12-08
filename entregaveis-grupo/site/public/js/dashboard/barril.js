@@ -1,14 +1,15 @@
 const ctx = document.getElementById('chartBarril').getContext('2d');
 
-function mudarNome() {
-    const nome = document.getElementById('profile-name')
-    nomeAtual = sessionStorage.NICK_FUNCIONARIO
-
-    nome.innerHTML = `${nomeAtual}`
-    
+    function mudarTexto() {
+    const nomeUsuario = document.getElementById('profile-name')
+    const html = sessionStorage.getItem('NICK_USUARIO');    
+    nomeUsuario.innerHTML = html
 }
 
-mudarNome()
+    mudarTexto()
+
+
+
 
 const horas = [
     '00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',

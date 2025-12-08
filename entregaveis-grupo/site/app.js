@@ -1,4 +1,4 @@
-var ambiente_processo = 'prod';
+var ambiente_processo = 'desenvolvimento';
 const { GoogleGenAI } = require("@google/genai");
 
 var caminho_env = ambiente_processo === 'prod' ? '.env' : '.env.dev';
