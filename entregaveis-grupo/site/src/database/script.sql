@@ -345,7 +345,7 @@ CREATE VIEW vw_alertas_por_cave AS
 	JOIN cave c ON b.id_cave = c.id_cave
     WHERE
 		MONTH(a.data_hora_registro) = MONTH(CURRENT_DATE())
-        AND YEAR(a.data_hora_registro) = YEAR(CURRENT_DATA())
+        AND YEAR(a.data_hora_registro) = YEAR(CURRENT_DATE())
 	GROUP BY 
 		c.id_empresa,
 		c.id_cave,
