@@ -129,6 +129,8 @@ INSERT INTO usuario (nome, sobrenome, email, senha, data_hora_registro, id_empre
     ('Ana', 'Lima', 'ana@vivinho.com', 'senha123', now(), 1, 3),
 	('João', 'Pereira', 'joao@vivinho.com', 'senha123', now(), 1, 4),
     ('Marcia', 'Oliveira', 'marcia@vinojoao.com', 'senha123', now(), 2, 2);
+INSERT INTO usuario (nome, sobrenome, email, senha, data_hora_registro, id_empresa, id_nivel_acesso) VALUES
+	('Julia', 'Alves', 'julia.a@novaera.com', 'senha001', '2024-01-04 13:00:00', 1, 2);
     
 INSERT INTO cave (identificacao, id_empresa) VALUES
 	('CAVE-A', 1),
@@ -155,10 +157,10 @@ INSERT INTO sensor (identificacao, id_barril) VALUES
 	('SENSOR-A001', 1),
 	('SENSOR-A002', 2),
 	('SENSOR-A003', 3),
-	('SENSOR-A004', 4),
-	('SENSOR-B001', 5),
-	('SENSOR-B002', 6),
-	('SENSOR-1', 7);
+	('SENSOR-B001', 4),
+	('SENSOR-B002', 5),
+	('SENSOR-1', 6),
+	('SENSOR-2', 7);
     
 -- leituras do barril 1 cave1 da empresa 1
 INSERT INTO leitura (temperatura, umidade, id_sensor) VALUES
@@ -281,6 +283,7 @@ INSERT INTO alerta (id_leitura, id_sensor) VALUES
     (68, 7),
     (70, 7);
 
+
 select s.identificacao as nome from sensor as s join barril as b on b.id_barril = s.id_barril
 join cave as c on c.id_cave = b.id_cave
 where c.id_empresa = 1;
@@ -368,7 +371,7 @@ CREATE VIEW vw_sensores_ativos AS
 	JOIN sensor s ON s.id_barril = b.id_barril
 	LEFT JOIN leitura l ON l.id_sensor = s.id_sensor
 	GROUP BY c.id_empresa;
-    
+
 DROP USER 'winetech'@'%';
 DROP USER 'winetech-sensor'@'%';
 
@@ -388,3 +391,5 @@ SELECT @@PORT, @@VERSION, @@hostname;
 
 select * from empresa;
 select * from usuario;
+
+show databases;

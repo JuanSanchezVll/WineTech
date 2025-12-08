@@ -140,3 +140,43 @@ async function carregarUltimaLeitura() {
         document.getElementById("barril-umi").textContent = "-- %";
     }
 }
+
+async function plotarKPIs() {
+    await plotarSensoresAtivos();
+    await plotarQuantidadeAlertasNoMes();
+    // Adicione estas chamadas:
+    await plotarKPIAlertaTemperatura();
+    await plotarKPIAlertaUmidade();
+}
+
+async function plotarKPIAlertaTemperatura() {
+    const kpi = document.getElementById("kpi-alerta-temp");
+    const idEmpresa = sessionStorage.ID_EMPRESA;
+
+    const resultado = await fetch(`/dashboardIndex/alertas/temperatura/empresa/${idEmpresa}`);
+    const dados = await resultado.json();
+
+    if (dados.length > 0) {
+        kpi.innerHTML = dados[0].local_alerta;
+        kpi.style.fontSize = "1rem";
+    } else {
+        kpi.innerHTML = "Nenhum alerta";
+        kpi.style.color = "#888"; 
+    }
+}
+
+async function plotarKPIAlertaUmidade() {
+    const kpi = document.getElementById("kpi-alerta-umi");
+    const idEmpresa = sessionStorage.ID_EMPRESA;
+
+    const resultado = await fetch(`/dashboardIndex/alertas/umidade/empresa/${idEmpresa}`);
+    const dados = await resultado.json();
+
+    if (dados.length > 0) {
+        kpi.innerHTML = dados[0].local_alerta;
+        kpi.style.fontSize = "1rem";
+    } else {
+        kpi.innerHTML = "Nenhum alerta";
+        kpi.style.color = "#888";
+    }
+}
