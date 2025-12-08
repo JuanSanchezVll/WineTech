@@ -3,6 +3,14 @@ async function plotarKPIs() {
     await plotarQuantidadeAlertasNoMes();
 }
 
+function mudarNome() {    
+    // Recupera e atualiza no HTML
+    const texto = sessionStorage.getItem('NICK_FUNCIONARIO');
+    document.getElementById('profile-name').innerHTML = texto;
+}
+
+mudarNome()
+
 async function plotarSensoresAtivos() {
     const kpi = document.getElementById("kpi-sensores-ativos");
 

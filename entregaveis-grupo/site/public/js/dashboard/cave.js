@@ -1,6 +1,7 @@
-// IDs no HTML: select-cave, chartTemperatura, chartUmidade, kpiTemperatura, kpiUmidade
+
 let chartTemperatura = null;
 let chartUmidade = null;
+
 
 async function carregarCaves() {
     const idEmpresa = sessionStorage.ID_EMPRESA;
@@ -94,6 +95,9 @@ function atualizarGraficoTemperatura(labels, data) {
             datasets: [{
                 label: "Temperatura (°C)",
                 data: data,
+                borderWidth: 1,
+                backgroundColor: 'rgba(214,166,92,0.95)',
+                borderColor: 'rgba(214,166,92,1)',
                 borderWidth: 1
             }]
         },
@@ -115,7 +119,9 @@ function atualizarGraficoUmidade(labels, data) {
             datasets: [{
                 label: "Umidade (%)",
                 data: data,
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor: 'rgba(214,166,92,0.95)',
+                borderColor: 'rgba(214,166,92,1)',
             }]
         },
         options: {
