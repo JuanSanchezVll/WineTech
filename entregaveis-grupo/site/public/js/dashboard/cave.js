@@ -18,7 +18,8 @@ const umidadeData = {
         fill: true,
         tension: 0.4,
         pointRadius: 5,
-        pointHoverRadius: 7
+        pointHoverRadius: 7,
+        borderRadius: 6
     }]
 };
 
@@ -44,7 +45,7 @@ const temperaturaConfig = {
 };
 
 const umidadeConfig = {
-    type: 'line',
+    type: 'bar',
     data: umidadeData,
     options: {
         responsive: true,
