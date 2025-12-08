@@ -26,12 +26,13 @@ async function listar(idEmpresa) {
     return await database.execute(instrucaoSql);
 }
 
-async function atualizar(idFuncionario, nome, sobrenome, email, idNivelAcesso) {
+async function atualizar(idFuncionario, nome, sobrenome, email, senha, idNivelAcesso) {
     const instrucaoSql = `
         UPDATE usuario 
         SET nome = '${nome}', 
             sobrenome = '${sobrenome}', 
             email = '${email}',
+            senha = '${senha}',
             id_nivel_acesso = ${idNivelAcesso}
         WHERE id_usuario = ${idFuncionario};
     `;

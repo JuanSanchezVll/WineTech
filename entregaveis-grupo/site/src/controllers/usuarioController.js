@@ -1,5 +1,25 @@
 var usuarioModel = require("./../models/usuarioModel");
 
+async function listar(req, res) {
+    try {
+        const { idEmpresa, idUsuario } = req.query;
+
+        if (idEmpresa && idUsuario) {
+            console.log("Listando usuarios da empresa por idUsuario");
+            const resultado = await usuarioModel.buscarPorId(idEmpresa, idUsuario);
+            return res.status(200).json(resultado);
+        }
+
+        console.log("Listando usuarios da empresa");
+
+        const resultado = await usuarioModel.listar(idEmpresa);
+        return res.status(200).json(resultado);
+    } catch(err) {
+        console.error("Erro ao listar usuarios" + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err})
+    }
+}
+
 function cadastrar(req, res) {
     const { nome, sobrenome, email, senha, codigoSeguranca } = req.body;
 
@@ -62,8 +82,8 @@ function autenticar(req, res) {
 
 
 
-
 module.exports = {
     cadastrar,
-    autenticar
+    autenticar,
+    listar
 }

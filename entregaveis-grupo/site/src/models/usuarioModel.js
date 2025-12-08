@@ -35,7 +35,7 @@ async function autenticar(email, senha)
     
 }
 
-async function listar() {
+async function listar(idEmpresa) {
     const instrucaoSql = `
         SELECT 
             id_usuario, 
@@ -43,16 +43,38 @@ async function listar() {
             sobrenome, 
             email, 
             id_empresa,
-            id_nivel_acesso
-        FROM usuario;
+            id_nivel_acesso,
+            senha
+        FROM usuario
+        WHERE id_empresa = ${idEmpresa};
     `;
 
-    return database.execute(instrucaoSql);
+    return await database.execute(instrucaoSql);
+}
+
+async function buscarPorId(idEmpresa, idUsuario) {
+    const instrucaoSql = `
+        SELECT 
+            id_usuario, 
+            nome, 
+            sobrenome, 
+            email, 
+            id_empresa,
+            id_nivel_acesso,
+            senha
+        FROM usuario
+        WHERE 
+            id_empresa = ${idEmpresa}
+            AND id_usuario = ${idUsuario};
+    `;
+
+    return await database.execute(instrucaoSql);
 }
 
 module.exports = {
     cadastrar,
     autenticar,
     listar,
-    validarCodigoSeguranca
+    validarCodigoSeguranca,
+    buscarPorId
 }
