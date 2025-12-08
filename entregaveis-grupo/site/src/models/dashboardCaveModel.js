@@ -1,4 +1,4 @@
-const database = require("../database/config");
+const database = require("../database/config.js");
 
 function listarInfos(idEmpresa) {
     const instrucao = `
@@ -6,7 +6,7 @@ function listarInfos(idEmpresa) {
         FROM vw_infos
         WHERE id_empresa = ${idEmpresa};
     `;
-    return database.executar(instrucao);
+    return database.execute(instrucao);
 }
 
 module.exports = {
