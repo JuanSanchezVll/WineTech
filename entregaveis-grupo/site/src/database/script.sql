@@ -328,7 +328,18 @@ CREATE VIEW vw_leitura_atual AS
 	JOIN uva u ON b.id_uva = u.id_uva
 	LIMIT 1;
     
-SELECT * FROM vw_leitura_atual;
+SELECT * FROM vw_leitura_atual;    
+
+CREATE VIEW vw_alertas_por_cave AS
+	SELECT
+		COUNT(*) AS alertas,
+		c.identificacao
+	FROM alerta a
+	JOIN leitura l ON a.id_leitura = l.id_leitura AND a.id_sensor = l.id_sensor
+	JOIN sensor s ON l.id_sensor = s.id_sensor
+	JOIN barril b ON s.id_barril = b.id_barril
+	JOIN cave c ON b.id_cave = c.id_cave
+	GROUP BY c.identificacao;
 
 DROP USER 'winetech'@'%';
 DROP USER 'winetech-sensor'@'%';
