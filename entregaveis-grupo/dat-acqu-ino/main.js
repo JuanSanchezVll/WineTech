@@ -63,23 +63,31 @@ const serial = async (
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
+                'INSERT INTO leitura (temperatura, umidade, idSensor) VALUES (?, ?, ?)',
                 [temperatura, umidade, 1]
             );
             console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
 
-            await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
-                [temperatura - 10, umidade - 10, 2]
+            const resultado = await poolBancoDados.execute(
+                'SELECT * FROM vw_leitura_atual'
             );
-            console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
 
-            await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
-                [temperatura + 10, umidade + 10, 3]
-            );
-            console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
+            const leituraAtual = await resultado.json();
+            const temperaturaAtual = await leituraAtual[0].temperatura;
+            const umidadeAtual = await leituraAtual[0].umidade;
+            const temperaturaMinima = await leituraAtual[0].temperatura_minima;
+            const temperaturaMaxima = await leituraAtual[0].temperatura_maxima;
+            const umidadeMinima = await leituraAtual[0].umidade_minima;
+            const umidadeMaxima = await leituraAtual[0].umidade_maxima;
 
+            let faixaAtual = false;
+            const faixaIdeal = faixaAtual;
+
+            if (!faixaIdeal) {
+                await poolBancoDados.execute(
+                    'INSERT INTO alerta () VALUES ()'
+                );
+            }
         }
 
     });

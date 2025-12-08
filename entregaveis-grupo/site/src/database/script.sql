@@ -155,10 +155,10 @@ INSERT INTO sensor (identificacao, id_barril) VALUES
 	('SENSOR-A001', 1),
 	('SENSOR-A002', 2),
 	('SENSOR-A003', 3),
-	('SENSOR-B001', 4),
-	('SENSOR-B002', 5),
-	('SENSOR-1', 6),
-	('SENSOR-2', 7);
+	('SENSOR-A004', 4),
+	('SENSOR-B001', 5),
+	('SENSOR-B002', 6),
+	('SENSOR-1', 7);
     
 -- leituras do barril 1 cave1 da empresa 1
 INSERT INTO leitura (temperatura, umidade, id_sensor) VALUES
@@ -313,42 +313,62 @@ CREATE VIEW vw_dash AS
 			ON s.id_sensor = l.id_sensor;
 
 SELECT * FROM vw_dash;
-
-CREATE VIEW vw_leitura_atual AS
-	SELECT
-		l.temperatura,
-		l.umidade,
-		u.temperatura_minima,
-		u.temperatura_maxima,
-		u.umidade_minima,
-		u.umidade_maxima
-	FROM leitura l
-	JOIN sensor s ON l.id_sensor = s.id_sensor
-	JOIN barril b ON s.id_barril = b.id_barril
-	JOIN uva u ON b.id_uva = u.id_uva
-	LIMIT 1;
     
 SELECT * FROM vw_leitura_atual;    
 
 CREATE VIEW vw_infos AS
-SELECT c.id_empresa ,b.id_barril ,c.id_cave, c.identificacao as cave ,b.identificacao as barril, temperatura, umidade from cave c 
-JOIN barril b ON c.id_cave = b.id_cave 
-JOIN sensor s ON s.id_barril = b.id_barril 
-JOIN leitura l ON s.id_sensor = l.id_sensor 
-JOIN empresa e ON e.id_empresa = c.id_empresa; 
+	SELECT 
+		c.id_empresa,
+        b.id_barril,
+        c.id_cave,
+        c.identificacao as cave,
+        b.identificacao as barril,
+        temperatura, umidade
+	FROM cave c 
+	JOIN barril b ON c.id_cave = b.id_cave 
+	JOIN sensor s ON s.id_barril = b.id_barril 
+	JOIN leitura l ON s.id_sensor = l.id_sensor 
+	JOIN empresa e ON e.id_empresa = c.id_empresa; 
 
 CREATE VIEW vw_alertas_por_cave AS
 	SELECT
 		c.id_empresa,
+        c.id_cave,
+        c.identificacao,
 		COUNT(*) AS alertas,
-		c.identificacao
+        MONTH(a.data_hora_registro) AS mes,
+        YEAR(a.data_hora_registro) AS ano
 	FROM alerta a
 	JOIN leitura l ON a.id_leitura = l.id_leitura AND a.id_sensor = l.id_sensor
 	JOIN sensor s ON l.id_sensor = s.id_sensor
 	JOIN barril b ON s.id_barril = b.id_barril
 	JOIN cave c ON b.id_cave = c.id_cave
-	GROUP BY c.identificacao, c.id_empresa;
-
+    WHERE
+		MONTH(a.data_hora_registro) = MOUNTH(CURRENT_DATE())
+        AND YEAR(a.data_hora_registro) = YEAR(CURRENT_DATA())
+	GROUP BY 
+		c.id_empresa,
+		c.id_cave,
+		c.identificacao,
+		mes,
+		ano;
+    
+CREATE VIEW vw_sensores_ativos AS
+	SELECT
+		c.id_empresa,
+		COUNT(
+			DISTINCT CASE 
+				WHEN l.data_hora_registro >= NOW() - INTERVAL 24 HOUR 
+				THEN s.id_sensor 
+			END
+		) AS ativos,
+		COUNT(DISTINCT s.id_sensor) AS total
+	FROM cave c
+	JOIN barril b ON b.id_cave = c.id_cave
+	JOIN sensor s ON s.id_barril = b.id_barril
+	LEFT JOIN leitura l ON l.id_sensor = s.id_sensor
+	GROUP BY c.id_empresa;
+    
 DROP USER 'winetech'@'%';
 DROP USER 'winetech-sensor'@'%';
 
