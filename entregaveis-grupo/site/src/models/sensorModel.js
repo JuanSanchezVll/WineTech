@@ -16,6 +16,14 @@ async function listar(idEmpresa) {
     return await database.execute(instrucao);
 }
 
+async function listarAtivosPorEmpresa(idEmpresa) {
+    const instrucao = `
+        SELECT * FROM vw_sensores_ativos WHERE id_empresa = ${idEmpresa};
+    `;
+
+    return await database.execute(instrucao);
+}
+
 async function buscarPorId(idSensor) {
     const instrucao = `
         SELECT 
@@ -83,5 +91,6 @@ module.exports = {
     atualizar,
     deletar,
     pesquisar,
-    buscarPorId // Agora ela existe lá em cima!
+    buscarPorId,
+    listarAtivosPorEmpresa
 }
