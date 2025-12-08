@@ -344,7 +344,7 @@ CREATE VIEW vw_alertas_por_cave AS
 	JOIN barril b ON s.id_barril = b.id_barril
 	JOIN cave c ON b.id_cave = c.id_cave
     WHERE
-		MONTH(a.data_hora_registro) = MOUNTH(CURRENT_DATE())
+		MONTH(a.data_hora_registro) = MONTH(CURRENT_DATE())
         AND YEAR(a.data_hora_registro) = YEAR(CURRENT_DATA())
 	GROUP BY 
 		c.id_empresa,
