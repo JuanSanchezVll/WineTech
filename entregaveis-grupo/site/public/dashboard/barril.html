@@ -21,8 +21,6 @@
 
         <aside class="sidebar">
             <div class="sidebar-top">
-
-             
                 <div class="profile-wrap">
                     <div class="profile-title">Enólogo</div>
                     <div class="profile-img">
@@ -31,25 +29,19 @@
                     <div class="profile-name">Juan David</div>
                 </div>
 
-          
                 <nav class="nav">
                     <a href="./index.html" class="nav-link">
                         <i class="fa-solid fa-house"></i><span>Home</span>
                     </a>
-
                     <a href="./cave.html" class="nav-link">
                         <i class="fa-solid fa-wine-bottle"></i><span>Cave</span>
                     </a>
-
                     <a href="./barril.html" class="nav-link active">
                         <i class="fa-solid fa-box"></i><span>Barril</span>
                     </a>
-
                     <a href="./painel-administrativo/gerenciar-funcionarios/index.html" class="nav-link">
                         <i class="fa-solid fa-chart-line"></i><span>Painel Administrativo</span>
                     </a>
-
-                
                     <a href="https://jira.atlassian.com/" target="_blank" class="nav-link">
                         <i class="fa-solid fa-circle-question"></i><span>Ajuda</span>
                     </a>
@@ -64,83 +56,73 @@
             </div>
         </aside>
 
-
         <main class="main">
-
 
             <header class="page-header">
                 <h1>
                     <select id="select-cave">
-                        <option>Barril #1</option>
-                        <option>Barril #2</option>
-                        <option>Barril #3</option>
-                        <option>Barril #4</option>
-                        <option>Barril #5</option>
+                        <option>Carregando...</option>
                     </select>
                 </h1>
                 <p>Monitoramento em tempo real da temperatura e umidade do barril</p>
             </header>
 
-
             <section class="kpi-row">
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Sensor Ativo</div>
-                        <div class="kpi-value">1 / 1</div>
+                        <div class="kpi-title">Status do barril</div>
+                        <div class="kpi-value" id="kpi-status">--</div>
                     </div>
                     <div class="kpi-meta">
-                        <span class="kpi-dot green"></span>
-                        <i class="fa-solid fa-signal"></i>
+                        <span id="kpi-status-dot" class="kpi-dot green"></span>
+                        <i class="fa-solid fa-heart-pulse"></i>
                     </div>
                 </div>
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Alertas atuais</div>
-                        <div class="kpi-value">3</div>
+                        <div class="kpi-title">Estabilidade (24h)</div>
+                        <div class="kpi-value" id="kpi-estabilidade">--</div>
                     </div>
                     <div class="kpi-meta">
-                        <span class="kpi-dot yellow"></span>
-                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span class="kpi-dot"></span>
+                        <i id="kpi-estabilidade-icon" class="fa-solid fa-arrow-trend-up"></i>
                     </div>
                 </div>
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Temperatura atual</div>
-                        <div class="kpi-value">27°C</div>
+                        <div class="kpi-title">Temperatura Atual</div>
+                        <div class="kpi-value" id="kpi-temp-atual">--°C</div>
+
                     </div>
                     <div class="kpi-meta">
-                        <span class="kpi-dot red"></span>
+                        <span id="dot-temp" class="kpi-dot red"></span>
                         <i class="fa-solid fa-thermometer-half"></i>
                     </div>
                 </div>
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Umidade atual</div>
-                        <div class="kpi-value">88%</div>
+                        <div class="kpi-title">Umidade Atual</div>
+                        <div class="kpi-value" id="kpi-umid-atual">--%</div>
+
                     </div>
                     <div class="kpi-meta">
-                        <span class="kpi-dot blue"></span>
+                        <span id="dot-umid" class="kpi-dot blue"></span>
                         <i class="fa-solid fa-droplet"></i>
                     </div>
                 </div>
 
             </section>
 
-
             <section class="monitoramento-row">
-
-
                 <div class="chart-card">
-                    <!-- <h2>Monitoramento</h2> -->
                     <div class="chart-container">
                         <canvas id="chartBarril"></canvas>
                     </div>
                 </div>
-
 
                 <div class="history-card">
                     <h2>Histórico de Leituras</h2>
@@ -153,44 +135,17 @@
                                     <th>Umidade</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>09:00</td>
-                                    <td>18.3°C</td>
-                                    <td>64%</td>
-                                </tr>
-                                <tr>
-                                    <td>10:00</td>
-                                    <td>18.5°C</td>
-                                    <td>65%</td>
-                                </tr>
-                                <tr>
-                                    <td>11:00</td>
-                                    <td>18.6°C</td>
-                                    <td>66%</td>
-                                </tr>
-                                <tr>
-                                    <td>12:00</td>
-                                    <td>18.8°C</td>
-                                    <td>67%</td>
-                                </tr>
-                                <tr>
-                                    <td>13:00</td>
-                                    <td>19.0°C</td>
-                                    <td>68%</td>
-                                </tr>
+                            <tbody id="table-body-history">
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-
             <div class="chart-card">
                 <div class="legenda">
                     <h3>Legenda de Alertas</h3>
                 </div>
-
                 <div class="legenda-faixas">
                     <div class="faixa normal">Normal</div>
                     <div class="faixa atencao">Atenção</div>
@@ -201,8 +156,247 @@
         </main>
     </div>
 
-    <script src="./../js/dashboard/barril.js"></script>
-
 </body>
+
+<script>
+    let chartInstance = null;
+
+    window.onload = async function () {
+        const idEmpresa = sessionStorage.ID_EMPRESA;
+
+        if (!idEmpresa) {
+            console.error("Sem empresa na sessão");
+            // return; 
+        }
+
+        try {
+            const resposta = await fetch(`/dashboardBarril/listar/${idEmpresa}`);
+            if (resposta.ok) {
+                const barris = await resposta.json();
+                preencherSelect(barris);
+            } else {
+                console.error("Erro ao buscar barris");
+            }
+        } catch (erro) {
+            console.error(erro);
+        }
+    };
+
+    function preencherSelect(barris) {
+        const select = document.getElementById("select-cave");
+        select.innerHTML = "";
+
+        barris.forEach((barril) => {
+            const option = document.createElement("option");
+            option.value = barril.id_barril;
+            option.text = barril.identificacao;
+            select.appendChild(option);
+        });
+
+        select.addEventListener("change", () => {
+            atualizarDashboard(select.value);
+        });
+
+        if (barris.length > 0) {
+            const idPrimeiroBarril = barris[0].id_barril;
+            atualizarDashboard(idPrimeiroBarril);
+
+            setInterval(() => {
+                atualizarDashboard(select.value);
+            }, 2000);
+        }
+    }
+
+    async function atualizarDashboard(idBarril) {
+        try {
+            const resposta = await fetch(`/dashboardBarril/medidas/${idBarril}`);
+
+            if (resposta.status === 204) {
+                return;
+            }
+
+            if (resposta.ok) {
+                const json = await resposta.json();
+                const medidas = json.medidas;
+                const qtdAlertas = json.alertas;
+
+                const ultimas10 = medidas.slice(0, 10);
+                const medidasGrafico = ultimas10.reverse();
+
+                atualizarKPIs(medidas, qtdAlertas);
+                atualizarGrafico(medidasGrafico);
+                atualizarTabela(medidas);
+            }
+        } catch (erro) {
+            console.error("Erro na dashboard:", erro);
+        }
+    }
+
+    function classificarTemperatura(temp) {
+        if (temp < -5 || temp > 21) return "critico";
+        if (temp >= 7 && temp <= 18) return "ideal";
+        return "atencao";
+    }
+
+    function classificarUmidade(umid) {
+        if (umid < 50 || umid > 80) return "critico";
+        if (umid >= 60 && umid <= 70) return "ideal";
+        return "atencao";
+    }
+
+    function atualizarKPIs(medidas, qtdAlertas) {
+        
+        const ultima = medidas[0];
+        const temp = Number(ultima.temperatura);
+        const umid = Number(ultima.umidade);
+
+        const statusTemp = classificarTemperatura(temp);
+        const statusUmid = classificarUmidade(umid);
+
+        let statusGeral = "ideal";
+        if (statusTemp === "critico" || statusUmid === "critico") {
+            statusGeral = "critico";
+        } else if (statusTemp === "atencao" || statusUmid === "atencao") {
+            statusGeral = "atencao";
+        }
+
+        const kpiStatus = document.getElementById("kpi-status");
+        const kpiStatusDot = document.getElementById("kpi-status-dot");
+
+        if (statusGeral === "critico") {
+            kpiStatus.innerText = "Crítico";
+            kpiStatus.style.color = "#e14b4b";
+            kpiStatusDot.className = "kpi-dot red";
+        } else if (statusGeral === "atencao") {
+            kpiStatus.innerText = "Atenção";
+            kpiStatus.style.color = "#f0b22a";
+            kpiStatusDot.className = "kpi-dot yellow";
+        } else {
+            kpiStatus.innerText = "Ideal";
+            kpiStatus.style.color = "#009e2a";
+            kpiStatusDot.className = "kpi-dot green";
+        }
+
+        const temperaturas = [];
+        medidas.slice(0, 10).forEach(item => {
+            temperaturas.push(Number(item.temperatura));
+        });
+
+        const maxTemp = Math.max(...temperaturas);
+        const minTemp = Math.min(...temperaturas);
+        const variacao = maxTemp - minTemp;
+
+        const kpiEstabilidade = document.getElementById("kpi-estabilidade");
+        const kpiEstabilidadeIcon = document.getElementById("kpi-estabilidade-icon");
+
+        if (variacao <= 2.0) {
+            kpiEstabilidade.innerText = "Estável";
+            kpiEstabilidade.style.color = "#009e2a";
+            kpiEstabilidadeIcon.className = "fa-solid fa-minus";
+        } else if (variacao <= 4.0) {
+            kpiEstabilidade.innerText = "Oscilando";
+            kpiEstabilidade.style.color = "#f0b22a";
+            kpiEstabilidadeIcon.className = "fa-solid fa-wave-square";
+        } else {
+            kpiEstabilidade.innerText = "Instável";
+            kpiEstabilidade.style.color = "#e14b4b";
+            kpiEstabilidadeIcon.className = "fa-solid fa-arrow-trend-up";
+        }
+
+        document.getElementById("kpi-temp-atual").innerText = temp.toFixed(1) + "°C";
+        document.getElementById("kpi-umid-atual").innerText = umid.toFixed(0) + "%";
+
+        const dotTemp = document.getElementById("dot-temp");
+        const dotUmid = document.getElementById("dot-umid");
+
+        if (statusTemp === 'critico') dotTemp.className = "kpi-dot red";
+        else if (statusTemp === 'atencao') dotTemp.className = "kpi-dot yellow";
+        else dotTemp.className = "kpi-dot green";
+
+        if (statusUmid === 'critico') dotUmid.className = "kpi-dot red";
+        else if (statusUmid === 'atencao') dotUmid.className = "kpi-dot yellow";
+        else dotUmid.className = "kpi-dot green";
+    }
+
+    function atualizarTabela(medidas) {
+        const tbody = document.getElementById("table-body-history");
+        tbody.innerHTML = "";
+        
+        
+        const recentes = medidas.slice(0, 5);
+
+        recentes.forEach(m => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${m.momento_grafico}</td>
+                <td>${m.temperatura}°C</td>
+                <td>${m.umidade}%</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function atualizarGrafico(medidas) {
+        const ctx = document.getElementById('chartBarril').getContext('2d');
+        const labels = [];
+        const dataTemp = [];
+        const dataUmid = [];
+
+        medidas.forEach(m => {
+            labels.push(m.momento_grafico);
+            dataTemp.push(m.temperatura);
+            dataUmid.push(m.umidade);
+        });
+
+        if (chartInstance) {
+     
+            chartInstance.data.labels = labels;
+            chartInstance.data.datasets[0].data = dataTemp;
+            chartInstance.data.datasets[1].data = dataUmid;
+            
+            chartInstance.update(); 
+        } else {
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                            label: 'Temperatura (°C)',
+                            data: dataTemp,
+                            borderColor: '#fff700ff',
+                            backgroundColor: 'rgba(239, 194, 32, 0.41)',
+                            tension: 0.1,
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Umidade (%)',
+                            data: dataUmid,
+                            borderColor: '#f97407ff',
+                            backgroundColor: 'rgba(240, 178, 42, 0.2)',
+                            tension: 0.1,
+                            fill: true,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    animation: { duration: 0 }, 
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { family: 'Poppins', size: 14 } } },
+                        title: { display: true, text: 'Monitoramento em Tempo Real (Últimos 10 registros)', font: { size: 18, family: 'Poppins', weight: '600' }, color: '#4b0e1a' }
+                    },
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        x: { ticks: { color: '#4b0e1a' } },
+                        y: { type: 'linear', position: 'left', ticks: { color: '#e14b4b' }, beginAtZero: false, title: { display: true, text: 'Temperatura (°C)', color: '#e14b4b', font: { weight: '600' } } },
+                        y1: { type: 'linear', position: 'right', ticks: { color: '#f0b22a' }, beginAtZero: true, grid: { drawOnChartArea: false }, title: { display: true, text: 'Umidade (%)', color: '#f0b22a', font: { weight: '600' } } }
+                    }
+                }
+            });
+        }
+    }
+</script>
 
 </html>
