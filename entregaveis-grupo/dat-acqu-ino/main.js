@@ -68,25 +68,42 @@ const serial = async (
             );
             console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
 
-            const resultado = await poolBancoDados.execute(
-                'SELECT * FROM vw_leitura_atual'
-            );
+            const idLeituraInserida = resultadoInsert.insertId;
+            const idSensor = 1;
 
-            const leituraAtual = await resultado.json();
-            const temperaturaAtual = await leituraAtual[0].temperatura;
-            const umidadeAtual = await leituraAtual[0].umidade;
-            const temperaturaMinima = await leituraAtual[0].temperatura_minima;
-            const temperaturaMaxima = await leituraAtual[0].temperatura_maxima;
-            const umidadeMinima = await leituraAtual[0].umidade_minima;
-            const umidadeMaxima = await leituraAtual[0].umidade_maxima;
+            const [limites] = await poolBancoDados.execute(`
+                SELECT 
+                    u.temperatura_minima,
+                    u.temperatura_maxima,
+                    u.umidade_minima,
+                    u.umidade_maxima
+                FROM sensor s
+                JOIN barril b ON b.id_barril = s.id_barril
+                JOIN uva u ON u.id_uva = b.id_uva
+                WHERE s.id_sensor = ?
+            `, [idSensor]);
 
-            let faixaAtual = false;
-            const faixaIdeal = faixaAtual;
+            const faixa = limites[0];
 
-            if (!faixaIdeal) {
+            const temperaturaFora =
+                temperatura < faixa.temperatura_minima ||
+                temperatura > faixa.temperatura_maxima;
+
+            const umidadeFora =
+                umidade < faixa.umidade_minima ||
+                umidade > faixa.umidade_maxima;
+
+            const houveAlerta = temperaturaFora || umidadeFora;
+
+            if (houveAlerta) {
                 await poolBancoDados.execute(
-                    'INSERT INTO alerta () VALUES ()'
+                    `INSERT INTO alerta (id_leitura, id_sensor) VALUES (?, ?)`,
+                    [idLeituraInserida, idSensor]
                 );
+
+                console.log("ALERTA REGISTRADO!");
+            } else {
+                console.log("Leitura dentro das faixas ideais.");
             }
         }
 
