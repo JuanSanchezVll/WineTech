@@ -320,7 +320,8 @@ SELECT * FROM vw_dash;
 SELECT * FROM vw_leitura_atual;    
 
 CREATE VIEW vw_infos AS
-	SELECT 
+	SELECT
+		l.id_leitura 
 		c.id_empresa,
         b.id_barril,
         c.id_cave,

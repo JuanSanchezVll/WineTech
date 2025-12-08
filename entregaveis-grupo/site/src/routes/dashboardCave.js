@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const dashboardCaveController = require("../controllers/dashboardCaveController");
+const controller = require("../controllers/dashboardCaveController");
 
-router.get("/infos/:idEmpresa", (req, res) => {
-    dashboardCaveController.listar(req, res);
-});
+router.get("/listarCaves/:idEmpresa", controller.listarCaves);          
+router.get("/ultimasLeituras/:idCave", controller.ultimasLeituras);    
+router.get("/kpi/ultima/:idCave", controller.kpiUltimaLeitura);        
+router.get("/kpis/:idCave", controller.listarKpiCave);
+
 
 module.exports = router;
