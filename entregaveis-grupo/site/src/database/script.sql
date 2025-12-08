@@ -330,6 +330,14 @@ CREATE VIEW vw_leitura_atual AS
     
 SELECT * FROM vw_leitura_atual;    
 
+CREATE VIEW vw_infos AS
+SELECT c.id_empresa ,b.id_barril ,c.id_cave, c.identificacao as cave ,b.identificacao as barril, temperatura, umidade from cave c 
+JOIN barril b ON c.id_cave = b.id_cave 
+JOIN sensor s ON s.id_barril = b.id_barril 
+JOIN leitura l ON s.id_sensor = l.id_sensor 
+JOIN empresa e ON e.id_empresa = c.id_empresa 
+WHERE e.id_empresa = 1 AND c.id_cave = 1 LIMIT 144; 
+
 CREATE VIEW vw_alertas_por_cave AS
 	SELECT
 		c.id_empresa,
