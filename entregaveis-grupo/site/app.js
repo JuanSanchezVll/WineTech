@@ -21,7 +21,7 @@ var caveRouter = require("./src/routes/caves");
 var uvaRouter = require("./src/routes/uvas");
 var barrilRouter = require("./src/routes/barris");
 var sensorRoutes = require ("./src/routes/sensores")
-var dashCaveRoutes = require ("./src/routes/dashboardCave")
+var dashCaveRoutes = require("./src/routes/dashboardCave");
 var dashBarrilRoutes = require ("./src/routes/dashboardBarril")
 var dashIndexRoutes = require ("./src/routes/dashboardIndex")
 
