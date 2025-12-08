@@ -332,6 +332,7 @@ SELECT * FROM vw_leitura_atual;
 
 CREATE VIEW vw_alertas_por_cave AS
 	SELECT
+		c.id_empresa,
 		COUNT(*) AS alertas,
 		c.identificacao
 	FROM alerta a
@@ -339,7 +340,7 @@ CREATE VIEW vw_alertas_por_cave AS
 	JOIN sensor s ON l.id_sensor = s.id_sensor
 	JOIN barril b ON s.id_barril = b.id_barril
 	JOIN cave c ON b.id_cave = c.id_cave
-	GROUP BY c.identificacao;
+	GROUP BY c.identificacao, c.id_empresa;
 
 DROP USER 'winetech'@'%';
 DROP USER 'winetech-sensor'@'%';
