@@ -42,7 +42,8 @@
                     <a href="./painel-administrativo/gerenciar-funcionarios/index.html" class="nav-link">
                         <i class="fa-solid fa-chart-line"></i><span>Painel Administrativo</span>
                     </a>
-                    <a href="https://jira.atlassian.com/" target="_blank" class="nav-link">
+                    <a href="https://sptech-team-b0vobkfd.atlassian.net/jira/servicedesk/projects/WNTC/list?jql=project%20%3D%20%22WNTC%22%20ORDER%20BY%20created%20DESC"
+                        target="_blank" class="nav-link">
                         <i class="fa-solid fa-circle-question"></i><span>Ajuda</span>
                     </a>
                 </nav>
@@ -245,7 +246,7 @@
     }
 
     function atualizarKPIs(medidas, qtdAlertas) {
-        
+
         const ultima = medidas[0];
         const temp = Number(ultima.temperatura);
         const umid = Number(ultima.umidade);
@@ -321,8 +322,8 @@
     function atualizarTabela(medidas) {
         const tbody = document.getElementById("table-body-history");
         tbody.innerHTML = "";
-        
-        
+
+
         const recentes = medidas.slice(0, 5);
 
         recentes.forEach(m => {
@@ -349,40 +350,40 @@
         });
 
         if (chartInstance) {
-     
+
             chartInstance.data.labels = labels;
             chartInstance.data.datasets[0].data = dataTemp;
             chartInstance.data.datasets[1].data = dataUmid;
-            
-            chartInstance.update(); 
+
+            chartInstance.update();
         } else {
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                            label: 'Temperatura (°C)',
-                            data: dataTemp,
-                            borderColor: '#fff700ff',
-                            backgroundColor: 'rgba(239, 194, 32, 0.41)',
-                            tension: 0.1,
-                            fill: true,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Umidade (%)',
-                            data: dataUmid,
-                            borderColor: '#f97407ff',
-                            backgroundColor: 'rgba(240, 178, 42, 0.2)',
-                            tension: 0.1,
-                            fill: true,
-                            yAxisID: 'y1'
-                        }
+                        label: 'Temperatura (°C)',
+                        data: dataTemp,
+                        borderColor: '#fff700ff',
+                        backgroundColor: 'rgba(239, 194, 32, 0.41)',
+                        tension: 0.1,
+                        fill: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Umidade (%)',
+                        data: dataUmid,
+                        borderColor: '#f97407ff',
+                        backgroundColor: 'rgba(240, 178, 42, 0.2)',
+                        tension: 0.1,
+                        fill: true,
+                        yAxisID: 'y1'
+                    }
                     ]
                 },
                 options: {
                     maintainAspectRatio: false,
-                    animation: { duration: 0 }, 
+                    animation: { duration: 0 },
                     plugins: {
                         legend: { position: 'top', labels: { font: { family: 'Poppins', size: 14 } } },
                         title: { display: true, text: 'Monitoramento em Tempo Real (Últimos 10 registros)', font: { size: 18, family: 'Poppins', weight: '600' }, color: '#4b0e1a' }
