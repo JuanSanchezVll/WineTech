@@ -1,4 +1,4 @@
-create DATABASE winetech;
+CREATE DATABASE winetech;
 
 USE winetech;
 

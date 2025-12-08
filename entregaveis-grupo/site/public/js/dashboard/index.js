@@ -28,7 +28,6 @@ new Chart(ctx, {
 });
 
 
-
 const selectCave = document.getElementById("select-cave");
 const selectBarril = document.getElementById("select-barril");
 
