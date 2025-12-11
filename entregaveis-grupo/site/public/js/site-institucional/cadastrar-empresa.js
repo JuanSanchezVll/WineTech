@@ -34,11 +34,11 @@ function cadastrar(cnpj, razaoSocial, nomeFantasia, emailContato) {
         }
 
         resposta.json().then(json => {
-            alert("Cadastro realizado com sucesso!");
+            return mostrarErro("Cadastro realizado com sucesso!");
         })
     })
     .catch (function (erro) {
         console.error("Erro: ", erro);
-        alert("Ocorreu um erro ao cadastrar. Tente novamente.");
+        return mostrarErro("Ocorreu um erro ao cadastrar. Tente novamente.");
     });
 }

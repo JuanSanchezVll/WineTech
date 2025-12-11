@@ -23,4 +23,8 @@ router.get("/pesquisar", function(req, res) {
     sensorController.pesquisar(req, res);
 })
 
+router.get("/listar/ativos", function(req, res) {
+    sensorController.listarAtivosPorEmpresa(req, res);
+})
+
 module.exports = router;

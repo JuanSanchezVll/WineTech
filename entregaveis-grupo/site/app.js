@@ -1,7 +1,7 @@
 var ambiente_processo = 'desenvolvimento';
 const { GoogleGenAI } = require("@google/genai");
 
-var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
+var caminho_env = ambiente_processo === 'prod' ? '.env' : '.env.dev';
 require("dotenv").config({ path: caminho_env });
 
 var express = require("express");
@@ -21,7 +21,10 @@ var caveRouter = require("./src/routes/caves");
 var uvaRouter = require("./src/routes/uvas");
 var barrilRouter = require("./src/routes/barris");
 var sensorRoutes = require ("./src/routes/sensores")
-// var enderecoRouter = require("./src/routes/enderecos");
+var dashCaveRoutes = require("./src/routes/dashboardCave");
+var dashBarrilRoutes = require ("./src/routes/dashboardBarril")
+var dashIndexRoutes = require ("./src/routes/dashboardIndex")
+
 // var leituraRouter = require("./src/routes/leituras");
 // var alertaRouter = require("./src/routes/alertas");
 
@@ -38,6 +41,10 @@ app.use("/caves", caveRouter);
 app.use("/uvas", uvaRouter);
 app.use("/barris", barrilRouter);
 app.use("/sensores", sensorRoutes);
+app.use("/dashboardCave", dashCaveRoutes);
+app.use("/dashboardBarril", dashBarrilRoutes);
+app.use("/dashboardIndex", dashIndexRoutes);
+
 
 app.post("/perguntar", async (req, res) => {
     const pergunta = req.body.pergunta;

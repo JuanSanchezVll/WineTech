@@ -62,24 +62,50 @@ const serial = async (
         if (HABILITAR_OPERACAO_INSERIR) {
 
             // este insert irá inserir os dados na tabela "medida"
-            await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
+            const resultadoInsert = await poolBancoDados.execute(
+                'INSERT INTO leitura (temperatura, umidade, idSensor) VALUES (?, ?, ?)',
                 [temperatura, umidade, 1]
             );
             console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
 
-            await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
-                [temperatura - 10, umidade - 10, 2]
-            );
-            console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
+            const idLeituraInserida = resultadoInsert[0].insertId;
 
-            await poolBancoDados.execute(
-                'insert into leituraSensor (temperatura, umidade, idSensor) values (?, ?, ?)',
-                [temperatura + 10, umidade + 10, 3]
-            );
-            console.log("valores inseridos no banco: ", temperatura + ", " + umidade);
+            const idSensor = 1;
 
+            const [limites] = await poolBancoDados.execute(`
+                SELECT 
+                    u.temperatura_minima,
+                    u.temperatura_maxima,
+                    u.umidade_minima,
+                    u.umidade_maxima
+                FROM sensor s
+                JOIN barril b ON b.id_barril = s.id_barril
+                JOIN uva u ON u.id_uva = b.id_uva
+                WHERE s.id_sensor = ?
+            `, [idSensor]);
+
+            const faixa = limites[0];
+
+            const temperaturaFora =
+                temperatura < faixa.temperatura_minima ||
+                temperatura > faixa.temperatura_maxima;
+
+            const umidadeFora =
+                umidade < faixa.umidade_minima ||
+                umidade > faixa.umidade_maxima;
+
+            const houveAlerta = temperaturaFora || umidadeFora;
+
+            if (houveAlerta) {
+                await poolBancoDados.execute(
+                    `INSERT INTO alerta (id_leitura, id_sensor) VALUES (?, ?)`,
+                    [idLeituraInserida, idSensor]
+                );
+
+                console.log("ALERTA REGISTRADO!");
+            } else {
+                console.log("Leitura dentro das faixas ideais.");
+            }
         }
 
     });

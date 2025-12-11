@@ -19,6 +19,22 @@ async function listar(idEmpresa) {
     return await database.execute(instrucaoSql);
 }
 
+async function listarPorIdCave(idEmpresa, idCave) {
+    const instrucaoSql = `
+        SELECT 
+            b.id_barril,
+            b.identificacao
+        FROM barril b
+        JOIN cave c ON b.id_cave = c.id_cave
+        WHERE 
+            c.id_empresa = ${idEmpresa}
+            AND b.id_cave = ${idCave}
+    `;
+
+    return await database.execute(instrucaoSql);
+}
+
+
 async function buscarPorId(idEmpresa, idBarril) {
     const instrucaoSql = `
         SELECT 
@@ -91,6 +107,7 @@ async function pesquisar(idEmpresa, pesquisa) {
 
 module.exports = {
     listar,
+    listarPorIdCave,
     cadastrar,
     buscarPorId,
     atualizar,

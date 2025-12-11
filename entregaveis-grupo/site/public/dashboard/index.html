@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="plotarKPIs(), plotarGraficoAlertas(), listarCaves(), mudarTexto()">
 
     <div class="container">
 
@@ -28,7 +28,7 @@
                     <div class="profile-img">
                         <img src="./../assets/imgs/usuario.png" alt="Usuário">
                     </div>
-                    <div class="profile-name">Juan David</div>
+                    <div class="profile-name" id="profile-name" ></div>
                 </div>
 
 
@@ -79,7 +79,7 @@
                 <div class="kpi">
                     <div class="kpi-left">
                         <div class="kpi-title">Sensores Ativos</div>
-                        <div class="kpi-value">12 / 12</div>
+                        <div class="kpi-value" id="kpi-sensores-ativos"></div>
                     </div>
                     <div class="kpi-meta">
                         <span class="kpi-dot green"></span>
@@ -89,8 +89,8 @@
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Alertas no total</div>
-                        <div class="kpi-value">15</div>
+                        <div class="kpi-title">Quantidade de alertas no mês</div>
+                        <div class="kpi-value" id="kpi-qtd-alertas-mes"></div>
                     </div>
                     <div class="kpi-meta">
                         <span class="kpi-dot yellow"></span>
@@ -100,8 +100,8 @@
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Temp. mais alta</div>
-                        <div class="kpi-value">27°C</div>
+                        <div class="kpi-title">Cave com alerta de temperatura</div>
+                        <div class="kpi-value" id="kpi-alerta-temp">--</div>
                     </div>
                     <div class="kpi-meta">
                         <span class="kpi-dot red"></span>
@@ -111,8 +111,8 @@
 
                 <div class="kpi">
                     <div class="kpi-left">
-                        <div class="kpi-title">Umidade mais alta</div>
-                        <div class="kpi-value">88%</div>
+                        <div class="kpi-title">Cave com alerta de umidade</div>
+                        <div class="kpi-value" id="kpi-alerta-umi">--</div>
                     </div>
                     <div class="kpi-meta">
                         <span class="kpi-dot blue"></span>
@@ -126,7 +126,7 @@
 
                 <div class="card chart-card">
                     <div class="card-header">
-                        <h3>Alertas nas suas caves</h3>
+                        <h3>Alertas nas caves nos últimos 30 dias</h3>
                     </div>
                     <div class="card-body">
                         <canvas id="chartCavesAlerts"></canvas>
@@ -142,10 +142,10 @@
 
                         <div class="history-top">
                             <label for="select-cave">Selecione a cave</label>
-                            <select id="select-cave"></select>
+                            <select id="select-cave" onchange="listarBarris(this.value)"></select>
 
                             <label for="select-barril">Barris</label>
-                            <select id="select-barril"></select>
+                            <select id="select-barril" oninput="carregarUltimaLeitura()"></select>
                         </div>
 
                         <div class="barril-info">
@@ -187,6 +187,7 @@
     </div>
 
     <script src="./../js/dashboard/index.js"></script>
+    
 
 </body>
 

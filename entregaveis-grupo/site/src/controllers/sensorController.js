@@ -25,6 +25,26 @@ async function listar(req, res) {
     }
 }
 
+async function listarAtivosPorEmpresa(req, res) {
+    try {
+        const { idEmpresa } = req.query;
+
+        if (!idEmpresa) {
+            throw new Error("ID_EMPRESA_INDEFINIDO");
+        }
+
+        const resultado = await sensorModel.listarAtivosPorEmpresa(idEmpresa);
+
+        return res.status(200).json(resultado);
+    } catch (err) {
+        if (err.message === "ID_EMPRESA_INDEFINIDO") {
+            return res.status(400).json({ mensagem: "ID da empresa não informado", erro: err});
+        }
+        console.error("Não foi possível listar sensores: " + err);
+        return res.status(500).json({ mensagem: "Erro interno no servidor", erro: err});
+    }
+}
+
 async function pesquisar(req, res) {
     try {
         const { idEmpresa, pesquisa } = req.query;
@@ -97,6 +117,7 @@ async function deletar(req, res) {
 
 module.exports = {
     listar,
+    listarAtivosPorEmpresa,
     cadastrar,
     atualizar,
     deletar,

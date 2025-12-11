@@ -43,11 +43,13 @@ function autenticar() {
             console.log("Houve um erro ao tentar realizar o login!");
             res.text().then(texto => {
                 console.error(texto);
+                return mostrarErro(`Email ou senha inválidos.`);
             });
         }
 
     }).catch(function (erro) {
         console.log(erro);
+        return mostrarErro(`Erro ao fazer login...`);
     })
 
     return false;

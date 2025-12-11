@@ -48,13 +48,13 @@ async function cadastrar(req, res) {
 
 async function atualizar(req, res) {
     try {
-        const { idFuncionario, nome, sobrenome, email, idNivelAcesso } = req.body;
+        const { idFuncionario, nome, sobrenome, email, senha, idNivelAcesso } = req.body;
 
         if (!idFuncionario) {
             return res.status(400).json({ mensagem: "ID do funcionário não informado." });
         }
 
-        const resultado = await usuarioModel.atualizar(idFuncionario, nome, sobrenome, email, idNivelAcesso);
+        const resultado = await usuarioModel.atualizar(idFuncionario, nome, sobrenome, email, senha, idNivelAcesso);
 
         return res.status(201).json(resultado);
 

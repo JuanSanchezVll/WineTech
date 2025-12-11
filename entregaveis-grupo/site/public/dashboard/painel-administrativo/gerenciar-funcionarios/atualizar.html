@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
 
     <title>Atualizar Funcionário</title>
 </head>
-<body>
+
+<body onload="buscarFuncionario()">
     <main class="content">
-        <header class="header"> 
+        <header class="header">
             <h2 class="titulo">Atualizar Funcionário</h2>
         </header>
 
@@ -47,7 +49,8 @@
 
             <div class="input-box">
                 <img src="./../../../assets/icones/painel-administrativo/password-icon.svg" alt="Ícone Senha">
-                <input type="password" id="confirmarSenha" placeholder="Confirme a Senha" minlength="8" autocomplete="off" required>
+                <input type="password" id="confirmarSenha" placeholder="Confirme a Senha" minlength="8"
+                    autocomplete="off" required>
             </div>
 
             <div class="buttons">
@@ -59,34 +62,29 @@
 </body>
 
 <script>
-    const ID_EMPRESA = sessionStorage.ID_EMPRESA;
+    let idUsuarioGlobal = null;
     const params = new URLSearchParams(window.location.search);
     const idFuncionarioUrl = params.get('id');
 
-    async function carregarDadosAtuais() {
-        if (!idFuncionarioUrl) {
-            alert("Erro: Funcionário não identificado.");
-            window.location.href = "./index.html";
-            return;
-        }
-
+    async function buscarFuncionario() {
         try {
-            const resposta = await fetch(`/painelAdministrativo/listar?idEmpresa=${ID_EMPRESA}&idFuncionario=${idFuncionarioUrl}`);
+            const params = new URLSearchParams(window.location.search);
+            idUsuarioGlobal = params.get('id');
 
-            if (resposta.ok) {
-                const dados = await resposta.json();
-                const usuario = dados[0];
+            const resposta = await fetch(`/usuarios/listar?idEmpresa=${sessionStorage.ID_EMPRESA}&idUsuario=${idUsuarioGlobal}`);
+            const usuario = await resposta.json();
 
-                document.getElementById("nome").value = usuario.nome;
-                document.getElementById("sobrenome").value = usuario.sobrenome;
-                document.getElementById("email").value = usuario.email;
-                
-                if (usuario.id_nivel_acesso) {
-                    document.getElementById("select_nivel").value = usuario.id_nivel_acesso;
-                }
-            }
+            const nome = document.getElementById("nome");
+            const sobrenome = document.getElementById("sobrenome");
+            const email = document.getElementById("email");
+            const cargo = document.getElementById("select_nivel");
+
+            nome.value = usuario[0].nome;
+            sobrenome.value = usuario[0].sobrenome;
+            email.value = usuario[0].email;
+            cargo.value = usuario[0].id_nivel_acesso;
         } catch (erro) {
-            console.error("Erro ao carregar dados:", erro);
+            console.error("Erro ao  usuario" + erro);
         }
     }
 
@@ -103,7 +101,6 @@
             return;
         }
 
-        
         if (senhaVar !== confirmarSenhaVar) {
             alert("As senhas não coincidem!");
             return;
@@ -118,7 +115,7 @@
                     nome: nomeVar,
                     sobrenome: sobrenomeVar,
                     email: emailVar,
-                    senha: senhaVar, 
+                    senha: senhaVar,
                     idNivelAcesso: nivelVar
                 })
             });
@@ -138,4 +135,5 @@
 
     window.onload = carregarDadosAtuais;
 </script>
+
 </html>

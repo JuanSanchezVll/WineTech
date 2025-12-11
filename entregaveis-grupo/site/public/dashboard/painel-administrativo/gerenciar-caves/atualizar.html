@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../../../style/dashboard/painel-administrativo/form-painel-administrativo.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./../../../js/dashboard/painel-administrativo/js-caves/atualizar.js">
 
-      
+
 
     <title>Atualizar Cave</title>
 </head>
-<body>
+
+<body onload="buscarCave()">
     <main class="content">
         <header class="header">
             <h2 class="titulo">Atualizar Cave</h2>
@@ -33,6 +34,23 @@
     </main>
 </body>
 <script>
+    let idCaveGlobal = null;
+
+    async function buscarCave() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            idCaveGlobal = params.get('id');
+
+            const resposta = await fetch(`/caves/listar?idEmpresa=${sessionStorage.ID_EMPRESA}&idCave=${idCaveGlobal}`);
+            const cave = await resposta.json();
+
+            const identificacao = document.getElementById("identificacao");
+
+            identificacao.value = cave[0].identificacao;
+        } catch (erro) {
+            console.error("Erro ao  uva" + erro);
+        }
+    }
     async function atualizar() {
         const params = new URLSearchParams(window.location.search);
         const idCaveVar = params.get('id');
@@ -64,7 +82,7 @@
 
             if (resposta.ok) {
                 alert("Cave atualizada com sucesso!");
-                window.location.href = "./index.html"; 
+                window.location.href = "./index.html";
             } else {
                 const erro = await resposta.json();
                 alert("Erro ao atualizar: " + erro.mensagem);
@@ -75,4 +93,5 @@
         }
     }
 </script>
+
 </html>

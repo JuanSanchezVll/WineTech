@@ -221,22 +221,6 @@ body {
     border-radius: 50%;
 }
 
-.kpi-dot.green {
-    background: #2ecc71;
-}
-
-.kpi-dot.yellow {
-    background: #f1c40f;
-}
-
-.kpi-dot.red {
-    background: #e74c3c;
-}
-
-.kpi-dot.blue {
-    background: #3498db;
-}
-
 
 
 .monitoramento-row {
@@ -246,8 +230,6 @@ body {
     margin-bottom: 20px;
     margin-top: 20px;
 }
-
-
 
 
 .chart-card {
@@ -368,3 +350,10 @@ body {
 .faixa.critico {
     background: #c0392b;
 }
+
+.kpi-dot.green { background: #2ecc71; }
+.kpi-dot.yellow { background: #f1c40f; }
+.kpi-dot.red { background: #e74c3c; }
+.kpi-dot.normal { background: #27ae60; } 
+.kpi-dot.atencao { background: #f39c12; }   
+.kpi-dot.critico { background: #c0392b; }   
